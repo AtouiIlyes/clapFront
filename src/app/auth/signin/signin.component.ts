@@ -46,7 +46,6 @@ export class SigninComponent implements OnInit {
           this.router.navigate(['home']);
         },
         error => {
-          console.log(error);
           this.message.error('ECHEC CONNEXION', 'Les informations fournies ne permettent pas de vous connecter à l\'application. Merci de réessayer');
         });
 

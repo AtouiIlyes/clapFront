@@ -38,7 +38,6 @@ export class AuthService {
       // set token property
       this.token = response.headers.get('Authorization');
 
-      console.log('res: ', this.user);
       if (this.token) {
 
         // store username and jwt token in local storage to keep user logged in between page refreshes
