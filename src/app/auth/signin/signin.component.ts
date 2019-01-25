@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup, Validators, FormBuilder } from "@angular/forms";
+import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { MessagesService } from '../../shared/messages/messages.service';
 
 @Component({
@@ -14,8 +14,6 @@ import { MessagesService } from '../../shared/messages/messages.service';
 export class SigninComponent implements OnInit {
   returnUrl: string;
   loading = false;
-  email = '';
-  password = '';
   loginForm: FormGroup;
 
 

@@ -11,10 +11,9 @@ import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { HttpModule } from '@angular/http';
 
+import { ClapModule } from './clap/clap.module';
 import { MessagesService } from './shared/messages/messages.service';
 import { SimpleNotificationsModule } from 'angular2-notifications';
-
-
 
 
 @NgModule({
@@ -28,6 +27,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     HttpModule,
     AuthModule,
     HttpClientModule,
+    ClapModule,
     SimpleNotificationsModule.forRoot()
   ],
   providers: [

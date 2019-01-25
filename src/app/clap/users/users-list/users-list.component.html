@@ -1,0 +1,44 @@
+<button class="slds-button slds-button_icon slds-button_icon-brand" routerLink="/users/new" title="Add">
+    <svg class="slds-button__icon" aria-hidden="true">
+        <use href="/assets/icons/utility-sprite/svg/symbols.svg#add"></use>
+    </svg>
+    <span class="slds-assistive-text">Search</span>
+</button>
+<table class="slds-table slds-table_cell-buffer slds-table_bordered">
+    <thead>
+        <tr class="slds-line-height_reset">
+            <th class="" scope="col">
+                <div class="slds-truncate" title="ID">id</div>
+            </th>
+            <th class="" scope="col">
+                <div class="slds-truncate" title="Email">Email</div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="slds-hint-parent" *ngFor="let user of users; let i = index">
+            <th data-label="ID" scope="row">
+                <div class="slds-truncate" title="Cloudhub"><a href="javascript:void(0);" tabindex="-1">{{user.id}}</a></div>
+            </th>
+            <td data-label="Email">
+                <div class="slds-truncate" title="Cloudhub">{{user.email}}</div>
+            </td>
+            <td data-label="actions">
+                <a (click)="onEditUser(row.id)" class="action_link edit_link"><i class="zmdi zmdi-edit"></i></a>
+                <button class="slds-button slds-button_icon slds-button_icon-brand" (click)="onEditUser(user.id)"
+                    title="Add">
+                    <svg class="slds-button__icon" aria-hidden="true">
+                        <use href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Search</span>
+                </button>
+                <button (click)="onDeleteUser(user.id)" class="slds-button slds-button_icon slds-button_icon-brand" title="Delete">
+                    <svg class="slds-button__icon" aria-hidden="true">
+                        <use href="/assets/icons/utility-sprite/svg/symbols.svg#delete"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Search</span>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
