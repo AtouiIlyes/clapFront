@@ -14,22 +14,11 @@ export class AuthGuard implements CanActivate {
 
     const url = state.url;
     const first_level = url.split(/[\s/]+/)[1];
-    const permissions = this.auth.getUserData().role.permissions;
+    const permissions = this.auth.getUserData();
 
 
     if (this.auth.loggedIn()) {
-
-      if (first_level === 'home') {
-        return true;
-      } else {
-        if (permissions.filter(e => e.name === next.data['function']).length > 0) {
-          // console.log('permission');
-          return true;
-        } else {
-          // console.log('not permission');
-          return false;
-        }
-      }
+      return true;
     } else {
       this.router.navigate(['/login']);
       return false;
