@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Role } from '../role.model';
-import { RolesService } from "../roles.service";
+import { RolesService } from '../roles.service';
 
 @Component({
   selector: 'app-roles-list',
@@ -17,7 +17,7 @@ export class RolesListComponent implements OnInit {
 
 
   constructor(private router: Router,
-              private rolesService: RolesService) { }
+    private rolesService: RolesService) { }
 
   ngOnInit() {
     this.roleSubscription = this.rolesService.getRefreshList().subscribe(
@@ -25,12 +25,12 @@ export class RolesListComponent implements OnInit {
         this.getRoles();
         this.loading = true;
       }
-    )
+    );
 
     this.getRoles();
   }
 
-  getRoles(){
+  getRoles() {
     this.rolesService.getRoles().subscribe(
       data => {
         this.roles = data;
@@ -39,16 +39,12 @@ export class RolesListComponent implements OnInit {
     );
   }
 
-  onEditRole(index:number){
+  onEditRole(index: number) {
     this.router.navigate(['/roles', index, 'edit']);
   }
 
-  onDeleteRole(index: number){
+  onDeleteRole(index: number) {
     this.rolesService.deleteRole(index);
   }
 
-  ngOnDestroy() {
-    // unsubscribe to ensure no memory leaks
-    this.roleSubscription.unsubscribe();
-  }
 }

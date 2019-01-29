@@ -26,7 +26,7 @@ export class UsersService {
     return this.http.get<any>(API_URL + '/api/v1/users');
   }
   /**
-    * Launch messagesUpdated event
+    * Launch usersUpdated event
     *
     * @return an observable who launch events
     */
@@ -40,16 +40,18 @@ export class UsersService {
 
   addUser(user: User) {
     const newUser = {
-      user : user,
-    }
+      user: user,
+    };
     return this.http.post<any>(API_URL + '/api/v1/users/', newUser).subscribe(
       (res) => {
         const message = res;
         this.messages.success('UTILISATEUR AJOUTÉ', 'l\'utilisateur ' + message.name + ' a bien été ajouté');
         this.usersUpdated.next(message);
+        return true;
       },
       err => {
         this.messages.error('UTILISATEUR NON AJOUTÉ', 'l\'utilisateur n\'a pas été ajouté : ' + err);
+        return false;
       }
     );
   }

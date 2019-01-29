@@ -19,7 +19,7 @@
         </header>
     </div>
     <div class="slds-card__body slds-card__body_inner">
-        <form [formGroup]="roleForm" *ngIf="loading" (ngSubmit)="onAddRole()">
+        <form [formGroup]="roleForm" *ngIf="loading" (ngSubmit)="onSubmitRole()">
             <div class="slds-form-element slds-col slds-size_3-of-12">
                 <label class="slds-form-element__label" for="text-input-id-1">Nom</label>
                 <div class="slds-form-element__control">
@@ -42,7 +42,7 @@
             </div>
             <button href="javascript:void(0)" type="submit" *ngIf="!editMode" class="slds-button slds-button_brand"
                 [disabled]="!roleForm.valid">Sauvegarder</button>
-            <button type="button" *ngIf="editMode" class="slds-button slds-button_brand" (click)="onUpdateRole()"
+            <button type="button" *ngIf="editMode" class="slds-button slds-button_brand" (click)="onSubmitRole()"
                 [disabled]="!roleForm.valid">Modifier</button>
             <button type="button" class="slds-button slds-button_outline-brand" (click)="onCancel()">Annuler</button>
         </form>

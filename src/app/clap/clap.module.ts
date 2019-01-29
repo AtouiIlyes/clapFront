@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
-import { from } from 'rxjs';
 
 
 @NgModule({

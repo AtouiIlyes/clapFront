@@ -13,7 +13,7 @@ import { MessagesService } from '../../shared/messages/messages.service';
 export class UsersComponent implements OnInit {
 
   constructor(private router: Router,
-              private route: ActivatedRoute) { }
+    private route: ActivatedRoute) { }
 
 
   ngOnInit() {
@@ -21,6 +21,6 @@ export class UsersComponent implements OnInit {
   }
 
   onNewUser() {
-    this.router.navigate(['new'], {relativeTo: this.route});
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
 }
