@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
-
 import { UsersModule } from './users/users.module';
+import { RolesModule } from './roles/roles.module';
 import { from } from 'rxjs';
 
 
@@ -16,6 +15,7 @@ import { from } from 'rxjs';
     ReactiveFormsModule,
     RouterModule,
     UsersModule,
+    RolesModule
   ],
   providers: []
 })

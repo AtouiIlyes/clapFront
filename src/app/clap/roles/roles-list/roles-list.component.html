@@ -1,17 +1,19 @@
-<button class="slds-button slds-button_icon slds-button_icon-brand" routerLink="/users/new" title="Add">
-    <svg class="slds-button__icon" aria-hidden="true">
-        <use href="/assets/icons/utility-sprite/svg/symbols.svg#add"></use>
-    </svg>
-    <span class="slds-assistive-text">Search</span>
-</button>
+<div style="height: 4rem;">
+    <button class="slds-button slds-button_icon slds-button_icon-brand" routerLink="/roles/new" title="Add">
+        <svg class="slds-button__icon" aria-hidden="true">
+            <use href="/assets/icons/utility-sprite/svg/symbols.svg#add"></use>
+        </svg>
+        <span class="slds-assistive-text">Search</span>
+    </button>
+</div>
 <table class="slds-table slds-table_cell-buffer slds-table_bordered">
     <thead>
         <tr class="slds-line-height_reset">
             <th class="" scope="col">
-                <div class="slds-truncate" title="ID">id</div>
+                <div class="slds-truncate" title="ID">ID</div>
             </th>
             <th class="" scope="col">
-                <div class="slds-truncate" title="Email">Email</div>
+                <div class="slds-truncate" title="Name">Name</div>
             </th>
             <th class="" scope="col">
                 <div class="slds-truncate" title="Name">Actions</div>
@@ -19,21 +21,21 @@
         </tr>
     </thead>
     <tbody>
-        <tr class="slds-hint-parent" *ngFor="let user of users; let i = index">
+        <tr class="slds-hint-parent" *ngFor="let role of roles; let i = index">
             <th data-label="ID" scope="row">
-                <div class="slds-truncate" title="Cloudhub"><a href="javascript:void(0);" tabindex="-1">{{user.id}}</a></div>
+                <div class="slds-truncate" title="Cloudhub"><a href="javascript:void(0);" tabindex="-1">{{role.id}}</a></div>
             </th>
             <td data-label="Email">
-                <div class="slds-truncate" title="Cloudhub">{{user.email}}</div>
+                <div class="slds-truncate" title="Cloudhub">{{role.name}}</div>
             </td>
             <td data-label="actions">
-                <button class="slds-button slds-button_icon slds-button_icon-brand" (click)="onEditUser(user.id)" title="Add">
+                <button class="slds-button slds-button_icon slds-button_icon-brand" (click)="onEditRole(role.id)" title="Add">
                     <svg class="slds-button__icon" aria-hidden="true">
                         <use href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use>
                     </svg>
                     <span class="slds-assistive-text">Search</span>
                 </button>
-                <button (click)="onDeleteUser(user.id)" class="slds-button slds-button_icon slds-button_icon-brand"
+                <button (click)="onDeleteRole(role.id)" class="slds-button slds-button_icon slds-button_icon-brand"
                     title="Delete">
                     <svg class="slds-button__icon" aria-hidden="true">
                         <use href="/assets/icons/utility-sprite/svg/symbols.svg#delete"></use>

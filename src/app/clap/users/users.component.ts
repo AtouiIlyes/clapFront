@@ -20,7 +20,7 @@ export class UsersComponent implements OnInit {
 
   }
 
-  onNewMessage() {
+  onNewUser() {
     this.router.navigate(['new'], {relativeTo: this.route});
   }
 }
