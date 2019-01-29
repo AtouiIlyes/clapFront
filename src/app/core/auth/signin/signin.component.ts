@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { MessagesService } from '../../../shared/messages/messages.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, Validators, FormBuilder } from "@angular/forms";
-import { MessagesService } from '../../shared/messages/messages.service';
 
 @Component({
   selector: 'app-signin',
@@ -40,7 +39,7 @@ export class SigninComponent implements OnInit {
     this.authService.login(this.loginForm.value)
       .subscribe(
         data => {
-          //this.router.navigate([this.returnUrl]);
+          // this.router.navigate([this.returnUrl]);
           this.router.navigate(['home']);
         },
         error => {

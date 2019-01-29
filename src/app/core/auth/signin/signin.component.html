@@ -1,0 +1,41 @@
+<div class="slds-align_absolute-center">
+  <div class="slds-col slds-size_6-of-12  slds-m-top_xx-large slds-m-left_x-large">
+    <article class="slds-card">
+      <div class="slds-grid slds-card__header">
+        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+          <h2 class="slds-card__header-link">
+            Connexion utilisateur
+          </h2>
+
+        </header>
+      </div>
+      <div class="slds-card__body slds-card__body_inner">
+
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+          <div class="slds-form-element">
+            <label class="slds-form-element__label" for="text-input-id-1">Identifiant</label>
+            <div class="slds-form-element__control">
+              <input id="login-input" placeholder="Identifiant" class="slds-input" formControlName="email" name="email"
+                type="text" value="" />
+            </div>
+          </div>
+          <div class="slds-form-element">
+            <label class="slds-form-element__label" for="text-input-id-1">Mot de passe</label>
+            <div class="slds-form-element__control">
+              <input id="password-input" placeholder="mot de passe" class="slds-input" formControlName="password"
+                name="password" type="password" value="" />
+            </div>
+          </div>
+
+          <div class="slds-m-top_large">
+            <button href="javascript:void(0)" class="slds-button slds-button_brand" [disabled]="!loginForm.valid">Connexion</button>
+          </div>
+
+        </form>
+      </div>
+      <footer class="slds-card__footer">
+      </footer>
+    </article>
+  </div>
+</div>

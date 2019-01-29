@@ -8,7 +8,7 @@ import * as moment from 'moment';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 const API_URL = environment.apiUrl;
 

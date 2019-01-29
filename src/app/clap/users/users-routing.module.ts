@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { UsersComponent } from './users.component';
 import { UserNewComponent } from './user-new/user-new.component';
-import { AuthGuard } from '../../auth/auth.guard';
+import { AuthGuard } from '../../core/auth/auth.guard';
 import { UsersListComponent } from './users-list/users-list.component';
 
 

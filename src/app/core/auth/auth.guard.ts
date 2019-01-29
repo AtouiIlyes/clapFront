@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): boolean {
 
     const url = state.url;
-    const first_level = url.split(/[\s/]+/)[1];
+    // const first_level = url.split(/[\s/]+/)[1];
     const permissions = this.auth.getUserData();
 
 

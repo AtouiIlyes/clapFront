@@ -1,10 +1,11 @@
-<div id="wrap">
-  <!-- top navbar-->
-  <!-- sidebar-->
-  <!-- Main section-->
-  <section id="wrapper">
+
+
+
+
+  <app-header></app-header>
+
+  <section id="main">
     <router-outlet></router-outlet>
-    <!-- Page content-->
   </section>
   <simple-notifications [options]="{ position: ['top', 'right'] }"></simple-notifications>
-</div>
+

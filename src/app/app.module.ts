@@ -1,25 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './shared/interceptor/auth.interceptor';
-import { ErrorInterceptor } from './shared/interceptor/error.interceptor';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './core/home/home.component';
-import { AuthGuard } from './auth/auth.guard';
-import { AuthService } from './auth/auth.service';
-import { AuthModule } from './auth/auth.module';
 import { HttpModule } from '@angular/http';
 
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AuthGuard } from './core/auth/auth.guard';
+import { AuthService } from './core/auth/auth.service';
+import { AuthModule } from './core/auth/auth.module';
 import { ClapModule } from './clap/clap.module';
 import { MessagesService } from './shared/messages/messages.service';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { CoreModule } from './core/core.module';
+
+import { AuthInterceptor } from './core/interceptor/auth.interceptor';
+import { ErrorInterceptor } from './core/interceptor/error.interceptor';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +28,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     AuthModule,
     HttpClientModule,
     ClapModule,
+    CoreModule,
     SimpleNotificationsModule.forRoot()
   ],
   providers: [
