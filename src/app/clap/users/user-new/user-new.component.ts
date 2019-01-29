@@ -27,20 +27,6 @@ export class UserNewComponent implements OnInit {
             (param: Params) => {
                 this.id = +param['id']; // + to convert to number
                 this.editMode = (param['id'] != null);
-                if (this.editMode) {
-                    this.userForm = this.fb.group({
-                        email: ['', Validators.required],
-                    });
-                } else {
-
-                    this.userForm = this.fb.group({
-                        email: ['', Validators.required],
-                        password: ['', Validators.required],
-                        confirmPassword: ['', Validators.required]
-                    },
-                        { validator: this.matchingPasswords('password', 'confirmPassword') });
-                }
-
                 this.initForm();
             }
         )
@@ -48,9 +34,7 @@ export class UserNewComponent implements OnInit {
 
     // INIT FORM depending of edit or not mode
     private initForm() {
-
-        // FIRST CREATE THE FORM
-        if (this.id) {
+        if (this.editMode) {
             this.userService.getUser(this.id).subscribe(res => {
                 const user = res;
                 this.userForm.setValue({
@@ -61,15 +45,26 @@ export class UserNewComponent implements OnInit {
                 this.messages.error('ERREUR SERVEUR', 'Impossible de charger les données de l\'utilisateur : ' + error);
             }
             );
+            this.userForm = this.fb.group({
+                email: ['', Validators.required],
+            });
+        } else {
+            this.userForm = this.fb.group(
+                {
+                    email: ['', Validators.required],
+                    password: ['', Validators.required],
+                    confirmPassword: ['', Validators.required]
+                },
+                {
+                    validator: this.matchingPasswords('password', 'confirmPassword')
+                });
         }
-
     }
 
     matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
         return (group: FormGroup): { [key: string]: any } => {
             let password = group.controls[passwordKey];
             let confirmPassword = group.controls[confirmPasswordKey];
-
             if (password.value !== confirmPassword.value) {
                 return {
                     mismatchedPasswords: true
@@ -77,6 +72,7 @@ export class UserNewComponent implements OnInit {
             }
         }
     }
+
     onAddUser() {
         this.userService.addUser(this.userForm.value);
         this.router.navigate(['/users']);
@@ -86,8 +82,7 @@ export class UserNewComponent implements OnInit {
         this.userService.updateUser(this.id, this.userForm.value);
         this.router.navigate(['/users']);
     }
-
-
+    
     onCancel() {
         this.router.navigate(['/users']);
     }
