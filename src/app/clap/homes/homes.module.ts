@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule,  } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { DefaultHomeComponent } from './default-home/default-home.component';
 
@@ -8,7 +9,8 @@ import { DefaultHomeComponent } from './default-home/default-home.component';
     DefaultHomeComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ]
 })
 export class HomesModule { }

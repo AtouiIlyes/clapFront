@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from '../../core/auth/auth.guard';
 
-import { RolesComponent} from './roles.component';
+import { RolesComponent } from './roles.component';
 import { RolesNewComponent } from './roles-new/roles-new.component';
 
 const rolesRoutes: Routes = [
@@ -30,7 +30,7 @@ const rolesRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(rolesRoutes)],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forChild(rolesRoutes)],
+  exports: [RouterModule]
 })
 export class RolesRoutingModule { }

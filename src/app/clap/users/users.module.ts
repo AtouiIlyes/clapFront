@@ -6,13 +6,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
 
-import { MessagesRoutingModule } from './users-routing.module';
+import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UserNewComponent } from './user-new/user-new.component';
 import { UsersService } from './users.service';
 
-//import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 
 @NgModule({
@@ -25,12 +24,11 @@ import { UsersService } from './users.service';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    MessagesRoutingModule,
+    UsersRoutingModule,
     MatInputModule,
-    MatSelectModule,
-    //SweetAlert2Module.forRoot()
+    MatSelectModule
   ],
   providers: [UsersService]
 })
 
-export class UsersModule {}
+export class UsersModule { }

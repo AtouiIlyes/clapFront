@@ -7,7 +7,7 @@ import { AuthGuard } from '../../core/auth/auth.guard';
 import { UsersListComponent } from './users-list/users-list.component';
 
 
-const messagesRoutes: Routes = [
+const usersRoutes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
@@ -31,8 +31,8 @@ const messagesRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(messagesRoutes)],
+  imports: [RouterModule.forChild(usersRoutes)],
   exports: [RouterModule]
 })
 
-export class MessagesRoutingModule { }
+export class UsersRoutingModule { }
