@@ -1,11 +1,5 @@
-
-
-
-
-  <app-header></app-header>
-
-  <section id="main">
-    <router-outlet></router-outlet>
-  </section>
-  <simple-notifications [options]="{ position: ['top', 'right'] }"></simple-notifications>
-
+<app-header></app-header>
+<section id="main">
+  <app-messages></app-messages>
+  <router-outlet></router-outlet>
+</section>

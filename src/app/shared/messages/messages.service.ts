@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
-import { NotificationsService } from 'angular2-notifications';
+import { Observable, Subject } from 'rxjs';
 
 
 @Injectable()
 export class MessagesService {
 
-  settings = {
-    animate: 'fromRight',
-    position: ['top', 'right'],
-    clickToClose: true,
-    pauseOnHover: true,
-    showProgressBar: true,
-    timeOut: 5000,
-  };
+  messagesNotifications = new Subject<any>();
 
-
-  constructor(private notifications: NotificationsService) {
+  constructor() {
   }
 
-  success(title: string, message: string) {
+  public success(title: string, message: string) {
 
-    this.notifications.success(title, message, {
-      position: ['top', 'left'],
-      animate: 'fromRight',
-      clickToClose: true,
-      pauseOnHover: true,
-      showProgressBar: true,
-      timeOut: 5000,
-    });
+    const notif = {
+      title: title,
+      message: message,
+      severity: 'success'
+    };
+    this.messagesNotifications.next(notif);
   }
 
   error(title: string, message: string) {
-    this.notifications.error(title, message, this.settings);
+    const notif = {
+      title: title,
+      message: message,
+      severity: 'error'
+    };
+    this.messagesNotifications.next(notif);
+
+  }
+
+  public getMessagesNotifications(): Observable<any> {
+    return this.messagesNotifications.asObservable();
   }
 }

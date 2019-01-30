@@ -1,0 +1,11 @@
+<div class="demo-only" style="height: 4rem;">
+    <ngl-notification *ngIf="showAlert" type="alert" severity="{{severity}}" (nglNotificationClose)="onClose()" timeout="5000">
+        <div class="slds-grid">
+            <ngl-icon category="action" icon="approval" size="small" class="slds-col slds-m-right--small slds-no-flex"></ngl-icon>
+            <div class="slds-notify__content">
+                <h2 class="slds-text-heading_small">{{title}}</h2>
+                <p>{{message}}</p>
+            </div>
+        </div>
+    </ngl-notification>
+</div>

@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MatInputModule } from '@angular/material';
-import { MatSelectModule } from '@angular/material';
+import { NglModule } from 'ng-lightning/ng-lightning';
+
 
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
@@ -25,8 +25,7 @@ import { UsersService } from './users.service';
     RouterModule,
     ReactiveFormsModule,
     UsersRoutingModule,
-    MatInputModule,
-    MatSelectModule
+    NglModule.forRoot()
   ],
   providers: [UsersService]
 })
