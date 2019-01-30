@@ -1,11 +1,20 @@
-<div class="demo-only" style="height: 4rem;">
-    <ngl-notification *ngIf="showAlert" type="alert" severity="{{severity}}" (nglNotificationClose)="onClose()" timeout="5000">
-        <div class="slds-grid">
-            <ngl-icon category="action" icon="approval" size="small" class="slds-col slds-m-right--small slds-no-flex"></ngl-icon>
-            <div class="slds-notify__content">
-                <h2 class="slds-text-heading_small">{{title}}</h2>
-                <p>{{message}}</p>
-            </div>
-        </div>
-    </ngl-notification>
+<div class="slds-notify_container">
+  <ngl-notification *ngIf="showAlert" type="toast" severity="{{severity}}" (nglNotificationClose)="onClose()" timeout="225000">
+    <div class="slds-grid">
+      <span class="slds-icon_container slds-icon-utility-error slds-m-right_small slds-no-flex slds-align-top" *ngIf="severity == error">
+        <svg class="slds-icon slds-icon_small" aria-hidden="true"><use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#error"></use></svg>
+      </span>
+      <span class="slds-icon_container slds-icon-utility-error slds-m-right_small slds-no-flex slds-align-top" >
+          <svg class="slds-icon slds-icon_small" aria-hidden="true"><use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#success"></use></svg>
+        </span>
+        <span class="slds-icon_container slds-icon-utility-success slds-m-right_small slds-no-flex slds-align-top" *ngIf="severity == success">
+            <svg class="slds-icon slds-icon_small" aria-hidden="true">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#success" />
+            </svg>
+          </span>
+      <div class="slds-notify__content">
+        <p><i>{{title}}</i> - {{message}}</p>
+      </div>
+    </div>
+  </ngl-notification>
 </div>

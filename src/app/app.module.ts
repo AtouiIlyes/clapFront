@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-import { NglModule } from 'ng-lightning/ng-lightning';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,15 +12,14 @@ import { ClapModule } from './clap/clap.module';
 import { MessagesService } from './shared/messages/messages.service';
 import { CoreModule } from './core/core.module';
 
-import { MessagesService } from './shared/messages/messages.service';
-import { MessagesComponent } from './shared/messages/messages.component';
 import { SharedModule } from './shared/shared.module';
 import { ErrorInterceptor } from './core/interceptor/error.interceptor';
 import { AuthInterceptor } from './core/interceptor/auth.interceptor';
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +29,7 @@ import { AuthInterceptor } from './core/interceptor/auth.interceptor';
     HttpClientModule,
     ClapModule,
     SharedModule,
-    CoreModule,
-    NglModule.forRoot()
+    CoreModule
   ],
   providers: [
     MessagesService,

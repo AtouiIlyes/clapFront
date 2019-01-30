@@ -10,8 +10,8 @@ import { MessagesService } from './messages.service';
 })
 export class MessagesComponent implements OnInit {
   showAlert = false;
-  title = 'Test';
-  message = 'test test test';
+  title = '';
+  message = '';
   severity = 'success';
   timeout = 5000;
   userSubscription: Subscription;

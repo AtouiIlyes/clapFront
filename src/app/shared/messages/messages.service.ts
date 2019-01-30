@@ -12,22 +12,22 @@ export class MessagesService {
 
   public success(title: string, message: string) {
 
-    const notif = {
+    this.messagesNotifications.next({
       title: title,
       message: message,
       severity: 'success'
-    };
-    this.messagesNotifications.next(notif);
+    });
+
   }
 
   error(title: string, message: string) {
-    const notif = {
+
+    this.messagesNotifications.next({
       title: title,
       message: message,
       severity: 'error'
-    };
-    this.messagesNotifications.next(notif);
-
+    });
+    
   }
 
   public getMessagesNotifications(): Observable<any> {
