@@ -3,7 +3,7 @@
     <div class="slds-global-header__item">
       <div class="slds-global-header__logo"></div>
     </div>
-    <div class="slds-global-header__item slds-global-header__item_search">
+    <div class="slds-global-header__item slds-global-header__item_search" *authorized="'loggued'">
       <div class="slds-form-element">
         <label class="slds-form-element__label slds-assistive-text" for="combobox-id-1">Search Salesforce</label>
         <div class="slds-form-element__control">
@@ -123,7 +123,7 @@
         </div>
       </div>
     </div>
-    <div class="slds-global-header__item">
+    <div class="slds-global-header__item" *authorized="'loggued'">
       <ul class="slds-global-actions">
         <li class="slds-global-actions__item">
           <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
@@ -133,17 +133,6 @@
                 <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#add"></use>
               </svg>
               <span class="slds-assistive-text">Global Actions</span>
-            </button>
-          </div>
-        </li>
-        <li class="slds-global-actions__item">
-          <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
-            <button class="slds-button slds-button_icon slds-button_icon slds-button_icon-container slds-button_icon-small slds-global-actions__help slds-global-actions__item-action"
-              aria-haspopup="true" title="Help and Training">
-              <svg class="slds-button__icon slds-global-header__icon" aria-hidden="true">
-                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#question"></use>
-              </svg>
-              <span class="slds-assistive-text">Help and Training</span>
             </button>
           </div>
         </li>
@@ -160,18 +149,6 @@
         </li>
         <li class="slds-global-actions__item">
           <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
-            <button class="slds-button slds-button_icon slds-button_icon slds-button_icon-container slds-button_icon-small slds-global-actions__notifications slds-global-actions__item-action"
-              title="no new notifications" aria-live="assertive" aria-atomic="true">
-              <svg class="slds-button__icon slds-global-header__icon" aria-hidden="true">
-                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#notification"></use>
-              </svg>
-              <span class="slds-assistive-text">no new notifications</span>
-            </button>
-            <span aria-hidden="true" class="slds-notification-badge">0</span>
-          </div>
-        </li>
-        <li class="slds-global-actions__item">
-          <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
             <button class="slds-button slds-global-actions__avatar slds-global-actions__item-action" title="person name"
               aria-haspopup="true">
               <span class="slds-avatar slds-avatar_circle slds-avatar_medium">
@@ -184,10 +161,10 @@
     </div>
   </div>
 
-  <div style="height: 16rem;">
+  <div  *authorized="'loggued'">
     <div class="slds-context-bar">
       <div class="slds-context-bar__primary">
-        <div class="slds-context-bar__item slds-context-bar__dropdown-trigger slds-dropdown-trigger slds-dropdown-trigger_click slds-no-hover">
+        <div class="slds-context-bar__item slds-no-hover">
           <span class="slds-context-bar__label-action slds-context-bar__app-name">
             <span class="slds-truncate" title="App Name">CLAP</span>
           </span>
@@ -201,12 +178,12 @@
               <span class="slds-truncate" title="Home">Home</span>
             </a>
           </li>
-          <li class="slds-context-bar__item slds-context-bar__dropdown-trigger slds-dropdown-trigger slds-dropdown-trigger_click">
+          <li class="slds-context-bar__item slds-context-bar__dropdown-trigger slds-dropdown-trigger slds-dropdown-trigger_click " id="menu1">
             <a href="javascript:void(0);" class="slds-context-bar__label-action" title="Menu Item">
               <span class="slds-truncate" title="Menu Item">Menu Item</span>
             </a>
             <div class="slds-context-bar__icon-action slds-p-left_none">
-              <button class="slds-button slds-button_icon slds-button_icon slds-context-bar__button" aria-haspopup="true" title="Open menu item submenu">
+              <button class="slds-button slds-button_icon slds-button_icon slds-context-bar__button" aria-haspopup="true" title="Open menu item submenu" appDropdown="#menu1">
                 <svg class="slds-button__icon" aria-hidden="true">
                   <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevrondown" />
                 </svg>

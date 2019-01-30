@@ -15,6 +15,7 @@ import { CoreModule } from './core/core.module';
 
 import { AuthInterceptor } from './core/interceptor/auth.interceptor';
 import { ErrorInterceptor } from './core/interceptor/error.interceptor';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ErrorInterceptor } from './core/interceptor/error.interceptor';
     HttpClientModule,
     ClapModule,
     CoreModule,
+    SharedModule,
     SimpleNotificationsModule.forRoot()
   ],
   providers: [
