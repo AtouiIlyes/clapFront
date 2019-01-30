@@ -1,0 +1,9 @@
+<ngl-modal [header]="noHeader ? '' : title" [(open)]="open" [size]="" [directional]="true">
+    <div body>
+        <p>{{text}}</p>
+    </div>
+    <ng-template ngl-modal-footer >
+        <button class="slds-button slds-button--neutral" *ngIf="showCancelButton" (click)="cancel()">Cancel</button>
+        <button class="slds-button slds-button--brand" (click)="modalAction()">{{submitButtonText}}</button>
+    </ng-template>
+</ngl-modal>

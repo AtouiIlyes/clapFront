@@ -35,8 +35,7 @@
                     </svg>
                     <span class="slds-assistive-text">Search</span>
                 </button>
-                <button (click)="onDeleteUser(user.id)" class="slds-button slds-button_icon slds-button_icon-brand"
-                    title="Delete">
+                <button (click)="openModal = true; userId = user.id" class="slds-button slds-button_icon slds-button_icon-brand" title="Delete">
                     <svg class="slds-button__icon" aria-hidden="true">
                         <use href="/assets/icons/utility-sprite/svg/symbols.svg#delete"></use>
                     </svg>
@@ -46,3 +45,6 @@
         </tr>
     </tbody>
 </table>
+<app-modal-window [open]="openModal" [title]="'Suppression Utilisateur'" [text]="'Êtes vous sur de vouloir supprimer définitivement ce utilisateur?'"
+[showCancelButton]="true" [submitButtonText]="'delete'" (hideModal)="openModal = false" (confirm)="onDeleteUser(userId)">
+</app-modal-window>

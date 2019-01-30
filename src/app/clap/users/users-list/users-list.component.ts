@@ -13,8 +13,10 @@ import { MessagesService } from '../../../shared/messages/messages.service';
 
 export class UsersListComponent implements OnInit {
   users = [];
+  userId: number;
   displayed = [];
   loading = false;
+  openModal = false;
   userSubscription: Subscription;
 
 
@@ -57,10 +59,12 @@ export class UsersListComponent implements OnInit {
           if (index > -1) {
             this.users.splice(index, 1);
           }
+          this.openModal = false;
         },
         err => {
           this.messages.error('UTILISATEUR NON SUPPRIMÉ', 'l\'utilisateur n\'a pas été supprimé : ' + err);
         }
       );
   }
+
 }

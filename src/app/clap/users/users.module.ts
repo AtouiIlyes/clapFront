@@ -11,6 +11,7 @@ import { UsersComponent } from './users.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UserNewComponent } from './user-new/user-new.component';
 import { UsersService } from './users.service';
+import { ModalComponent } from '../../shared/modal/modal.component';
 
 
 
@@ -19,6 +20,7 @@ import { UsersService } from './users.service';
     UsersComponent,
     UsersListComponent,
     UserNewComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
