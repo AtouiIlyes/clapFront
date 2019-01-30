@@ -14,6 +14,8 @@ export class RolesListComponent implements OnInit {
   roles: Role[];
   roleSubscription: Subscription;
   loading = false;
+  numberOfRoles = 0;
+  open = false;
 
 
   constructor(private router: Router,
@@ -34,6 +36,7 @@ export class RolesListComponent implements OnInit {
     this.rolesService.getRoles().subscribe(
       data => {
         this.roles = data;
+        this.numberOfRoles = this.roles.length;
         this.loading = false;
       }
     );

@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { NglModule } from 'ng-lightning/ng-lightning';
 
-
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 import { UsersListComponent } from './users-list/users-list.component';

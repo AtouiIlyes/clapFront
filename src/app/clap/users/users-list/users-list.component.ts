@@ -18,7 +18,8 @@ export class UsersListComponent implements OnInit {
   loading = false;
   openModal = false;
   userSubscription: Subscription;
-
+  open = false;
+  numberOfUsers = 0;
 
   constructor(private userService: UsersService,
     private messages: MessagesService,
@@ -27,6 +28,7 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+
     this.userSubscription = this.userService.getUserdded().subscribe(
       data => {
         const index = this.users.findIndex(user => user.id === data.id);
@@ -40,8 +42,9 @@ export class UsersListComponent implements OnInit {
     );
     this.userService.getUsers().subscribe(
       data => {
-        this.loading = false;
         this.users = data;
+        this.numberOfUsers = this.users.length;
+        this.loading = false;
       }
     );
   }

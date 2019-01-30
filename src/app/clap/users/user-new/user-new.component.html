@@ -1,55 +1,49 @@
 <article class="slds-card">
-  <div class="slds-card__header slds-grid">
+  <div class="slds-card__header slds-grid"> 
     <header class="slds-media slds-media_center slds-has-flexi-truncate">
       <div class="slds-media__figure">
         <span class="slds-icon_container slds-icon-standard-account" title="account">
           <svg class="slds-icon slds-icon_small" aria-hidden="true">
             <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#user"></use>
           </svg>
-          <span class="slds-assistive-text">User</span>
+          <span class="slds-assistive-text">Nouvel Utilisateur</span>
         </span>
       </div>
       <div class="slds-media__body">
         <h2 class="slds-card__header-title">
-          <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
-            <span>User</span>
-          </a>
+          <span class="slds-card__header-link slds-truncate">Nouvel Utilisateur</span>
         </h2>
       </div>
     </header>
   </div>
   <div class="slds-card__body slds-card__body_inner">
     <form [formGroup]="userForm" (ngSubmit)="onAddUser()">
-      <div class="slds-form-element slds-col slds-size_3-of-12">
+      <div class="slds-form-element slds-m-top_small">
         <label class="slds-form-element__label" for="text-input-id-1">Email</label>
         <div class="slds-form-element__control">
-          <input id="email" placeholder="put your email here" class="slds-input" formControlName="email" name="email"
-            type="text" value="" />
+          <input id="email" placeholder="Entrez votre email ici" class="slds-input" formControlName="email" name="email" type="text"/>
         </div>
       </div>
       <div *ngIf="!editMode">
-        <div class="slds-form-element slds-col slds-size_3-of-12">
-          <label class="slds-form-element__label" for="text-input-id-1">Password</label>
+        <div class="slds-form-element slds-m-top_small">
+          <label class="slds-form-element__label" for="password">Mot de passe</label>
           <div class="slds-form-element__control">
-            <input id="password" placeholder="put your email here" class="slds-input" formControlName="password" name="password"
-              type="password" value="" />
+            <input id="password" placeholder="Entrez votre mot de passe" class="slds-input" formControlName="password" name="password" type="password"/>
           </div>
         </div>
-        <div style="height: 4rem;" class="slds-form-element slds-col slds-size_3-of-12">
-          <label class="slds-form-element__label" for="text-input-id-1">Confirm Password</label>
+        <div class="slds-form-element slds-m-top_small">
+          <label class="slds-form-element__label" for="confirmedPassword">Confirmation du mot de passe</label>
           <div class="slds-form-element__control">
-            <input id="confirmedPassword" placeholder="put your password here" class="slds-input" formControlName="confirmPassword" name="confirmPassword"
-              type="password" value="" />
+            <input id="confirmedPassword" placeholder="Validez votre mot de passe" class="slds-input" formControlName="confirmPassword" name="confirmPassword" type="password"/>
           </div>
         </div>
       </div>
-      <button href="javascript:void(0)" type="submit" *ngIf="!editMode" class="slds-button slds-button_brand"
-        [disabled]="!userForm.valid">Sauvegarder</button>
-      <button type="button" *ngIf="editMode" class="slds-button slds-button_brand" (click)="onUpdateUser()" [disabled]="!userForm.valid">Modifier</button>
-      <button type="button" class="slds-button slds-button_outline-brand" (click)="onCancel()">Annuler</button>
+      <div class="slds-m-top_large">
+        <button type="submit" *ngIf="!editMode" class="slds-button slds-button_brand" [disabled]="!userForm.valid">Sauvegarder</button>
+        <button type="button" *ngIf="editMode" class="slds-button slds-button_brand" (click)="onUpdateUser()" [disabled]="!userForm.valid">Modifier</button>
+        <button type="button" class="slds-button slds-button_outline-brand" (click)="onCancel()">Annuler</button>
+      </div>
     </form>
   </div>
-  <footer class="slds-card__footer">
-
-  </footer>
+  <footer class="slds-card__footer"></footer>
 </article>

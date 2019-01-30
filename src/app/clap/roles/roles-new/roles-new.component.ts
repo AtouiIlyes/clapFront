@@ -4,6 +4,7 @@ import { FormGroup, FormControl, FormArray, Validators, ValidatorFn, FormBuilder
 import { Subscription } from 'rxjs';
 
 import { RolesService } from '../roles.service';
+import { Role } from '../role.model';
 
 @Component({
   selector: 'app-roles-new',
@@ -13,10 +14,11 @@ import { RolesService } from '../roles.service';
 export class RolesNewComponent implements OnInit {
   id: number;
   editMode = false;
-  loading = false;
+  loading = true;
   roleForm: FormGroup;
   roleSubscription: Subscription;
   permissions = [];
+  role: {};
 
   constructor(
     private route: ActivatedRoute,
@@ -34,8 +36,14 @@ export class RolesNewComponent implements OnInit {
       }
     );
 
+    this.roleSubscription = this.rolesService.getRefreshList().subscribe(
+      data => this.router.navigate(['/roles'])
+    );
+
     this.initForm();
   }
+
+
   // checkbox management inspired by : https://coryrylan.com/blog/creating-a-dynamic-checkbox-list-in-angular
   private initForm() {
     this.rolesService.getPermissions().subscribe(res => {
@@ -51,22 +59,26 @@ export class RolesNewComponent implements OnInit {
 
       if (this.editMode) {
         this.rolesService.getRole(this.id).subscribe(role => {
+
+          this.role = role;
+
           const perms = role.permissions;
           controls = this.permissions.map((permission) =>
             perms.filter(e => e.id === permission.id).length > 0 ? new FormControl(true) : new FormControl(false)
           );
+
           this.roleForm = this.fb.group({
             name: [role.name, Validators.required],
             description: [role.description, Validators.required],
             permission_ids: new FormArray(controls, this.minSelectedCheckboxes(1))
           });
 
+          this.loading = false;
         });
+      } else {
+        this.loading = false;
       }
-      this.loading = true;
-
     });
-
   }
 
 
@@ -82,10 +94,6 @@ export class RolesNewComponent implements OnInit {
     } else {
       this.rolesService.addRole(this.roleForm.value);
     }
-    this.roleSubscription = this.rolesService.getRefreshList().subscribe(
-      data => this.router.navigate(['/roles'])
-    );
-
   }
 
   onCancel() {

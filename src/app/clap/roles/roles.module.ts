@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MatInputModule } from '@angular/material';
-import { MatSelectModule } from '@angular/material';
+import { NglModule } from 'ng-lightning/ng-lightning';
 
 import { RolesComponent } from './roles.component';
 import { RolesNewComponent } from './roles-new/roles-new.component';
@@ -15,8 +14,7 @@ import { RolesRoutingModule } from './roles-routing.module';
   imports: [
     CommonModule,
     RolesRoutingModule,
-    MatInputModule,
-    MatSelectModule,
+    NglModule,
     RouterModule,
     ReactiveFormsModule
   ],

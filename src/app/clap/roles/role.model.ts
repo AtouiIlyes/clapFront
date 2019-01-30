@@ -4,7 +4,8 @@ export class Role {
   public description: string;
   permission_ids: Array<any>;
 
-  constructor(id: number,
+  constructor(
+    id: number,
     name: string,
     permission_ids: Array<any>,
     description: string

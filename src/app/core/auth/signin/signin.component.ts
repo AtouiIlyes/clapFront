@@ -31,7 +31,7 @@ export class SigninComponent implements OnInit {
       password: ['', Validators.required],
     });
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/homes';
   }
 
   login() {
@@ -40,7 +40,7 @@ export class SigninComponent implements OnInit {
       .subscribe(
         data => {
           // this.router.navigate([this.returnUrl]);
-          this.router.navigate(['home']);
+          this.router.navigate(['homes']);
         },
         error => {
           this.message.error('ECHEC CONNEXION', 'Les informations fournies ne permettent pas de vous connecter à l\'application. Merci de réessayer');

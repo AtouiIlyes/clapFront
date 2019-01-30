@@ -1,50 +1,67 @@
-<div style="height: 4rem;">
-    <button class="slds-button slds-button_icon slds-button_icon-brand" routerLink="/users/new" title="Add">
-        <svg class="slds-button__icon" aria-hidden="true">
-            <use href="/assets/icons/utility-sprite/svg/symbols.svg#add"></use>
-        </svg>
-        <span class="slds-assistive-text">Search</span>
-    </button>
-</div>
-<table class="slds-table slds-table_cell-buffer slds-table_bordered">
-    <thead>
+<article class="slds-card">
+  <div class="slds-card__header slds-grid">
+    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+      <div class="slds-media__figure">
+        <span class="slds-icon_container slds-icon-standard-account" title="account">
+          <svg class="slds-icon slds-icon_small" aria-hidden="true">
+            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#user"></use>
+          </svg>
+          <span class="slds-assistive-text">Liste des Utilisteurs</span>
+        </span>
+      </div>
+      <div class="slds-media__body">
+        <h2 class="slds-card__header-title slds-card__header-link slds-truncate">Utilisateurs ({{numberOfUsers}})</h2>
+      </div>
+      <div class="slds-no-flex">
+        <button class="slds-button slds-button_neutral" routerLink="/users/new">Ajouter</button>
+      </div>
+    </header>
+  </div>
+  <div class="slds-card__body slds-card__body_inner">
+    <table class="slds-table slds-table_cell-buffer slds-table_striped slds-m-top_large">
+      <thead>
         <tr class="slds-line-height_reset">
-            <th class="" scope="col">
-                <div class="slds-truncate" title="ID">id</div>
-            </th>
-            <th class="" scope="col">
-                <div class="slds-truncate" title="Email">Email</div>
-            </th>
-            <th class="" scope="col">
-                <div class="slds-truncate" title="Name">Actions</div>
-            </th>
+          <th>
+            <div class="slds-truncate" title="ID">id</div>
+          </th>
+          <th>
+            <div class="slds-truncate" title="Email">Email</div>
+          </th>
+          <th>
+            <div class="slds-truncate" title="Actions">Actions</div>
+          </th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <tr class="slds-hint-parent" *ngFor="let user of users; let i = index">
-            <th data-label="ID" scope="row">
-                <div class="slds-truncate" title="Cloudhub"><a href="javascript:void(0);" tabindex="-1">{{user.id}}</a></div>
-            </th>
-            <td data-label="Email">
-                <div class="slds-truncate" title="Cloudhub">{{user.email}}</div>
-            </td>
-            <td data-label="actions">
-                <button class="slds-button slds-button_icon slds-button_icon-brand" (click)="onEditUser(user.id)" title="Add">
-                    <svg class="slds-button__icon" aria-hidden="true">
-                        <use href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use>
-                    </svg>
-                    <span class="slds-assistive-text">Search</span>
-                </button>
-                <button (click)="openModal = true; userId = user.id" class="slds-button slds-button_icon slds-button_icon-brand" title="Delete">
-                    <svg class="slds-button__icon" aria-hidden="true">
-                        <use href="/assets/icons/utility-sprite/svg/symbols.svg#delete"></use>
-                    </svg>
-                    <span class="slds-assistive-text">Search</span>
-                </button>
-            </td>
+          <th data-label="ID" scope="row">
+            <div class="slds-truncate" title="Cloudhub"><a href="javascript:void(0);" tabindex="-1">{{user.id}}</a></div>
+          </th>
+          <td data-label="Email">
+            <div class="slds-truncate" title="Cloudhub">{{user.email}}</div>
+          </td>
+          <td data-label="actions">
+            <span nglDropdown [(open)]="open">
+              <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small" nglDropdownTrigger>
+                <ngl-icon icon="down" type="default" size="x-small"></ngl-icon>
+              </button>
+              <div class="slds-dropdown slds-dropdown--left">
+                <ul class="dropdown__list" role="menu">
+                  <li class="slds-dropdown__item">
+                    <a role="menuitem" nglDropdownItem (click)="onEditUser(user.id)">
+                      <p class="slds-truncate">Editer</p>
+                    </a>
+                  </li>
+                  <li class="slds-dropdown__item">
+                    <a role="menuitem" nglDropdownItem (click)="onDeleteUser(user.id)">
+                      <p class="slds-truncate">Supprimer</p>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </td>
         </tr>
-    </tbody>
-</table>
 <app-modal-window [open]="openModal" [title]="'Suppression Utilisateur'" [text]="'Êtes vous sur de vouloir supprimer définitivement ce utilisateur?'"
 [showCancelButton]="true" [submitButtonText]="'delete'" (hideModal)="openModal = false" (confirm)="onDeleteUser(userId)">
 </app-modal-window>

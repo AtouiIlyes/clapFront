@@ -20,4 +20,4 @@ const homesRoutes: Routes = [
   imports: [ RouterModule.forChild(homesRoutes)],
   exports: [ RouterModule ]
 })
-export class RolesRoutingModule { }
+export class HomesRoutingModule { }

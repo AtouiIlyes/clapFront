@@ -1,53 +1,58 @@
-<article class="slds-card">
-    <div class="slds-card__header slds-grid">
-        <header class="slds-media slds-media_center slds-has-flexi-truncate">
-            <div class="slds-media__figure">
-                <span class="slds-icon_container slds-icon-standard-account" title="account">
-                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
-                        <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#user_role"></use>
-                    </svg>
-                    <span class="slds-assistive-text">Role</span>
-                </span>
-            </div>
-            <div class="slds-media__body">
-                <h2 class="slds-card__header-title">
-                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
-                        <span>Role</span>
-                    </a>
-                </h2>
-            </div>
-        </header>
-    </div>
-    <div class="slds-card__body slds-card__body_inner">
-        <form [formGroup]="roleForm" *ngIf="loading" (ngSubmit)="onSubmitRole()">
-            <div class="slds-form-element slds-col slds-size_3-of-12">
-                <label class="slds-form-element__label" for="text-input-id-1">Nom</label>
-                <div class="slds-form-element__control">
-                    <input id="email" placeholder="Mettez le nom du rôle ici" class="slds-input" formControlName="name"
-                        name="email" type="text" value="" />
-                </div>
-            </div>
-            <div class="slds-form-element slds-col slds-size_3-of-12">
-                <label class="slds-form-element__label" for="text-input-id-1">Description</label>
-                <div class="slds-form-element__control">
-                    <input id="password" placeholder="Mettez la description du rôle ici" class="slds-input"
-                        formControlName="description" name="description" type="text" value="" />
-                </div>
-            </div>
-            <div style="height: 4rem;" class="slds-form-element ">
-                <label formArrayName="permission_ids" *ngFor="let permission of roleForm.controls.permission_ids.controls; let i = index">
-                    <input type="checkbox" [formControlName]="i">
-                    {{permissions[i].name}}
-                </label>
-            </div>
-            <button href="javascript:void(0)" type="submit" *ngIf="!editMode" class="slds-button slds-button_brand"
-                [disabled]="!roleForm.valid">Sauvegarder</button>
-            <button type="button" *ngIf="editMode" class="slds-button slds-button_brand" (click)="onSubmitRole()"
-                [disabled]="!roleForm.valid">Modifier</button>
-            <button type="button" class="slds-button slds-button_outline-brand" (click)="onCancel()">Annuler</button>
-        </form>
-    </div>
-    <footer class="slds-card__footer">
+<div class="demo-only" style="height: 6rem;" *ngIf="loading">
+  <div role="status" class="slds-spinner slds-spinner_medium">
+    <span class="slds-assistive-text">Loading</span>
+    <div class="slds-spinner__dot-a"></div>
+    <div class="slds-spinner__dot-b"></div>
+  </div>
+</div>
 
-    </footer>
+<article class="slds-card" *ngIf="!loading">
+  <div class="slds-card__header slds-grid">
+    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+      <div class="slds-media__figure">
+        <span class="slds-icon_container slds-icon-standard-account" title="account">
+          <svg class="slds-icon slds-icon_small" aria-hidden="true">
+            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#user_role"></use>
+          </svg>
+          <span class="slds-assistive-text">Nouveau role</span>
+        </span>
+      </div>
+      <div class="slds-media__body">
+        <h2 class="slds-card__header-title slds-card__header-link slds-truncate" *ngIf="!editMode">Nouveau role</h2>
+        <h2 class="slds-card__header-title slds-card__header-link slds-truncate" *ngIf="editMode">Edition du role : <i>{{role.name}}</i></h2>
+      </div>
+    </header>
+  </div>
+  <div class="slds-card__body slds-card__body_inner">
+    <form [formGroup]="roleForm" (ngSubmit)="onSubmitRole()">
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="name">Nom</label>
+        <div class="slds-form-element__control">
+          <input id="name" placeholder="Nom du rôle" class="slds-input" formControlName="name" name="name" type="text" />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="description">Description</label>
+        <div class="slds-form-element__control">
+          <input id="description" placeholder="Description du rôle" class="slds-input" formControlName="description"
+            name="description" type="text" />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <div formArrayName="permission_ids" *ngFor="let permission of roleForm.controls.permission_ids.controls; let i = index">
+          <label>
+            <input type="checkbox" [formControlName]="i">{{permissions[i].name}}
+          </label>
+        </div>
+      </div>
+      <div class="slds-m-top_large">
+        <button href="javascript:void(0)" type="submit" *ngIf="!editMode" class="slds-button slds-button_brand"
+          [disabled]="!roleForm.valid">Sauvegarder</button>
+        <button type="button" *ngIf="editMode" class="slds-button slds-button_brand" (click)="onSubmitRole()"
+          [disabled]="!roleForm.valid">Modifier</button>
+        <button type="button" class="slds-button slds-button_outline-brand" (click)="onCancel()">Annuler</button>
+      </div>
+    </form>
+  </div>
+  <footer class="slds-card__footer"></footer>
 </article>
