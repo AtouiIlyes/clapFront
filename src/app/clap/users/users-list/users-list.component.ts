@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { UsersService } from '../users.service';
 import { MessagesService } from '../../../shared/messages/messages.service';
+import { ModalComponent } from '../../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-users-list',
@@ -13,10 +14,10 @@ import { MessagesService } from '../../../shared/messages/messages.service';
 
 export class UsersListComponent implements OnInit {
   users = [];
-  userId: number;
+  userIdToDelete: number;
   displayed = [];
   loading = false;
-  openModal = false;
+  openDeleteUserConfirm = false;
   userSubscription: Subscription;
   open = false;
   numberOfUsers = 0;
@@ -53,8 +54,8 @@ export class UsersListComponent implements OnInit {
     this.router.navigate(['/users', index, 'edit']);
   }
 
-  onDeleteUser(id: number) {
-    this.userService.deleteUser(id)
+  onDeleteUser() {
+    this.userService.deleteUser(this.userIdToDelete)
       .subscribe(
         (res) => {
           this.messages.success('UTILISATEUR SUPPRIMÉ', 'l\'utilisateur a bien été supprimé');
@@ -62,12 +63,22 @@ export class UsersListComponent implements OnInit {
           if (index > -1) {
             this.users.splice(index, 1);
           }
-          this.openModal = false;
+          this.openDeleteUserConfirm = false;
         },
         err => {
           this.messages.error('UTILISATEUR NON SUPPRIMÉ', 'l\'utilisateur n\'a pas été supprimé : ' + err);
         }
       );
+  }
+
+  onDeleteCancel() {
+    this.openDeleteUserConfirm = false;
+    this.userIdToDelete = 0;
+  }
+
+  onDeleteUserAction(id) {
+    this.openDeleteUserConfirm = true;
+    this.userIdToDelete = id;
   }
 
 }

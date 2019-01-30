@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { Role } from '../role.model';
 import { RolesService } from '../roles.service';
+import { ModalComponent } from '../../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-roles-list',
@@ -15,7 +16,9 @@ export class RolesListComponent implements OnInit {
   roleSubscription: Subscription;
   loading = false;
   numberOfRoles = 0;
-  open = false;
+  open = [];
+  openDeleteRoleConfirm = false;
+  roleIdToDelete: number;
 
 
   constructor(private router: Router,
@@ -24,8 +27,9 @@ export class RolesListComponent implements OnInit {
   ngOnInit() {
     this.roleSubscription = this.rolesService.getRefreshList().subscribe(
       res => {
-        this.getRoles();
         this.loading = true;
+        this.openDeleteRoleConfirm = false;
+        this.getRoles();
       }
     );
 
@@ -37,6 +41,7 @@ export class RolesListComponent implements OnInit {
       data => {
         this.roles = data;
         this.numberOfRoles = this.roles.length;
+
         this.loading = false;
       }
     );
@@ -46,8 +51,19 @@ export class RolesListComponent implements OnInit {
     this.router.navigate(['/roles', index, 'edit']);
   }
 
-  onDeleteRole(index: number) {
-    this.rolesService.deleteRole(index);
+  onDeleteRole() {
+    this.rolesService.deleteRole(this.roleIdToDelete);
+  }
+
+  onDeleteCancel() {
+    this.roleIdToDelete = 0;
+    this.openDeleteRoleConfirm = false;
+
+  }
+
+  onDeleteUserAction(id) {
+    this.roleIdToDelete = id;
+    this.openDeleteRoleConfirm = true;
   }
 
 }

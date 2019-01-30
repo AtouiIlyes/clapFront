@@ -53,7 +53,7 @@
                     </a>
                   </li>
                   <li class="slds-dropdown__item">
-                    <a role="menuitem" nglDropdownItem (click)="onDeleteUser(user.id)">
+                    <a role="menuitem" nglDropdownItem (click)="onDeleteUserAction(user.id)">
                       <p class="slds-truncate">Supprimer</p>
                     </a>
                   </li>
@@ -62,6 +62,16 @@
             </span>
           </td>
         </tr>
-<app-modal-window [open]="openModal" [title]="'Suppression Utilisateur'" [text]="'Êtes vous sur de vouloir supprimer définitivement ce utilisateur?'"
-[showCancelButton]="true" [submitButtonText]="'delete'" (hideModal)="openModal = false" (confirm)="onDeleteUser(userId)">
+      </tbody>
+    </table>
+  </div>
+  <footer class="slds-card__footer"></footer>
+</article>
+<app-modal-window 
+  [open]="openDeleteUserConfirm" 
+  [title]="'Suppression Utilisateur'" 
+  [text]="'Êtes vous sur de vouloir supprimer définitivement ce utilisateur?'"
+  [submitButtonText]="'Supprimer'" 
+  (cancel)="onDeleteCancel()" 
+  (confirm)="onDeleteUser()">
 </app-modal-window>

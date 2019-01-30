@@ -10,7 +10,7 @@ import { UsersComponent } from './users.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UserNewComponent } from './user-new/user-new.component';
 import { UsersService } from './users.service';
-import { ModalComponent } from '../../shared/modal/modal.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -18,12 +18,12 @@ import { ModalComponent } from '../../shared/modal/modal.component';
   declarations: [
     UsersComponent,
     UsersListComponent,
-    UserNewComponent,
-    ModalComponent
+    UserNewComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
+    SharedModule,
     ReactiveFormsModule,
     UsersRoutingModule,
     NglModule.forRoot()

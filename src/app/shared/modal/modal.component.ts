@@ -6,30 +6,28 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit {
-    opened = false;
-    size: string;
 
     @Input() title: string;
     @Input() text: string;
     @Input() open: boolean;
-    @Input() showCancelButton: boolean;
+    @Input() showCancelButton = true;
     @Input() submitButtonText: string;
     @Output() confirm = new EventEmitter<Boolean>();
-    @Output() hideModal = new EventEmitter<Boolean>();
+    @Output() cancel = new EventEmitter<Boolean>();
 
     constructor() { }
 
     ngOnInit() {
+        
     }
 
-
-    cancel() {
-        this.open = false;
-        this.hideModal.emit(true);
+    onCancel() {
+        this.open = !this.open;
+        this.cancel.emit(true);
     }
 
-    modalAction() {
+    onConfirm() {
+        this.open = !this.open;
         this.confirm.emit(true);
-        this.open = false;
     }
 }

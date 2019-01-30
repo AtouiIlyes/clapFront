@@ -6,13 +6,15 @@ import { NglModule } from 'ng-lightning/ng-lightning';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { AccessDirective } from './directives/access.directive';
 import { MessagesComponent } from './messages/messages.component';
+import { ModalComponent } from './modal/modal.component';
 
 
 @NgModule({
   declarations: [
     DropdownDirective,
     AccessDirective, 
-    MessagesComponent
+    MessagesComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { MessagesComponent } from './messages/messages.component';
   exports: [
     DropdownDirective,
     AccessDirective,
-    MessagesComponent
+    MessagesComponent,
+    ModalComponent
   ]
 })
 

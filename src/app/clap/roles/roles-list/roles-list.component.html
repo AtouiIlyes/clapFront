@@ -41,9 +41,8 @@
             <div class="slds-truncate" title="Cloudhub">{{role.name}}</div>
           </td>
           <td data-label="actions">
-            <span nglDropdown [(open)]="open">
-              <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
-                nglDropdownTrigger>
+            <span nglDropdown [(open)]="open[i]">
+              <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small" nglDropdownTrigger>
                 <ngl-icon icon="down" type="default" size="x-small"></ngl-icon>
               </button>
               <div class="slds-dropdown slds-dropdown--left">
@@ -54,7 +53,7 @@
                     </a>
                   </li>
                   <li class="slds-dropdown__item">
-                    <a role="menuitem" nglDropdownItem (click)="onDeleteRole(role.id)">
+                    <a role="menuitem" nglDropdownItem (click)="onDeleteUserAction(role.id)">
                       <p class="slds-truncate">Supprimer</p>
                     </a>
                   </li>
@@ -68,3 +67,11 @@
   </div>
   <footer class="slds-card__footer"></footer>
 </article>
+<app-modal-window 
+  [open]="openDeleteRoleConfirm" 
+  [title]="'Suppression Utilisateur'" 
+  [text]="'Êtes vous sur de vouloir supprimer définitivement cet utilisateur?'"
+  [submitButtonText]="'Supprimer'" 
+  (cancel)="onDeleteCancel()" 
+  (confirm)="onDeleteRole()">
+</app-modal-window>

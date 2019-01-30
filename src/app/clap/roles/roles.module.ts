@@ -9,6 +9,7 @@ import { RolesComponent } from './roles.component';
 import { RolesNewComponent } from './roles-new/roles-new.component';
 import { RolesListComponent } from './roles-list/roles-list.component';
 import { RolesRoutingModule } from './roles-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { RolesRoutingModule } from './roles-routing.module';
     RolesRoutingModule,
     NglModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   declarations: [
     RolesComponent,
