@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { INglDatatableSort, INglDatatableRowClick } from 'ng-lightning/ng-lightning';
+
 
 import { Role } from '../role.model';
 import { RolesService } from '../roles.service';
-import { ModalComponent } from '../../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-roles-list',
@@ -14,11 +15,12 @@ import { ModalComponent } from '../../../shared/modal/modal.component';
 export class RolesListComponent implements OnInit {
   roles: Role[];
   roleSubscription: Subscription;
-  loading = false;
+  loading = true;
   numberOfRoles = 0;
   open = [];
   openDeleteRoleConfirm = false;
   roleIdToDelete: number;
+  sort: INglDatatableSort = { key: 'id', order: 'asc' };
 
 
   constructor(private router: Router,
@@ -27,7 +29,7 @@ export class RolesListComponent implements OnInit {
   ngOnInit() {
     this.roleSubscription = this.rolesService.getRefreshList().subscribe(
       res => {
-        this.loading = true;
+        this.loading = false;
         this.openDeleteRoleConfirm = false;
         this.getRoles();
       }
@@ -64,6 +66,13 @@ export class RolesListComponent implements OnInit {
   onDeleteUserAction(id) {
     this.roleIdToDelete = id;
     this.openDeleteRoleConfirm = true;
+  }
+
+  onSort($event: INglDatatableSort) {
+    const { key, order } = $event;
+    this.roles.sort((a: any, b: any) => {
+      return (key === 'id' ? b[key] - a[key] : b[key].localeCompare(a[key])) * (order === 'desc' ? 1 : -1);
+    });
   }
 
 }

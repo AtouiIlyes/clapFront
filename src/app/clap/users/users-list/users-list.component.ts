@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { INglDatatableSort, INglDatatableRowClick } from 'ng-lightning/ng-lightning';
 
 import { UsersService } from '../users.service';
 import { MessagesService } from '../../../shared/messages/messages.service';
-import { ModalComponent } from '../../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-users-list',
@@ -19,7 +19,7 @@ export class UsersListComponent implements OnInit {
   loading = false;
   openDeleteUserConfirm = false;
   userSubscription: Subscription;
-  open = false;
+  open = [];
   numberOfUsers = 0;
 
   constructor(private userService: UsersService,
@@ -59,7 +59,7 @@ export class UsersListComponent implements OnInit {
       .subscribe(
         (res) => {
           this.messages.success('UTILISATEUR SUPPRIMÉ', 'l\'utilisateur a bien été supprimé');
-          const index = this.users.findIndex(user => user.id === id);
+          const index = this.users.findIndex(user => user.id === this.userIdToDelete);
           if (index > -1) {
             this.users.splice(index, 1);
           }
@@ -81,4 +81,10 @@ export class UsersListComponent implements OnInit {
     this.userIdToDelete = id;
   }
 
+  onSort($event: INglDatatableSort) {
+    const { key, order } = $event;
+    this.users.sort((a: any, b: any) => {
+      return (key === 'id' ? b[key] - a[key] : b[key].localeCompare(a[key])) * (order === 'desc' ? 1 : -1);
+    });
+  }
 }

@@ -18,59 +18,50 @@
     </header>
   </div>
   <div class="slds-card__body slds-card__body_inner">
-    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-m-top_large">
-      <thead>
-        <tr class="slds-line-height_reset">
-          <th>
-            <div class="slds-truncate" title="ID">ID</div>
-          </th>
-          <th>
-            <div class="slds-truncate" title="Name">Name</div>
-          </th>
-          <th>
-            <div class="slds-truncate" title="Actions">Actions</div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="slds-hint-parent" *ngFor="let role of roles; let i = index">
-          <th data-label="ID" scope="row">
-            <div class="slds-truncate" title="Cloudhub"><a href="javascript:void(0);" tabindex="-1">{{role.id}}</a></div>
-          </th>
-          <td data-label="name">
-            <div class="slds-truncate" title="Cloudhub">{{role.name}}</div>
-          </td>
-          <td data-label="actions">
-            <span nglDropdown [(open)]="open[i]">
-              <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small" nglDropdownTrigger>
-                <ngl-icon icon="down" type="default" size="x-small"></ngl-icon>
-              </button>
-              <div class="slds-dropdown slds-dropdown--left">
-                <ul class="dropdown__list" role="menu">
-                  <li class="slds-dropdown__item">
-                    <a role="menuitem" nglDropdownItem (click)="onEditRole(role.id)">
-                      <p class="slds-truncate">Editer</p>
-                    </a>
-                  </li>
-                  <li class="slds-dropdown__item">
-                    <a role="menuitem" nglDropdownItem (click)="onDeleteUserAction(role.id)">
-                      <p class="slds-truncate">Supprimer</p>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </span>
-          </td>
-        </tr>
-      </tbody>
+    <table ngl-datatable [data]="roles" trackByKey="id" [loading]="loading" [(sort)]="sort" (sortChange)="onSort($event)"
+      class="slds-max-medium-table--stacked-horizontal">
+      <ngl-datatable-column heading="ID" key="id" sortable></ngl-datatable-column>
+      <ngl-datatable-column heading="Name" key="name" cellClass="slds-truncate" sortable></ngl-datatable-column>
+      <ngl-datatable-column heading="Actions">
+        <ng-template nglDatatableCell let-row="row" let-index="index">
+          <span nglDropdown [(open)]="open[index]">
+            <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
+              nglDropdownTrigger>
+              <ngl-icon icon="down" type="default" size="x-small"></ngl-icon>
+            </button>
+            <div class="slds-dropdown slds-dropdown--left">
+              <ul class="dropdown__list" role="menu">
+                <li class="slds-dropdown__item">
+                  <a role="menuitem" nglDropdownItem (click)="onEditRole(row.id)">
+                    <p class="slds-truncate">Editer</p>
+                  </a>
+                </li>
+                <li class="slds-dropdown__item">
+                  <a role="menuitem" nglDropdownItem (click)="onDeleteUserAction(row.id)">
+                    <p class="slds-truncate">Supprimer</p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </span>
+        </ng-template>
+      </ngl-datatable-column>
+
+      <!-- Loading overlay -->
+      <ng-template nglLoadingOverlay>
+        <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center">Loading...</div>
+      </ng-template>
+
+      <!-- No rows overlay -->
+      <ng-template nglNoRowsOverlay>No data available in table!</ng-template>
     </table>
   </div>
   <footer class="slds-card__footer"></footer>
 </article>
 <app-modal-window 
   [open]="openDeleteRoleConfirm" 
-  [title]="'Suppression Utilisateur'" 
-  [text]="'Êtes vous sur de vouloir supprimer définitivement cet utilisateur?'"
+  [title]="'Suppression Role'" 
+  [text]="'Êtes vous sur de vouloir supprimer définitivement cet role?'"
   [submitButtonText]="'Supprimer'" 
   (cancel)="onDeleteCancel()" 
   (confirm)="onDeleteRole()">
