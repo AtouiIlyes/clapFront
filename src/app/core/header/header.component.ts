@@ -10,6 +10,8 @@ import { AccessDirective } from '../../shared/directives/access.directive';
 })
 export class HeaderComponent implements OnInit {
 
+  open = false;
+
   constructor() { }
 
   ngOnInit() {
