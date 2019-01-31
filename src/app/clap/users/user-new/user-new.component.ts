@@ -16,7 +16,10 @@ export class UserNewComponent implements OnInit {
   editMode = false;
   userForm: FormGroup;
   userSubscription: Subscription;
-
+  openRolePickList = false;
+  multipleRolesSelection = false;
+  pickRole: any = [];
+  roles = [];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -30,36 +33,63 @@ export class UserNewComponent implements OnInit {
       (param: Params) => {
         this.id = +param['id'];
         this.editMode = (param['id'] != null);
+        this.userService.getRoles().subscribe(roles => {
+          this.roles = roles;
+        });
+
         this.initForm();
       }
     );
   }
-
   // INIT FORM depending of edit or not mode
   private initForm() {
-    if (this.editMode) {
-      this.userService.getUser(this.id).subscribe(res => {
-        const user = res;
-        this.userForm.setValue({
-          email: user.email,
-        });
-      }, error => {
-        this.messages.error('ERREUR SERVEUR', 'Impossible de charger les données de l\'utilisateur : ' + error);
-      }
-      );
-      this.userForm = this.fb.group({
+    this.userForm = this.fb.group(
+      {
         email: ['', Validators.required],
+        first_name: ['', Validators.required],
+        last_name: ['', Validators.required],
+        function: ['', Validators.required],
+        address_one: ['', Validators.required],
+        address_two: ['', Validators.required],
+        phone: ['', Validators.required],
+        fax: ['', Validators.required],
+        city: ['', Validators.required],
+        zip_code: ['', Validators.required],
+        role_id: [''],
+        password: ['', Validators.required],
+        confirmPassword: ['', Validators.required]
+      },
+      {
+        validator: this.matchingPasswords('password', 'confirmPassword')
       });
-    } else {
-      this.userForm = this.fb.group(
-        {
-          email: ['', Validators.required],
-          password: ['', Validators.required],
-          confirmPassword: ['', Validators.required]
-        },
-        {
-          validator: this.matchingPasswords('password', 'confirmPassword')
-        });
+
+    if (this.editMode) {
+      this.userService.getRoles().subscribe(
+        roles => {
+          this.roles = roles;
+          this.userService.getUser(this.id).subscribe(res => {
+            const user = res;
+            const userRole = this.roles.find(role => role.id = user.role_id);
+            this.userForm = this.fb.group({
+              email: user.email,
+              first_name: user.first_name,
+              last_name: user.last_name,
+              function: user.function,
+              address_one: user.address_one,
+              address_two: user.address_two,
+              phone: user.phone,
+              fax: user.fax,
+              city: user.city,
+              role_id: userRole.id,
+              zip_code: user.zip_code
+            });
+            this.pickRole = userRole;
+          }, error => {
+            this.messages.error('ERREUR SERVEUR', 'Impossible de charger les données de l\'utilisateur : ' + error);
+          }
+          );
+        }
+      );
     }
   }
 
@@ -77,6 +107,7 @@ export class UserNewComponent implements OnInit {
   }
 
   onAddUser() {
+    this.userForm.patchValue({ role_id: this.pickRole.id });
     this.userService.addUser(this.userForm.value);
     this.userSubscription = this.userService.getUserdded().subscribe(
       data => this.router.navigate(['/users'])
@@ -85,6 +116,7 @@ export class UserNewComponent implements OnInit {
 
 
   onUpdateUser() {
+    this.userForm.patchValue({ role_id: this.pickRole.id });
     this.userService.updateUser(this.id, this.userForm.value);
     this.userSubscription = this.userService.getUserdded().subscribe(
       data => this.router.navigate(['/users'])
@@ -93,6 +125,10 @@ export class UserNewComponent implements OnInit {
 
   onCancel() {
     this.router.navigate(['/users']);
+  }
+
+  get pickLabel() {
+    return this.pickRole.name || 'Sélectionner un role';
   }
 
 }

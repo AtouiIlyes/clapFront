@@ -73,5 +73,9 @@ export class UsersService {
     return this.http.delete(API_URL + '/api/v1/users/' + index);
   }
 
+  getRoles() {
+    return this.http.get<any>(API_URL + '/api/v1/roles');
+  }
+
 
 }

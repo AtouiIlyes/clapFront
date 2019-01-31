@@ -6,6 +6,8 @@ import { INglDatatableSort, INglDatatableRowClick } from 'ng-lightning/ng-lightn
 
 import { Role } from '../role.model';
 import { RolesService } from '../roles.service';
+import { MessagesService } from '../../../shared/messages/messages.service';
+
 
 @Component({
   selector: 'app-roles-list',
@@ -24,6 +26,7 @@ export class RolesListComponent implements OnInit {
 
 
   constructor(private router: Router,
+    private messages: MessagesService,
     private rolesService: RolesService) { }
 
   ngOnInit() {
@@ -54,7 +57,19 @@ export class RolesListComponent implements OnInit {
   }
 
   onDeleteRole() {
-    this.rolesService.deleteRole(this.roleIdToDelete);
+    this.rolesService.deleteRole(this.roleIdToDelete).subscribe(
+      (res) => {
+        this.messages.success('RÔLE SUPPRIMÉ', 'le role a bien été supprimé');
+        const index = this.roles.findIndex(role => role.id === this.roleIdToDelete);
+        if (index > -1) {
+          this.roles.splice(index, 1);
+        }
+        this.openDeleteRoleConfirm = false;
+      },
+      err => {
+        this.messages.error('RÔLE NON SUPPRIMÉ', 'le role n\'a pas été supprimé : ' + err);
+      }
+    );
   }
 
   onDeleteCancel() {

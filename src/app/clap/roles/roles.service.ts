@@ -56,16 +56,7 @@ export class RolesService {
   }
 
   deleteRole(index: number) {
-    return this.http.delete(API_URL + '/api/v1/roles/' + index)
-      .subscribe(
-        (res) => {
-          this.rolesListUpdated.next();
-          this.messages.success('RÔLE SUPPRIMÉ', 'le role a bien été supprimé');
-        },
-        err => {
-          this.messages.error('RÔLE NON SUPPRIMÉ', 'le role n\'a pas été supprimé : ' + err);
-        }
-      );
+    return this.http.delete(API_URL + '/api/v1/roles/' + index);
   }
 
   getPermissions() {

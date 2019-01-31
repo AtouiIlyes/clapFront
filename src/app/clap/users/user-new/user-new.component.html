@@ -1,5 +1,5 @@
 <article class="slds-card">
-  <div class="slds-card__header slds-grid"> 
+  <div class="slds-card__header slds-grid">
     <header class="slds-media slds-media_center slds-has-flexi-truncate">
       <div class="slds-media__figure">
         <span class="slds-icon_container slds-icon-standard-account" title="account">
@@ -21,26 +21,102 @@
       <div class="slds-form-element slds-m-top_small">
         <label class="slds-form-element__label" for="text-input-id-1">Email</label>
         <div class="slds-form-element__control">
-          <input id="email" placeholder="Entrez votre email ici" class="slds-input" formControlName="email" name="email" type="text"/>
+          <input id="email" placeholder="Entrez votre email ici" class="slds-input" formControlName="email" name="email"
+            type="text" />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Role</label>
+        <div class="slds-form-element__control">
+          <ngl-picklist [data]="roles" [(nglPick)]="pickRole" [(open)]="openRolePickList" formControlName="role_id" [nglPickMultiple]="multipleRolesSelection"  ngDefaultControl>
+            <span class="slds-truncate">{{ pickLabel }}</span>
+            <ng-template nglPicklistItem let-item>{{item.name}}</ng-template>
+          </ngl-picklist>
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Nom</label>
+        <div class="slds-form-element__control">
+          <input id="first_name" placeholder="Entrez votre nom ici" class="slds-input" formControlName="first_name"
+            name="first_name" type="text" />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Prénom</label>
+        <div class="slds-form-element__control">
+          <input id="last_name" placeholder="Entrez votre prénom ici" class="slds-input" formControlName="last_name"
+            name="last_name" type="text" />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Fonction</label>
+        <div class="slds-form-element__control">
+          <input id="function" placeholder="Entrez votre fonction ici" class="slds-input" formControlName="function"
+            name="function" type="text" />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Addresse 1</label>
+        <div class="slds-form-element__control">
+          <input id="address_one" placeholder="Entrez votre addresse ici" class="slds-input" formControlName="address_one"
+            name="address_one" type="text" />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Addresse 2</label>
+        <div class="slds-form-element__control">
+          <input id="address_two" placeholder="Entrez votre addresse ici" class="slds-input" formControlName="address_two"
+            name="address_two" type="text" />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Téléphone</label>
+        <div class="slds-form-element__control">
+          <input id="phone" placeholder="Entrez votre téléphone ici" class="slds-input" formControlName="phone" name="phone"
+            type="tel" />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Fax</label>
+        <div class="slds-form-element__control">
+          <input id="fax" placeholder="Entrez votre téléphone ici" class="slds-input" formControlName="fax" name="fax"
+            type="tel" />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Ville</label>
+        <div class="slds-form-element__control">
+          <input id="city" placeholder="Entrez votre ville ici" class="slds-input" formControlName="city" name="city"
+            type="text" />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Zip code</label>
+        <div class="slds-form-element__control">
+          <input id="zip_code" placeholder="Entrez votre ville ici" class="slds-input" formControlName="zip_code" name="zip_code"
+            type="number" />
         </div>
       </div>
       <div *ngIf="!editMode">
         <div class="slds-form-element slds-m-top_small">
           <label class="slds-form-element__label" for="password">Mot de passe</label>
           <div class="slds-form-element__control">
-            <input id="password" placeholder="Entrez votre mot de passe" class="slds-input" formControlName="password" name="password" type="password"/>
+            <input id="password" placeholder="Entrez votre mot de passe" class="slds-input" formControlName="password"
+              name="password" type="password" />
           </div>
         </div>
         <div class="slds-form-element slds-m-top_small">
           <label class="slds-form-element__label" for="confirmedPassword">Confirmation du mot de passe</label>
           <div class="slds-form-element__control">
-            <input id="confirmedPassword" placeholder="Validez votre mot de passe" class="slds-input" formControlName="confirmPassword" name="confirmPassword" type="password"/>
+            <input id="confirmedPassword" placeholder="Validez votre mot de passe" class="slds-input" formControlName="confirmPassword"
+              name="confirmPassword" type="password" />
           </div>
         </div>
       </div>
       <div class="slds-m-top_large">
         <button type="submit" *ngIf="!editMode" class="slds-button slds-button_brand" [disabled]="!userForm.valid">Sauvegarder</button>
-        <button type="button" *ngIf="editMode" class="slds-button slds-button_brand" (click)="onUpdateUser()" [disabled]="!userForm.valid">Modifier</button>
+        <button type="button" *ngIf="editMode" class="slds-button slds-button_brand" (click)="onUpdateUser()"
+          [disabled]="!userForm.valid">Modifier</button>
         <button type="button" class="slds-button slds-button_outline-brand" (click)="onCancel()">Annuler</button>
       </div>
     </form>
