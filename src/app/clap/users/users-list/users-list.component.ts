@@ -55,11 +55,10 @@ export class UsersListComponent implements OnInit {
   }
 
   onDeleteUser() {
-    this.userService.deleteUser(this.userIdToDelete)
-      .subscribe(
+    this.userService.deleteUser(this.userIdToDelete).subscribe(
         (res) => {
           this.messages.success('UTILISATEUR SUPPRIMÉ', 'l\'utilisateur a bien été supprimé');
-          const index = this.users.findIndex(user => user.id === id);
+          const index = this.users.findIndex(user => user.id === this.userIdToDelete);
           if (index > -1) {
             this.users.splice(index, 1);
           }
