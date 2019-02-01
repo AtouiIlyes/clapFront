@@ -3,8 +3,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { UsersService } from '../users.service';
-import { MessagesService } from '../../../shared/messages/messages.service';
+import { UsersService } from '#clap/users/users.service';
+import { MessagesService } from '#shared/messages/messages.service';
 
 @Component({
   selector: 'app-user-new',
@@ -14,6 +14,7 @@ import { MessagesService } from '../../../shared/messages/messages.service';
 export class UserNewComponent implements OnInit {
   id: number;
   editMode = false;
+  loading = true;
   userForm: FormGroup;
   userSubscription: Subscription;
   openRolePickList = false;

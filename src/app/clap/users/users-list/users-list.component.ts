@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { INglDatatableSort, INglDatatableRowClick } from 'ng-lightning/ng-lightning';
 
 import { UsersService } from '../users.service';
-import { MessagesService } from '../../../shared/messages/messages.service';
+import { MessagesService } from '#shared/messages/messages.service';
 
 @Component({
   selector: 'app-users-list',
@@ -15,7 +15,6 @@ import { MessagesService } from '../../../shared/messages/messages.service';
 export class UsersListComponent implements OnInit {
   users = [];
   userIdToDelete: number;
-  displayed = [];
   loading = false;
   openDeleteUserConfirm = false;
   userSubscription: Subscription;

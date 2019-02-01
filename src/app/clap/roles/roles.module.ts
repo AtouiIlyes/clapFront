@@ -9,7 +9,7 @@ import { RolesComponent } from './roles.component';
 import { RolesNewComponent } from './roles-new/roles-new.component';
 import { RolesListComponent } from './roles-list/roles-list.component';
 import { RolesRoutingModule } from './roles-routing.module';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '#shared/shared.module';
 
 @NgModule({
   imports: [

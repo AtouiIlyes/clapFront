@@ -12,6 +12,22 @@
             "element",
             "app",
             "kebab-case"
+        ],
+        "ordered-imports": [
+            true,
+            {
+                "import-sources-order": "case-insensitive",
+                "named-imports-order": "case-insensitive",
+                //"no-implicit-dependencies": [ true, "optional" ]
+                "no-implicit-dependencies": [true, ["@shared", "@app"]], // add any alias in the array
+                // "groups": [
+                //     { "match": "^@shared*", "order": 20 },
+                //     //{ "match": "^@env", "order": 30 },
+                //     { "name": "parent_dir", "match": "^[.][.]", "order": 40 },
+                //     { "name": "current dir", "match": "^[.]", "order": 50 },
+                //     { "match": null, "order": 10 }
+                // ]
+            }
         ]
     }
 }

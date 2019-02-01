@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Role } from './role.model';
 import { environment } from '../../../environments/environment';
-import { MessagesService } from '../../shared/messages/messages.service';
+import { MessagesService } from '#shared/messages/messages.service';
 
 const API_URL = environment.apiUrl;
 

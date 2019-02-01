@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DropdownDirective } from '../../shared/directives/dropdown.directive';
-import { AccessDirective } from '../../shared/directives/access.directive';
+import { DropdownDirective } from '#shared/directives/dropdown.directive';
+import { AccessDirective } from '#shared/directives/access.directive';
 
 @Component({
   selector: 'app-header',
@@ -9,8 +9,6 @@ import { AccessDirective } from '../../shared/directives/access.directive';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
-  open = false;
 
   constructor() { }
 

@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { NglModule } from 'ng-lightning/ng-lightning';
 
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '#shared/shared.module';
 import { UserTypeNewComponent } from './user-type-new/user-type-new.component';
 import { UserTypesListComponent } from './user-types-list/user-types-list.component';
 import { UserTypesComponent } from './user-types.component';

@@ -27,7 +27,6 @@ export class MessagesService {
       message: message,
       severity: 'error'
     });
-    
   }
 
   public getMessagesNotifications(): Observable<any> {

@@ -1,4 +1,4 @@
-<div class="demo-only" style="height: 6rem;" *ngIf="loading">
+<div *ngIf="loading">
   <div role="status" class="slds-spinner slds-spinner_medium">
     <span class="slds-assistive-text">Loading</span>
     <div class="slds-spinner__dot-a"></div>
@@ -34,8 +34,7 @@
       <div class="slds-form-element slds-m-top_small">
         <label class="slds-form-element__label" for="description">Description</label>
         <div class="slds-form-element__control">
-          <input id="description" placeholder="Description du rôle" class="slds-input" formControlName="description"
-            name="description" type="text" />
+          <input id="description" placeholder="Description du rôle" class="slds-input" formControlName="description" name="description" type="text" />
         </div>
       </div>
       <div class="slds-form-element slds-m-top_small">
@@ -46,10 +45,8 @@
         </div>
       </div>
       <div class="slds-m-top_large">
-        <button href="javascript:void(0)" type="submit" *ngIf="!editMode" class="slds-button slds-button_brand"
-          [disabled]="!roleForm.valid">Sauvegarder</button>
-        <button type="button" *ngIf="editMode" class="slds-button slds-button_brand" (click)="onSubmitRole()"
-          [disabled]="!roleForm.valid">Modifier</button>
+        <button href="javascript:void(0)" type="submit" *ngIf="!editMode" class="slds-button slds-button_brand" [disabled]="!roleForm.valid">Sauvegarder</button>
+        <button type="button" *ngIf="editMode" class="slds-button slds-button_brand" (click)="onSubmitRole()" [disabled]="!roleForm.valid">Modifier</button>
         <button type="button" class="slds-button slds-button_outline-brand" (click)="onCancel()">Annuler</button>
       </div>
     </form>

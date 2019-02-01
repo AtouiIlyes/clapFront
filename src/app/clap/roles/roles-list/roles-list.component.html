@@ -18,8 +18,7 @@
     </header>
   </div>
   <div class="slds-card__body slds-card__body_inner">
-    <table ngl-datatable [data]="roles" trackByKey="id" [loading]="loading" [(sort)]="sort" (sortChange)="onSort($event)"
-      class="slds-max-medium-table--stacked-horizontal">
+    <table ngl-datatable [data]="roles" trackByKey="id" [loading]="loading" [(sort)]="sort" (sortChange)="onSort($event)" class="slds-table_striped slds-m-top_large">
       <ngl-datatable-column heading="ID" key="id" sortable></ngl-datatable-column>
       <ngl-datatable-column heading="Name" key="name" cellClass="slds-truncate" sortable></ngl-datatable-column>
       <ngl-datatable-column heading="Actions">
@@ -49,11 +48,11 @@
 
       <!-- Loading overlay -->
       <ng-template nglLoadingOverlay>
-        <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center">Loading...</div>
+        <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center">Chargement...</div>
       </ng-template>
 
       <!-- No rows overlay -->
-      <ng-template nglNoRowsOverlay>No data available in table!</ng-template>
+      <ng-template nglNoRowsOverlay>Aucune données à charger!</ng-template>
     </table>
   </div>
   <footer class="slds-card__footer"></footer>

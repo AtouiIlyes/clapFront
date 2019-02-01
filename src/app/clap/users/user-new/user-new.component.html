@@ -1,4 +1,12 @@
-<article class="slds-card">
+<div *ngIf="loading">
+  <div role="status" class="slds-spinner slds-spinner_medium">
+    <span class="slds-assistive-text">Loading</span>
+    <div class="slds-spinner__dot-a"></div>
+    <div class="slds-spinner__dot-b"></div>
+  </div>
+</div>
+
+<article class="slds-card" *ngIf="!loading">
   <div class="slds-card__header slds-grid">
     <header class="slds-media slds-media_center slds-has-flexi-truncate">
       <div class="slds-media__figure">
@@ -21,8 +29,7 @@
       <div class="slds-form-element slds-m-top_small">
         <label class="slds-form-element__label" for="text-input-id-1">Email</label>
         <div class="slds-form-element__control">
-          <input id="email" placeholder="Entrez votre email ici" class="slds-input" formControlName="email" name="email"
-            type="text" />
+          <input id="email" placeholder="Entrez votre email ici" class="slds-input" formControlName="email" name="email" type="text"/>
         </div>
       </div>
       <div class="slds-form-element slds-m-top_small">
@@ -110,15 +117,13 @@
         <div class="slds-form-element slds-m-top_small">
           <label class="slds-form-element__label" for="password">Mot de passe</label>
           <div class="slds-form-element__control">
-            <input id="password" placeholder="Entrez votre mot de passe" class="slds-input" formControlName="password"
-              name="password" type="password" />
+            <input id="password" placeholder="Entrez votre mot de passe" class="slds-input" formControlName="password" name="password" type="password"/>
           </div>
         </div>
         <div class="slds-form-element slds-m-top_small">
           <label class="slds-form-element__label" for="confirmedPassword">Confirmation du mot de passe</label>
           <div class="slds-form-element__control">
-            <input id="confirmedPassword" placeholder="Validez votre mot de passe" class="slds-input" formControlName="confirmPassword"
-              name="confirmPassword" type="password" />
+            <input id="confirmedPassword" placeholder="Validez votre mot de passe" class="slds-input" formControlName="confirmPassword" name="confirmPassword" type="password"/>
           </div>
         </div>
       </div>

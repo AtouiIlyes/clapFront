@@ -6,6 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { HomesModule } from './homes/homes.module';
+import { AccountsModule } from './accounts/accounts.module';
+
 
 
 
@@ -17,7 +19,8 @@ import { HomesModule } from './homes/homes.module';
     RouterModule,
     UsersModule,
     RolesModule,
-    HomesModule
+    HomesModule,
+    AccountsModule
   ],
   providers: []
 })
