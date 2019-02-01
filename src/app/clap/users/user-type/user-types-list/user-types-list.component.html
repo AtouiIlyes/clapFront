@@ -4,29 +4,26 @@
       <div class="slds-media__figure">
         <span class="slds-icon_container slds-icon-standard-account" title="account">
           <svg class="slds-icon slds-icon_small" aria-hidden="true">
-            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#user"></use>
+            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#user_role"></use>
           </svg>
-          <span class="slds-assistive-text">Liste des Utilisteurs</span>
+          <span class="slds-assistive-text">Liste des types utilisateurs</span>
         </span>
       </div>
       <div class="slds-media__body">
-        <h2 class="slds-card__header-title slds-card__header-link slds-truncate">Utilisateurs ({{numberOfUsers}})</h2>
+        <h2 class="slds-card__header-title slds-card__header-link slds-truncate">Types Utilisateurs
+          ({{numberOfUsersTypes}})</h2>
       </div>
       <div class="slds-no-flex">
-        <button class="slds-button slds-button_neutral" routerLink="/users/new">Ajouter</button>
-        <button class="slds-button slds-button_brand" routerLink="/types">Types</button>
+        <button class="slds-button slds-button_neutral" routerLink="/types/new">Ajouter</button>
       </div>
     </header>
   </div>
   <div class="slds-card__body slds-card__body_inner">
-    <table ngl-datatable [data]="users" trackByKey="id" [loading]="loading" [(sort)]="sort" (sortChange)="onSort($event)"
+    <table ngl-datatable [data]="userTypes" trackByKey="id" [loading]="loading" [(sort)]="sort" (sortChange)="onSort($event)"
       class="slds-max-medium-table--stacked-horizontal">
       <ngl-datatable-column heading="ID" key="id" sortable></ngl-datatable-column>
-      <ngl-datatable-column heading="Email" key="email" cellClass="slds-truncate" sortable></ngl-datatable-column>
-      <ngl-datatable-column heading="Nom" key="first_name" cellClass="slds-truncate" sortable></ngl-datatable-column>
-      <ngl-datatable-column heading="Prénom" key="last_name" cellClass="slds-truncate" sortable></ngl-datatable-column>
-      <ngl-datatable-column heading="Ville" key="city" cellClass="slds-truncate" sortable></ngl-datatable-column>
-
+      <ngl-datatable-column heading="Name" key="name" cellClass="slds-truncate" sortable></ngl-datatable-column>
+      <ngl-datatable-column heading="Description" key="description" cellClass="slds-truncate" sortable></ngl-datatable-column>
       <ngl-datatable-column heading="Actions">
         <ng-template nglDatatableCell let-row="row" let-index="index">
           <span nglDropdown [(open)]="open[index]">
@@ -37,12 +34,12 @@
             <div class="slds-dropdown slds-dropdown--left">
               <ul class="dropdown__list" role="menu">
                 <li class="slds-dropdown__item">
-                  <a role="menuitem" nglDropdownItem (click)="onEditUser(row.id)">
+                  <a role="menuitem" nglDropdownItem (click)="onEditUserType(row.id)">
                     <p class="slds-truncate">Editer</p>
                   </a>
                 </li>
                 <li class="slds-dropdown__item">
-                  <a role="menuitem" nglDropdownItem (click)="onDeleteUserAction(row.id)">
+                  <a role="menuitem" nglDropdownItem (click)="onDeleteUserTypeAction(row.id)">
                     <p class="slds-truncate">Supprimer</p>
                   </a>
                 </li>
@@ -64,10 +61,10 @@
   <footer class="slds-card__footer"></footer>
 </article>
 <app-modal-window 
-  [open]="openDeleteUserConfirm" 
-  [title]="'Suppression Utilisateur'" 
-  [text]="'Êtes vous sur de vouloir supprimer définitivement ce utilisateur?'"
+  [open]="openDeleteUserTypeConfirm" 
+  [title]="'Suppression Type Utilisateur'" 
+  [text]="'Êtes vous sur de vouloir supprimer définitivement ce type d\'utilisateur?'"
   [submitButtonText]="'Supprimer'" 
   (cancel)="onDeleteCancel()" 
-  (confirm)="onDeleteUser()">
+  (confirm)="onDeleteUserType()">
 </app-modal-window>

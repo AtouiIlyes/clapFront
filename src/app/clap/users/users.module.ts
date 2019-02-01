@@ -11,6 +11,7 @@ import { UsersListComponent } from './users-list/users-list.component';
 import { UserNewComponent } from './user-new/user-new.component';
 import { UsersService } from './users.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { UserTypesModule } from './user-type/user-types.module';
 
 
 
@@ -26,6 +27,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule,
     ReactiveFormsModule,
     UsersRoutingModule,
+    UserTypesModule,
     NglModule.forRoot()
   ],
   providers: [UsersService]
