@@ -71,6 +71,7 @@ export class UserNewComponent implements OnInit {
       {
         validator: this.matchingPasswords('password', 'confirmPassword')
       });
+      this.loading = false;
 
     if (this.editMode) {
       this.userService.getUserTypes().subscribe(userTypes => {
@@ -105,6 +106,7 @@ export class UserNewComponent implements OnInit {
           }
         );
       });
+      this.loading = false;
 
     }
   }

@@ -4,7 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { UserTypesService } from '../user-types.service';
-import { MessagesService } from '../../../../shared/messages/messages.service';
+import { MessagesService } from '#shared/messages/messages.service';
 
 @Component({
   selector: 'app-user-type-new',
@@ -14,6 +14,7 @@ import { MessagesService } from '../../../../shared/messages/messages.service';
 export class UserTypeNewComponent implements OnInit {
   id: number;
   editMode = false;
+  loading = true;
   userTypeForm: FormGroup;
   userTypeSubscription: Subscription;
   constructor(
@@ -41,7 +42,6 @@ export class UserTypeNewComponent implements OnInit {
         name: ['', Validators.required],
         description: ['', Validators.required],
       });
-
     if (this.editMode) {
 
       this.userTypesService.getUserType(this.id).subscribe(res => {
@@ -54,6 +54,7 @@ export class UserTypeNewComponent implements OnInit {
       }
       );
     }
+    this.loading = false;
   }
 
 

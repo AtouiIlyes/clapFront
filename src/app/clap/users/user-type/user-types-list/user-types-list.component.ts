@@ -16,7 +16,7 @@ export class UserTypesListComponent implements OnInit {
   userTypes = [];
   userTypeIdToDelete: number;
   displayed = [];
-  loading = false;
+  loading = true;
   openDeleteUserTypeConfirm = false;
   userTypeSubscription: Subscription;
   open = [];
@@ -28,8 +28,6 @@ export class UserTypesListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loading = true;
-
     this.userTypeSubscription = this.userTypesService.getTypeUserRefreshList().subscribe(
       data => {
         const index = this.userTypes.findIndex(userType => userType.id === data.id);
