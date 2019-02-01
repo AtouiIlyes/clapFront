@@ -29,7 +29,16 @@
         <label class="slds-form-element__label" for="text-input-id-1">Role</label>
         <div class="slds-form-element__control">
           <ngl-picklist [data]="roles" [(nglPick)]="pickRole" [(open)]="openRolePickList" formControlName="role_id" [nglPickMultiple]="multipleRolesSelection"  ngDefaultControl>
-            <span class="slds-truncate">{{ pickLabel }}</span>
+            <span class="slds-truncate">{{ pickRoleLabel }}</span>
+            <ng-template nglPicklistItem let-item>{{item.name}}</ng-template>
+          </ngl-picklist>
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Type</label>
+        <div class="slds-form-element__control">
+          <ngl-picklist [data]="userTypes" [(nglPick)]="pickUserType" [(open)]="openUserTypePickList" formControlName="type_id" [nglPickMultiple]="multipleUserTypeSelection"  ngDefaultControl>
+            <span class="slds-truncate">{{ pickUserTypeLabel }}</span>
             <ng-template nglPicklistItem let-item>{{item.name}}</ng-template>
           </ngl-picklist>
         </div>

@@ -77,5 +77,8 @@ export class UsersService {
     return this.http.get<any>(API_URL + '/api/v1/roles');
   }
 
+  getUserTypes() {
+    return this.http.get<any>(API_URL + '/api/v1/user_types');
+  }
 
 }

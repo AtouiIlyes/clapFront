@@ -17,9 +17,13 @@ export class UserNewComponent implements OnInit {
   userForm: FormGroup;
   userSubscription: Subscription;
   openRolePickList = false;
+  openUserTypePickList = false;
   multipleRolesSelection = false;
+  multipleUserTypeSelection = false;
   pickRole: any = [];
+  pickUserType: any = [];
   roles = [];
+  userTypes = [];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -37,6 +41,9 @@ export class UserNewComponent implements OnInit {
           this.roles = roles;
         });
 
+        this.userService.getUserTypes().subscribe(userTypes => {
+          this.userTypes = userTypes;
+        });
         this.initForm();
       }
     );
@@ -55,7 +62,8 @@ export class UserNewComponent implements OnInit {
         fax: ['', Validators.required],
         city: ['', Validators.required],
         zip_code: ['', Validators.required],
-        role_id: [''],
+        role_id: ['', Validators.required],
+        type_id: ['', Validators.required],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required]
       },
@@ -64,32 +72,39 @@ export class UserNewComponent implements OnInit {
       });
 
     if (this.editMode) {
-      this.userService.getRoles().subscribe(
-        roles => {
-          this.roles = roles;
-          this.userService.getUser(this.id).subscribe(res => {
-            const user = res;
-            const userRole = this.roles.find(role => role.id === user.role_id);
-            this.pickRole = userRole;
-            this.userForm = this.fb.group({
-              email: user.email,
-              first_name: user.first_name,
-              last_name: user.last_name,
-              function: user.function,
-              address_one: user.address_one,
-              address_two: user.address_two,
-              phone: user.phone,
-              fax: user.fax,
-              city: user.city,
-              role_id: userRole.id,
-              zip_code: user.zip_code
-            });
-          }, error => {
-            this.messages.error('ERREUR SERVEUR', 'Impossible de charger les données de l\'utilisateur : ' + error);
+      this.userService.getUserTypes().subscribe(userTypes => {
+        this.userTypes = userTypes;
+        this.userService.getRoles().subscribe(
+          roles => {
+            this.roles = roles;
+            this.userService.getUser(this.id).subscribe(res => {
+              const user = res;
+              const userRole = this.roles.find(role => role.id === user.role_id);
+              const userType = this.userTypes.find(type => type.id === user.type_id);
+              this.pickRole = userRole;
+              this.pickUserType = userType;
+              this.userForm = this.fb.group({
+                email: user.email,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                function: user.function,
+                address_one: user.address_one,
+                address_two: user.address_two,
+                phone: user.phone,
+                fax: user.fax,
+                city: user.city,
+                role_id: userRole.id,
+                type_id: userType.id,
+                zip_code: user.zip_code
+              });
+            }, error => {
+              this.messages.error('ERREUR SERVEUR', 'Impossible de charger les données de l\'utilisateur : ' + error);
+            }
+            );
           }
-          );
-        }
-      );
+        );
+      });
+
     }
   }
 
@@ -107,8 +122,12 @@ export class UserNewComponent implements OnInit {
   }
 
   onAddUser() {
-    this.userForm.patchValue({ role_id: this.pickRole.id });
-    this.userService.addUser(this.userForm.value);
+    this.userForm.patchValue(
+      {
+        role_id: this.pickRole.id,
+        type_id: this.pickUserType.id
+      }
+    ); this.userService.addUser(this.userForm.value);
     this.userSubscription = this.userService.getUserdded().subscribe(
       data => this.router.navigate(['/users'])
     );
@@ -116,7 +135,12 @@ export class UserNewComponent implements OnInit {
 
 
   onUpdateUser() {
-    this.userForm.patchValue({ role_id: this.pickRole.id });
+    this.userForm.patchValue(
+      {
+        role_id: this.pickRole.id,
+        type_id: this.pickUserType.id
+      }
+    );
     this.userService.updateUser(this.id, this.userForm.value);
     this.userSubscription = this.userService.getUserdded().subscribe(
       data => this.router.navigate(['/users'])
@@ -127,8 +151,12 @@ export class UserNewComponent implements OnInit {
     this.router.navigate(['/users']);
   }
 
-  get pickLabel() {
+  get pickRoleLabel() {
     return this.pickRole.name || 'Sélectionner un role';
+  }
+
+  get pickUserTypeLabel() {
+    return this.pickUserType.name || 'Sélectionner un type';
   }
 
 }
