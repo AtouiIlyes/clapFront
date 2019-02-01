@@ -69,7 +69,8 @@ export class UserNewComponent implements OnInit {
           this.roles = roles;
           this.userService.getUser(this.id).subscribe(res => {
             const user = res;
-            const userRole = this.roles.find(role => role.id = user.role_id);
+            const userRole = this.roles.find(role => role.id === user.role_id);
+            this.pickRole = userRole;
             this.userForm = this.fb.group({
               email: user.email,
               first_name: user.first_name,
@@ -83,7 +84,6 @@ export class UserNewComponent implements OnInit {
               role_id: userRole.id,
               zip_code: user.zip_code
             });
-            this.pickRole = userRole;
           }, error => {
             this.messages.error('ERREUR SERVEUR', 'Impossible de charger les données de l\'utilisateur : ' + error);
           }
