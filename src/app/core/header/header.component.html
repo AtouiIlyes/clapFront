@@ -161,7 +161,7 @@
     </div>
   </div>
 
-  <div  *authorized="'loggued'">
+  <div *authorized="'loggued'">
     <div class="slds-context-bar">
       <div class="slds-context-bar__primary">
         <div class="slds-context-bar__item slds-no-hover">
@@ -205,6 +205,30 @@
                 <li class="slds-dropdown__item" role="presentation" [routerLink]="'/roles'">
                   <a href="javascript:void(0);" role="menuitem" tabindex="-1">
                     <span class="slds-truncate" title="Gestion des roles">Roles</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="slds-context-bar__item slds-context-bar__dropdown-trigger slds-dropdown-trigger slds-dropdown-trigger_click "
+            id="menu2">
+            <a href="javascript:void(0);" class="slds-context-bar__label-action" title="Menu Item" [routerLink]="'/accounts'">
+              <span class="slds-truncate" title="Menu Item">Comptes</span>
+            </a>
+            <div class="slds-context-bar__icon-action slds-p-left_none">
+              <button class="slds-button slds-button_icon slds-button_icon slds-context-bar__button" aria-haspopup="true"
+                title="Open menu item submenu" appDropdown="#menu2">
+                <svg class="slds-button__icon" aria-hidden="true">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevrondown" />
+                </svg>
+                <span class="slds-assistive-text"></span>
+              </button>
+            </div>
+            <div class="slds-dropdown slds-dropdown_right">
+              <ul class="slds-dropdown__list" role="menu">
+                <li class="slds-dropdown__item" role="presentation">
+                  <a href="javascript:void(0);" role="menuitem" tabindex="-1" [routerLink]="'/accounts'">
+                    <span class="slds-truncate" title="Gestion des clients">Nouveau compte</span>
                   </a>
                 </li>
               </ul>

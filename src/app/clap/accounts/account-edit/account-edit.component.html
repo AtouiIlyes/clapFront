@@ -1,3 +1,184 @@
-<p>
-  account-edit works!
-</p>
+<form [formGroup]="accountForm" (ngSubmit)="onAddAccount()">
+  <ngl-modal [header]="'Créer: Compte'" [(open)]="open" [size]="''" [directional]="false">
+    <div body>
+      <div style="height: 25rem;">
+
+        <!-- Info compte-->
+        <h3 class="slds-section__title slds-theme_shade">
+          <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Information sur le compte</span>
+        </h3>
+        <br />
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col slds-size_6-of-12">
+            <div class="slds-form-element">
+              <label class="slds-form-element__label">
+                <abbr class="slds-required" title="required">* </abbr>Nom du compte</label>
+              <div class="slds-form-element__control">
+                <input id="account-name" required="" class="slds-input" type="text" value="" formControlName="name" />
+              </div>
+            </div>
+            <div class="slds-form-element">
+              <label class="slds-form-element__label">Secteur d'activité</label>
+              <ngl-picklist [data]="activities" [(nglPick)]="pickActivities" [(open)]="openActivityPickList"
+                [nglPickMultiple]="flase" formControlName="activity" ngDefaultControl>
+                <span class="slds-truncate">{{ pickActivitiesLabel }}</span>
+                <ng-template nglPicklistItem let-item>{{item.value}}</ng-template>
+              </ngl-picklist>
+            </div>
+            <div class="slds-form-element">
+              <label class="slds-form-element__label">
+                <abbr class="slds-required" title="required">* </abbr>Code NAF</label>
+              <div class="slds-form-element__control">
+                <input id="account-naf" required="" class="slds-input" type="text" value="" formControlName="vat_number" />
+              </div>
+            </div>
+            <div class="slds-form-element">
+              <label class="slds-form-element__label">
+                <abbr class="slds-required" title="required">* </abbr>Numéro TVA</label>
+              <div class="slds-form-element__control">
+                <input id="account-tva" required="" class="slds-input" type="text" value="" />
+              </div>
+            </div>
+          </div>
+          <div class="slds-col slds-size_6-of-12">
+            <div class="slds-form-element">
+              <label class="slds-form-element__label" for="text-input-id-1">Propriétaire du compte</label>
+              <div class="slds-form-element__control">
+                <label class="slds-form-element__label"><b>Test</b></label>
+              </div>
+            </div>
+            <div class="slds-form-element">
+              <label class="slds-form-element__label">
+                <abbr class="slds-required" title="required">* </abbr>Compte principal</label>
+              <div class="slds-form-element__control">
+                <ngl-lookup [(value)]="value" [lookup]="lookup" [(pick)]="name" placeholder="Recherchez des comptes..."></ngl-lookup>
+              </div>
+            </div>
+            <div class="slds-form-element">
+              <label class="slds-form-element__label">
+                <abbr class="slds-required" title="required">* </abbr>Numéro du Siret NAF</label>
+              <div class="slds-form-element__control">
+                <input id="account-siret" required="" class="slds-input" type="text" value="" formControlName="siret" />
+              </div>
+            </div>
+            <div class="slds-form-element">
+              <span class="slds-form-element__label" id="file-selector-primary-label">KBIS</span>
+              <div class="slds-form-element__control">
+                <div class="slds-file-selector slds-file-selector_files">
+                  <div class="slds-file-selector__dropzone">
+                    <input class="slds-file-selector__input slds-assistive-text" accept="image/png" type="file" id="file-upload-input-01"
+                      aria-labelledby="file-selector-primary-label file-selector-secondary-label" />
+                    <label class="slds-file-selector__body" for="file-upload-input-01" id="file-selector-secondary-label">
+                      <span class="slds-file-selector__button slds-button slds-button_neutral">
+                        <svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#upload" />
+                        </svg>Charger </span>
+                      <span class="slds-file-selector__text slds-medium-show">ou Déposer un fichier</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <!-- Coordonnées-->
+
+        <h3 class="slds-section__title slds-theme_shade">
+          <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Coordonnées</span>
+        </h3>
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col slds-size_6-of-12">
+            <div class="slds-form-element">
+              <label class="slds-form-element__label">Adresse siége social</label>
+              <div class="slds-form-element__control">
+                <input id="account-address-1" required="" class="slds-input" type="text" value="" formControlName="address" />
+              </div>
+            </div>
+            <div class="slds-form-element">
+              <label class="slds-form-element__label">Adresse 2</label>
+              <div class="slds-form-element__control">
+                <input id="account-address-2" required="" class="slds-input" type="text" value="" />
+              </div>
+            </div>
+            <div class="slds-grid slds-gutters">
+              <div class="slds-col slds-size_8-of-12">
+                <div class="slds-form-element">
+                  <label class="slds-form-element__label">Ville</label>
+                  <div class="slds-form-element__control">
+                    <input id="account-city" required="" class="slds-input" type="text" value="" formControlName="city"/>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-col slds-size_4-of-12">
+                <div class="slds-form-element">
+                  <label class="slds-form-element__label">Code postal</label>
+                  <div class="slds-form-element__control">
+                    <input id="account-code" required="" class="slds-input" type="text" value="" formControlName="zip_code" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-form-element">
+              <label class="slds-form-element__label">Pays</label>
+              <div class="slds-form-element__control">
+                <input id="account-country" required="" class="slds-input" type="text" value="" formControlName="country" />
+              </div>
+            </div>
+          </div>
+          <div class="slds-col slds-size_6-of-12">
+            <div class="slds-form-element">
+              <label class="slds-form-element__label" for="text-input-id-1">Téléphone</label>
+              <div class="slds-form-element__control">
+                <input id="account-phone" required="" class="slds-input" type="tel" value="" formControlName="phone" />
+              </div>
+            </div>
+            <div class="slds-form-element">
+              <label class="slds-form-element__label">Fax</label>
+              <div class="slds-form-element__control">
+                <input id="account-fax" required="" class="slds-input" type="tel" value="" formControlName="fax" />
+              </div>
+            </div>
+            <div class="slds-form-element">
+              <label class="slds-form-element__label">Email</label>
+              <div class="slds-form-element__control">
+                <input id="account-email" required="" class="slds-input" type="text" value="" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+
+        <!-- Contact-->
+
+        <h3 class="slds-section__title slds-theme_shade">
+          <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Contact</span>
+        </h3>
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col slds-size_6-of-12">
+            <div class="slds-form-element">
+              <label class="slds-form-element__label">Contact opérationel</label>
+              <div class="slds-form-element__control">
+                <ngl-lookup [(value)]="value" [lookup]="lookup" [(pick)]="name" placeholder="Recherchez un contact..."></ngl-lookup>
+              </div>
+            </div>
+          </div>
+          <div class="slds-col slds-size_6-of-12">
+            <div class="slds-form-element">
+              <label class="slds-form-element__label" for="text-input-id-1">Contact facturation</label>
+              <div class="slds-form-element__control">
+                <ngl-lookup [(value)]="value" [lookup]="lookup" [(pick)]="name" placeholder="Recherchez un contact..."></ngl-lookup>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+      </div>
+    </div>
+    <ng-template ngl-modal-footer>
+      <button class="slds-button slds-button--neutral" (click)="onCancel()">Cancel</button>
+      <button type="button" (click)="onAddAccountAndNew()" class="slds-button slds-button--neutral">Enregistrer et Nouveau</button>
+      <button type="submit" class="slds-button slds-button--brand">Enregistrer</button>
+    </ng-template>
+  </ngl-modal>
+</form>

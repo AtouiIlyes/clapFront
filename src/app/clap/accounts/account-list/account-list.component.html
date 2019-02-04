@@ -1,3 +1,116 @@
-<p>
-  account-list works!
-</p>
+<div class="slds-grid slds-gutters slds-p-around_large">
+  <div class="slds-col slds-size_12-of-12">
+    <article class="slds-card">
+      <div class="slds-page-header">
+        <div class="slds-page-header__row">
+          <div class="slds-page-header__col-title">
+            <div class="slds-media">
+              <div class="slds-media__figure">
+                <span class="slds-icon_container slds-icon-standard-account">
+                  <svg class="slds-icon slds-page-header__icon" aria-hidden="true">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account" />
+                  </svg>
+                </span>
+              </div>
+              <div class="slds-media__body">
+                <div class="slds-page-header__name">
+                  <div class="slds-page-header__name-title">
+                    <h1>
+                      <span>Comptes</span>
+                      <span class="slds-page-header__title slds-truncate" title="Recently Viewed">Récement visualisés</span>
+                    </h1>
+                  </div>
+                  <div class="slds-page-header__name-switcher">
+                    <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
+                      <button class="slds-button slds-button_icon slds-button_icon-small" aria-haspopup="true" title="Switch list view">
+                        <svg class="slds-button__icon slds-icon_x-small" aria-hidden="true">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down" />
+                        </svg>
+                        <span class="slds-assistive-text">Switch list view</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slds-page-header__col-actions">
+            <button class="slds-button slds-button_neutral" (click)="onEditAccount()">Nouveau</button>
+          </div>
+        </div>
+        <div class="slds-page-header__row">
+          <div class="slds-page-header__col-meta">
+            <p class="slds-page-header__meta-text">{{numberOfAccounts}} éléments • Mises à jour
+              {{lastUpdatedAccountDate}}</p>
+          </div>
+          <ngl-lookup [(value)]="value" [lookup]="lookup" [(pick)]="name" placeholder="Recherchez dans cette liste... ">
+          </ngl-lookup>
+        </div>
+      </div>
+      <table ngl-datatable [data]="accounts" trackByKey="id" [loading]="loading" [(sort)]="sort" (sortChange)="onSort($event)"
+        class="slds-table_striped slds-m-top_large">
+        <ngl-datatable-column>
+          <ng-template nglDatatableCell>
+            <ngl-form-checkbox class="slds-m-top--small">
+              <input nglFormControl type="checkbox" />
+            </ngl-form-checkbox>
+          </ng-template>
+        </ngl-datatable-column>
+        <ngl-datatable-column heading="Name" key="name" cellClass="slds-truncate" sortable>
+        </ngl-datatable-column>
+        <ngl-datatable-column heading="Secteur d'activité " key="activity" cellClass="slds-truncate" sortable></ngl-datatable-column>
+        <ngl-datatable-column heading="Contrat" key="contracts.length" cellClass="slds-truncate" sortable>
+        </ngl-datatable-column>
+        <ngl-datatable-column heading="phone" key="phone" cellClass="slds-truncate" sortable></ngl-datatable-column>
+        <ngl-datatable-column>
+          <ng-template nglDatatableCell let-row="row" let-index="index">
+            <span nglDropdown [(open)]="accountActions[index]">
+              <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
+                nglDropdownTrigger>
+                <ngl-icon icon="down" type="default" size="x-small"></ngl-icon>
+              </button>
+              <div class="slds-dropdown slds-dropdown--left">
+                <ul class="dropdown__list" role="menu">
+                  <li class="slds-dropdown__item">
+                    <a role="menuitem" nglDropdownItem (click)="onEditAccount(row.id)">
+                      <p class="slds-truncate">Editer</p>
+                    </a>
+                  </li>
+                  <li class="slds-dropdown__item">
+                    <a role="menuitem" nglDropdownItem (click)="onDeleteAccountAction(row.id)">
+                      <p class="slds-truncate">Supprimer</p>
+                    </a>
+                  </li>
+                  <li class="slds-dropdown__item">
+                    <a role="menuitem" nglDropdownItem>
+                      <p class="slds-truncate">Afficher détails</p>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </ng-template>
+        </ngl-datatable-column>
+
+        <!-- Loading overlay -->
+        <ng-template nglLoadingOverlay>
+          <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center">Chargement...</div>
+        </ng-template>
+
+        <!-- No rows overlay -->
+        <ng-template nglNoRowsOverlay>
+          <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center">
+            <p>Vous ne pouvez pas visualiser des comptes.</p>
+            <p>Essayer d'ajouter un compte</p>
+            <button class="slds-button slds-button_neutral">Nouveau</button>
+          </div>
+        </ng-template>
+      </table>
+      <footer class="slds-card__footer"></footer>
+    </article>
+  </div>
+  <app-account-edit [open]="openAccountEditModal" (cancel)="onDeleteCancelEditModal()" (saveAndNew)="onSaveAndNewAccount()"></app-account-edit>
+  <app-modal-window [open]="openDeleteAccountConfirm" [title]="'Suppression Compte'" [text]="'Êtes vous sur de vouloir supprimer définitivement ce compte?'"
+    [submitButtonText]="'Supprimer'" (cancel)="onDeleteCancel()" (confirm)="onDeleteAccount()">
+  </app-modal-window>
+</div>
