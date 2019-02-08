@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { INglDatatableSort, INglDatatableRowClick } from 'ng-lightning/ng-lightning';
 import * as moment from 'moment';
@@ -25,11 +25,11 @@ export class AccountListComponent implements OnInit {
 
   constructor(private accountService: AccountService,
     private messages: MessagesService,
+    private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
     moment.locale('fr');
-
     this.accountSubscription = this.accountService.getAccountsRefreshList().subscribe(
       data => {
         const index = this.accounts.findIndex(account => account.id === data.id);
@@ -89,11 +89,15 @@ export class AccountListComponent implements OnInit {
     this.accountIdToDelete = id;
   }
 
-  onSaveAndNewAccount(){
+  onSaveAndNewAccount() {
     this.openAccountEditModal = false;
     setTimeout(() => {
       this.openAccountEditModal = true;
     }, 400);
+  }
+
+  onShowAccountDetails(index) {
+    this.router.navigate(['/accounts', index]);
   }
 
   onSort($event: INglDatatableSort) {
@@ -101,6 +105,10 @@ export class AccountListComponent implements OnInit {
     this.accounts.sort((a: any, b: any) => {
       return (key === 'id' ? b[key] - a[key] : b[key].localeCompare(a[key])) * (order === 'desc' ? 1 : -1);
     });
+  }
+
+  onCancel() {
+    this.openAccountEditModal = !this.openAccountEditModal;
   }
 
   lookup = (query: string, source = this.accounts): string[] => {

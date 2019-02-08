@@ -5,13 +5,20 @@ import { AuthGuard } from '#core/auth/auth.guard';
 import { AccountListComponent } from './account-list/account-list.component';
 import { AccountEditComponent } from './account-edit/account-edit.component';
 import { AccountDetailComponent } from './account-detail/account-detail.component';
+import { AccountsComponent } from './accounts.component';
 
 
 const accountsRoutes: Routes = [
   {
     path: 'accounts',
-    component: AccountListComponent,
+    component: AccountsComponent,
     children: [
+      {
+        path: '',
+        component: AccountListComponent,
+        canActivate: [AuthGuard],
+        data: { function: 'rights.list' }
+      },
       {
         path: 'new',
         component: AccountEditComponent,

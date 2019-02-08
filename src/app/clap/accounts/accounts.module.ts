@@ -6,6 +6,7 @@ import { NglModule } from 'ng-lightning/ng-lightning';
 
 import { SharedModule } from '#app/shared/shared.module';
 
+import { AccountsComponent } from './accounts.component';
 import { AccountListComponent } from './account-list/account-list.component';
 import { AccountDetailComponent } from './account-detail/account-detail.component';
 import { AccountEditComponent } from './account-edit/account-edit.component';
@@ -14,6 +15,7 @@ import { AccountsRoutingModule } from './accounts-routing.module';
 
 @NgModule({
   declarations: [
+    AccountsComponent,
     AccountListComponent,
     AccountDetailComponent,
     AccountEditComponent
