@@ -12,6 +12,15 @@
       <div class="slds-media__body">
         <h2 class="slds-card__header-title slds-card__header-link slds-truncate">Utilisateurs ({{numberOfUsers}})</h2>
       </div>
+      <div class="slds-grid">
+        <input id="name" placeholder="Entrez votre nom ici" class="slds-input" (keyup)='searchByField($event, "first_name")'
+          name="name" type="text" />
+        <ngl-picklist [data]="userTypes" [(nglPick)]="pickUsersTypes" [(open)]="openusersTypesPickList"
+          [nglPickMultiple]="flase" (nglPickChange)="searchByField($event, 'type_id')">
+          <span class="slds-truncate">{{ pickUsersTypesLabel }}</span>
+          <ng-template nglPicklistItem let-item>{{item.name}}</ng-template>
+        </ngl-picklist>
+      </div>
       <div class="slds-no-flex">
         <button class="slds-button slds-button_neutral" routerLink="/users/new">Ajouter</button>
       </div>

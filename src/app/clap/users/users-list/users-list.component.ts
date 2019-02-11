@@ -14,9 +14,13 @@ import { MessagesService } from '#shared/messages/messages.service';
 
 export class UsersListComponent implements OnInit {
   users = [];
+  temp = [];
+  userTypes = [];
+  pickUsersTypes: any = [];
   userIdToDelete: number;
   loading = false;
   openDeleteUserConfirm = false;
+  openusersTypesPickList = false;
   userSubscription: Subscription;
   open = [];
   numberOfUsers = 0;
@@ -28,7 +32,9 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-
+    this.userService.getUserTypes().subscribe(userTypes => {
+      this.userTypes = userTypes;
+    });
     this.userSubscription = this.userService.getUserdded().subscribe(
       data => {
         const index = this.users.findIndex(user => user.id === data.id);
@@ -43,6 +49,7 @@ export class UsersListComponent implements OnInit {
     this.userService.getUsers().subscribe(
       data => {
         this.users = data;
+        this.temp = this.users;
         this.numberOfUsers = this.users.length;
         this.loading = false;
       }
@@ -55,18 +62,18 @@ export class UsersListComponent implements OnInit {
 
   onDeleteUser() {
     this.userService.deleteUser(this.userIdToDelete).subscribe(
-        (res) => {
-          this.messages.success('UTILISATEUR SUPPRIMÉ', 'l\'utilisateur a bien été supprimé');
-          const index = this.users.findIndex(user => user.id === this.userIdToDelete);
-          if (index > -1) {
-            this.users.splice(index, 1);
-          }
-          this.openDeleteUserConfirm = false;
-        },
-        err => {
-          this.messages.error('UTILISATEUR NON SUPPRIMÉ', 'l\'utilisateur n\'a pas été supprimé : ' + err);
+      (res) => {
+        this.messages.success('UTILISATEUR SUPPRIMÉ', 'l\'utilisateur a bien été supprimé');
+        const index = this.users.findIndex(user => user.id === this.userIdToDelete);
+        if (index > -1) {
+          this.users.splice(index, 1);
         }
-      );
+        this.openDeleteUserConfirm = false;
+      },
+      err => {
+        this.messages.error('UTILISATEUR NON SUPPRIMÉ', 'l\'utilisateur n\'a pas été supprimé : ' + err);
+      }
+    );
   }
 
   onDeleteCancel() {
@@ -77,6 +84,30 @@ export class UsersListComponent implements OnInit {
   onDeleteUserAction(id) {
     this.openDeleteUserConfirm = true;
     this.userIdToDelete = id;
+  }
+
+  get pickUsersTypesLabel() {
+    return this.pickUsersTypes.name || '-Aucun-';
+  }
+
+  // FILTER TABLE BY FIELD
+  searchByField(event, field) {
+    let temp = [];
+    if (field == 'type_id') {
+      temp = this.temp.filter(function (d) {
+        return String(d['type_id']).indexOf(event.id) !== -1 || !event.id;
+      });
+    } else {
+      const val = event.target.value.toLowerCase();
+      // filter our data
+      temp = this.temp.filter(function (d) {
+        return String(d[field]).toLowerCase().indexOf(val) !== -1 || !val;
+      });
+    }
+    // update the rows
+
+    this.users = temp;
+    this.users = [...this.users];
   }
 
   onSort($event: INglDatatableSort) {
