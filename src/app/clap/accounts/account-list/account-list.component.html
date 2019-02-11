@@ -42,25 +42,18 @@
           <p class="slds-page-header__meta-text">{{numberOfAccounts}} éléments • Mises à jour
             {{lastUpdatedAccountDate}}</p>
         </div>
-        <ngl-lookup [(value)]="value" [lookup]="lookup" [(pick)]="name" placeholder="Recherchez dans cette liste... ">
+        <ngl-lookup [(value)]="value" [lookup]="lookup" [(pick)]="name" placeholder="Recherchez dans cette liste... " style="width:300px">
         </ngl-lookup>
       </div>
     </div>
     <table ngl-datatable [data]="accounts" trackByKey="id" [loading]="loading" [(sort)]="sort" (sortChange)="onSort($event)"
-      class="slds-table_striped slds-m-top_large">
-      <ngl-datatable-column>
-        <ng-template nglDatatableCell>
-          <ngl-form-checkbox class="slds-m-top--small">
-            <input nglFormControl type="checkbox" />
-          </ngl-form-checkbox>
-        </ng-template>
-      </ngl-datatable-column>
-      <ngl-datatable-column heading="Name" key="name" cellClass="slds-truncate" sortable>
+      class="slds-table_striped slds-m-top_large" style="margin-top:0px;">
+      <ngl-datatable-column heading="Nom du compte" key="name" cellClass="slds-truncate" sortable>
       </ngl-datatable-column>
       <ngl-datatable-column heading="Secteur d'activité " key="activity" cellClass="slds-truncate" sortable></ngl-datatable-column>
       <ngl-datatable-column heading="Contrat" key="contracts.length" cellClass="slds-truncate" sortable>
       </ngl-datatable-column>
-      <ngl-datatable-column heading="phone" key="phone" cellClass="slds-truncate" sortable></ngl-datatable-column>
+      <ngl-datatable-column heading="Téléphone" key="phone" cellClass="slds-truncate" sortable></ngl-datatable-column>
       <ngl-datatable-column>
         <ng-template nglDatatableCell let-row="row" let-index="index">
           <span nglDropdown [(open)]="accountActions[index]">
