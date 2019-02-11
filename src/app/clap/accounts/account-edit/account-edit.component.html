@@ -35,8 +35,7 @@
           <div class="slds-form-element">
             <label class="slds-form-element__label" for="text-input-id-1">Propriétaire du compte</label>
             <div class="slds-form-element__control">
-              <input id="account-siret" style="border: none;" required="" class="slds-input" type="text" readonly="readonly"
-                value="Test" />
+              <label class="slds-form-element__label" for="text-input-id-1">{{user.first_name}} {{user.last_name}}</label>
             </div>
           </div>
         </div>
@@ -55,7 +54,20 @@
             <label class="slds-form-element__label">
               <abbr class="slds-required" title="required">* </abbr>Compte principal</label>
             <div class="slds-form-element__control">
-              <ngl-lookup [(value)]="value" [lookup]="lookup" [(pick)]="name" placeholder="Recherchez des comptes..."></ngl-lookup>
+              <ngl-lookup [lookup]="lookup" [icon]="true" [image]="'address'" [noResultsText]="'Aucun résultat trouvé'" [(pick)]="pickedAccount"
+                placeholder="Recherchez des comptes...">
+                <ng-template nglLookupItem let-item>
+                  <div class="slds-media__body">
+                    <span class="slds-media__figure slds-listbox__option-icon">
+                      <span class="slds-icon_container slds-icon-standard-account">
+                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account" />
+                        </svg>
+                      </span>
+                    </span>{{item}}
+                  </div>
+                </ng-template>
+              </ngl-lookup>
             </div>
           </div>
         </div>

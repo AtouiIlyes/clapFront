@@ -102,8 +102,8 @@
   </article>
 </div>
 
-<app-account-edit [open]="openAccountEditModal" (cancel)="onDeleteCancelEditModal()" (saveAndNew)="onSaveAndNewAccount()"></app-account-edit>
+<app-account-edit [accountsList]="accounts" [open]="openAccountEditModal" (cancel)="onDeleteCancelEditModal()" (saveAndNew)="onSaveAndNewAccount()"></app-account-edit>
 
-<app-modal-window [open]="openDeleteAccountConfirm" [title]="'Suppression Compte'" [text]="'Êtes vous sur de vouloir supprimer définitivement ce compte?'"
+<app-modal-window  [open]="openDeleteAccountConfirm" [title]="'Suppression Compte'" [text]="'Êtes vous sur de vouloir supprimer définitivement ce compte?'"
   [submitButtonText]="'Supprimer'" (cancel)="onDeleteCancel()" (confirm)="onDeleteAccount()">
 </app-modal-window>

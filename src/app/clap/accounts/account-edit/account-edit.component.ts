@@ -20,6 +20,8 @@ export class AccountEditComponent implements OnInit {
   submitted = false;
   accountForm: FormGroup;
   accountFormErrors = [];
+  user = [];
+  pickedAccount: string = '';
   activities = [
     { value: 'Item 1', icon: 'kanban' },
     { value: 'Item 2', icon: 'side_list' },
@@ -28,6 +30,7 @@ export class AccountEditComponent implements OnInit {
 
 
   @Input() open: boolean;
+  @Input() accountsList: any = [];
   @Output() cancel = new EventEmitter<Boolean>();
   @Output() saveAndNew = new EventEmitter<Boolean>();
 
@@ -45,22 +48,25 @@ export class AccountEditComponent implements OnInit {
 
   // INIT FORM depending of edit or not mode
   private initForm() {
-    this.accountForm = this.fb.group(
-      {
-        name: ['', [Validators.required, Validators.minLength(3)]],
-        siret: ['', [Validators.required, Validators.pattern(/^\d{14}$/)]],
-        address: ['', Validators.required],
-        zip_code: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
-        city: ['', Validators.required],
-        country: ['', Validators.required],
-        phone: ['', [Validators.required, Validators.pattern(/^[33|0]{1}[6|7|9]{1}\d{8}$/)]],
-        fax: ['', [Validators.required, Validators.pattern(/^[33|0]{1}[6|7|9]{1}\d{8}$/)]],
-        activity: ['55', Validators.required],
-        activity_code: ['', Validators.required],
-        vat_number: ['', [Validators.required, Validators.pattern(/^\d{4}[a-zA-Z]{1}$/)]]
-      });
-    this.loading = false;
-  }
+    this.user = JSON.parse(localStorage.getItem('currentUserData'));
+    if (this.user) {
+      this.accountForm = this.fb.group(
+        {
+          name: ['', [Validators.required, Validators.minLength(3)]],
+          siret: ['', [Validators.required, Validators.pattern(/^\d{14}$/)]],
+          address: ['', Validators.required],
+          zip_code: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
+          city: ['', Validators.required],
+          country: ['', Validators.required],
+          phone: ['', [Validators.required, Validators.pattern(/^[33|0]{1}[6|7|9]{1}\d{8}$/)]],
+          fax: ['', [Validators.required, Validators.pattern(/^[33|0]{1}[6|7|9]{1}\d{8}$/)]],
+          activity: ['55', Validators.required],
+          activity_code: ['', Validators.required],
+          vat_number: ['', [Validators.required, Validators.pattern(/^\d{4}[a-zA-Z]{1}$/)]]
+        });
+      this.loading = false;
+    }
+  };
 
 
   get pickActivitiesLabel() {
@@ -148,5 +154,20 @@ export class AccountEditComponent implements OnInit {
     });
   }
   get accountFormValidators() { return this.accountForm.controls; }
+
+  lookup = (query: string, source = this.accountsList) => {
+    let temp = [];
+    if (!query) {
+      for (const m of source) {
+        temp.push(m.name + ' ')
+      }
+    } else {
+      const temp2 = source.filter(account => account.name.indexOf(query.toLowerCase()) > -1);
+      for (const m of temp2) {
+        temp.push(m.name + ' ')
+      }
+    }
+    return temp;
+  }
 
 }
