@@ -136,15 +136,33 @@
             </button>
           </div>
         </li>
-        <li class="slds-global-actions__item">
-          <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
-            <button class="slds-button slds-button_icon slds-button_icon slds-button_icon-container slds-button_icon-small slds-global-actions__setup slds-global-actions__item-action"
-              aria-haspopup="true" title="Setup">
-              <svg class="slds-button__icon slds-global-header__icon" aria-hidden="true">
-                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#setup"></use>
-              </svg>
-              <span class="slds-assistive-text">Setup</span>
-            </button>
+
+        <li class="slds-dropdown-trigger slds-dropdown-trigger_click" id="menu1">
+          <button class="slds-button slds-button_icon slds-button_icon slds-button_icon-container slds-button_icon-small slds-global-actions__setup slds-global-actions__item-action"
+            aria-haspopup="true" appDropdown="#menu1" title="Settings">
+            <svg class="slds-button__icon slds-global-header__icon" aria-hidden="true">
+              <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#setup"></use>
+            </svg>
+            <span class="slds-assistive-text">Setup</span>
+          </button>
+          <div class="slds-dropdown slds-dropdown_right slds-nubbin_top-right" style="top:2rem;right:-1rem">
+            <ul class="slds-dropdown__list" role="menu">
+              <li class="slds-dropdown__item" role="presentation">
+                <a href="javascript:void(0);" role="menuitem" tabindex="-1" [routerLink]="'/users'">
+                  <span class="slds-truncate" title="Gestion des utilisateurs">Utilisateurs</span>
+                </a>
+              </li>
+              <li class="slds-dropdown__item" role="presentation">
+                <a href="javascript:void(0);" role="menuitem" tabindex="-1" [routerLink]="'/types'">
+                  <span class="slds-truncate" title="Gestion des utilisateurs">Types utilisateurs</span>
+                </a>
+              </li>
+              <li class="slds-dropdown__item" role="presentation" [routerLink]="'/roles'">
+                <a href="javascript:void(0);" role="menuitem" tabindex="-1">
+                  <span class="slds-truncate" title="Gestion des roles">Roles</span>
+                </a>
+              </li>
+            </ul>
           </div>
         </li>
         <li class="slds-global-actions__item">
@@ -178,14 +196,15 @@
               <span class="slds-truncate" title="Home">Home</span>
             </a>
           </li>
+
           <li class="slds-context-bar__item slds-context-bar__dropdown-trigger slds-dropdown-trigger slds-dropdown-trigger_click "
-            id="menu1">
-            <a href="javascript:void(0);" class="slds-context-bar__label-action" title="Menu Item">
-              <span class="slds-truncate" title="Menu Item">Admin</span>
+            id="menu2">
+            <a href="javascript:void(0);" class="slds-context-bar__label-action" title="Menu Item" [routerLink]="'/accounts'">
+              <span class="slds-truncate" title="Menu Item">Comptes</span>
             </a>
             <div class="slds-context-bar__icon-action slds-p-left_none">
               <button class="slds-button slds-button_icon slds-button_icon slds-context-bar__button" aria-haspopup="true"
-                title="Open menu item submenu" appDropdown="#menu1">
+                title="Open menu item submenu" appDropdown="#menu2">
                 <svg class="slds-button__icon" aria-hidden="true">
                   <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevrondown" />
                 </svg>
@@ -195,18 +214,8 @@
             <div class="slds-dropdown slds-dropdown_right">
               <ul class="slds-dropdown__list" role="menu">
                 <li class="slds-dropdown__item" role="presentation">
-                  <a href="javascript:void(0);" role="menuitem" tabindex="-1" [routerLink]="'/users'">
-                    <span class="slds-truncate" title="Gestion des utilisateurs">Utilisateurs</span>
-                  </a>
-                </li>
-                <li class="slds-dropdown__item" role="presentation">
-                  <a href="javascript:void(0);" role="menuitem" tabindex="-1" [routerLink]="'/types'">
-                    <span class="slds-truncate" title="Gestion des utilisateurs">Types utilisateurs</span>
-                  </a>
-                </li>
-                <li class="slds-dropdown__item" role="presentation" [routerLink]="'/roles'">
-                  <a href="javascript:void(0);" role="menuitem" tabindex="-1">
-                    <span class="slds-truncate" title="Gestion des roles">Roles</span>
+                  <a href="javascript:void(0);" role="menuitem" tabindex="-1" [routerLink]="'/accounts'">
+                    <span class="slds-truncate" title="Gestion des clients">Nouveau compte</span>
                   </a>
                 </li>
               </ul>
