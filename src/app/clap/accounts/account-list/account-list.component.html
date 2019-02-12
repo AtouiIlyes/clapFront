@@ -34,7 +34,12 @@
           </div>
         </div>
         <div class="slds-page-header__col-actions">
-          <button class="slds-button slds-button_neutral" (click)="onEditAccount()">Nouveau</button>
+          <div class="slds-page-header__controls">
+            <ngl-lookup [(value)]="value" [lookup]="lookup" [(pick)]="name" placeholder="Recherchez dans cette liste... "
+              style="width:15rem; padding-right:1rem">
+            </ngl-lookup>
+            <button class="slds-button slds-button_neutral" (click)="onEditAccount()">Nouveau</button>
+          </div>
         </div>
       </div>
       <div class="slds-page-header__row">
@@ -42,8 +47,6 @@
           <p class="slds-page-header__meta-text">{{numberOfAccounts}} éléments • Mises à jour
             {{lastUpdatedAccountDate}}</p>
         </div>
-        <ngl-lookup [(value)]="value" [lookup]="lookup" [(pick)]="name" placeholder="Recherchez dans cette liste... " style="width:300px">
-        </ngl-lookup>
       </div>
     </div>
     <table ngl-datatable [data]="accounts" trackByKey="id" [loading]="loading" [(sort)]="sort" (sortChange)="onSort($event)"
