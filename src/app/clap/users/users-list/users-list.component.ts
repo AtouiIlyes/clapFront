@@ -101,7 +101,7 @@ export class UsersListComponent implements OnInit {
       const val = event.target.value.toLowerCase();
       // filter our data
       temp = this.temp.filter(function (d) {
-        return String(d[field]).toLowerCase().indexOf(val) !== -1 || !val;
+        return String(d['first_name']).toLowerCase().indexOf(val) !== -1 || String(d['last_name']).toLowerCase().indexOf(val) !== -1;
       });
     }
     // update the rows
