@@ -1,16 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, Validators, ValidationErrors, FormBuilder } from '@angular/forms';
 
 import { AccountService } from '../accounts.service';
 import { MessagesService } from '#shared/messages/messages.service';
+import { AuthService } from '#app/core/auth/auth.service';
 
 @Component({
   selector: 'app-account-edit',
   templateUrl: './account-edit.component.html',
   styleUrls: ['./account-edit.component.scss']
 })
-export class AccountEditComponent implements OnInit {
+export class AccountEditComponent implements OnChanges {
 
   pickActivities: any = [];
   openActivityPickList = false;
@@ -30,6 +31,7 @@ export class AccountEditComponent implements OnInit {
 
 
   @Input() open: boolean;
+  @Input() accountId: number;
   @Input() accountsList: any = [];
   @Output() cancel = new EventEmitter<Boolean>();
   @Output() saveAndNew = new EventEmitter<Boolean>();
@@ -39,10 +41,11 @@ export class AccountEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService,
+    private auth: AuthService,
     private messages: MessagesService,
     private fb: FormBuilder) { }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.initForm();
   }
 
@@ -64,9 +67,30 @@ export class AccountEditComponent implements OnInit {
           activity_code: ['', Validators.required],
           vat_number: ['', [Validators.required, Validators.pattern(/^\d{4}[a-zA-Z]{1}$/)]]
         });
+      if (this.accountId) {
+        this.accountService.getAccount(this.accountId).subscribe(account => {
+          this.accountForm = this.fb.group(
+            {
+              name: account.name,
+              siret: account.siret,
+              address: account.address,
+              zip_code: account.zip_code,
+              city: account.city,
+              country: account.country,
+              phone: account.phone,
+              fax: account.fax,
+              activity: account.activity,
+              activity_code: account.activity_code,
+              vat_number: account.vat_number,
+            });
+        });
+
+      }
       this.loading = false;
     }
   };
+
+
 
 
   get pickActivitiesLabel() {
@@ -155,19 +179,25 @@ export class AccountEditComponent implements OnInit {
   }
   get accountFormValidators() { return this.accountForm.controls; }
 
-  lookup = (query: string, source = this.accountsList) => {
+
+
+  lookupAccounts = (query: string, source = this.accountsList) => {
     let temp = [];
     if (!query) {
-      for (const m of source) {
-        temp.push(m.name + ' ')
-      }
+      temp = source;
     } else {
-      const temp2 = source.filter(account => account.name.indexOf(query.toLowerCase()) > -1);
-      for (const m of temp2) {
-        temp.push(m.name + ' ')
-      }
+      temp = source.filter(account => account.name.indexOf(query.toLowerCase()) > -1 || account.name.indexOf(query.toLowerCase()) > -1);
     }
     return temp;
+  }
+
+  accountPicked(pickedAccount) {
+    if (pickedAccount) {
+      this.pickedAccount = pickedAccount.name;
+      //this.accountForm.patchValue({ client_id: pickedAccount.id });
+    } else {
+      this.pickedAccount = null;
+    }
   }
 
 }

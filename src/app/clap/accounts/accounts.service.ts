@@ -25,6 +25,16 @@ export class AccountService {
   getAccounts() {
     return this.http.get<any>(API_URL + '/api/v1/clients');
   }
+
+    /**
+    * Return list of all accounts
+    *
+    * @return array of accounts
+    */
+   getContacts() {
+    return this.http.get<any>(API_URL + '/api/v1/clients/contacts');
+  }
+
   /**
     * Launch accountsUpdated event
     *
@@ -65,6 +75,5 @@ export class AccountService {
   deleteAccount(index: number) {
     return this.http.delete(API_URL + '/api/v1/clients/' + index);
   }
-
 
 }

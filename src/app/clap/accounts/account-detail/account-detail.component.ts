@@ -6,15 +6,21 @@ import { MessagesService } from '#shared/messages/messages.service';
 @Component({
   selector: 'app-account-detail',
   templateUrl: './account-detail.component.html',
-  styleUrls: ['./account-detail.component.scss']
+  styleUrls: ['./account-detail.component.scss'],
+
 })
 export class AccountDetailComponent implements OnInit {
   id: number;
   accountDetail: any = [];
   accountContracts = [];
   numberOfContracts = 0;
+  billingContacts = [];
+  operationalContacts = [];
+  numberOfContacts = 0;
   loading = true;
   openDeleteAccountConfirm = false;
+  openContractEditModal = false;
+  contractId: number;
   commercialActions = [];
   contractCardActions = [];
   operationnelActions = [];
@@ -33,7 +39,12 @@ export class AccountDetailComponent implements OnInit {
           this.accountDetail = account;
           this.accountContracts = account.contracts;
           this.numberOfContracts = this.accountContracts.length;
-          this.loading = false;
+          this.accountService.getContacts().subscribe(contacts => {
+            this.billingContacts = contacts.billing;
+            this.operationalContacts = contacts.operational;
+            this.numberOfContacts = this.billingContacts.length + this.operationalContacts.length;
+            this.loading = false;
+          })
         });
       }
     );
@@ -46,7 +57,7 @@ export class AccountDetailComponent implements OnInit {
 
   onToggleContractCardActions($event: Event, index) {
     $event.stopPropagation();
-    this.commercialActions[index] = true;
+    this.contractCardActions[index] = true;
   }
 
   onToggleOperationnelActions($event: Event, index) {
@@ -71,5 +82,20 @@ export class AccountDetailComponent implements OnInit {
         this.messages.error('CLIENT NON SUPPRIMÉ', 'le client n\'a pas été supprimé : ' + err);
       }
     );
+  }
+
+  onNewContract() {
+    this.openContractEditModal = true;
+    this.contractId = null;
+
+  }
+
+  onEditContract(id) {
+    this.openContractEditModal = true;
+    this.contractId = id;
+  }
+
+  onCancelEditModal() {
+    this.openContractEditModal = false;
   }
 }

@@ -1,5 +1,5 @@
 <form [formGroup]="accountForm" (ngSubmit)="onAddAccount()">
-  <ngl-modal [header]="'Créer: Compte'" [(open)]="open" [size]="''" [directional]="false">
+  <ngl-modal [header]="accountId ? 'Modifier: Contrat' : 'Créer: Contrat'" [(open)]="open" [size]="''" [directional]="false">
     <div body>
       <div *ngIf="submitted && accountFormErrors.length > 0">
         <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error theme_error" role="alert">
@@ -54,8 +54,8 @@
             <label class="slds-form-element__label">
               <abbr class="slds-required" title="required">* </abbr>Compte principal</label>
             <div class="slds-form-element__control">
-              <ngl-lookup [lookup]="lookup" [icon]="true" [image]="'address'" [noResultsText]="'Aucun résultat trouvé'" [(pick)]="pickedAccount"
-                placeholder="Recherchez des comptes...">
+              <ngl-lookup [lookup]="lookupAccounts" [icon]="true" [image]="'account'" [noResultsText]="'Aucun résultat trouvé'"
+              [pick]="pickedAccount" (pickChange)="accountPicked($event)" placeholder="Recherchez des comptes...">
                 <ng-template nglLookupItem let-item>
                   <div class="slds-media__body">
                     <span class="slds-media__figure slds-listbox__option-icon">
@@ -64,7 +64,7 @@
                           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account" />
                         </svg>
                       </span>
-                    </span>{{item}}
+                    </span>{{item.name}}
                   </div>
                 </ng-template>
               </ngl-lookup>
@@ -280,9 +280,14 @@
     </div>
     <ng-template ngl-modal-footer>
       <button class="slds-button slds-button--neutral" (click)="onCancel()">Cancel</button>
-      <button type="button" (click)="onAddAccountAndNew()" class="slds-button slds-button--neutral">Enregistrer et
+      <button *ngIf="!contractId" type="button" (click)="onAddAccountAndNew()" class="slds-button slds-button--neutral">Enregistrer
+        et
         Nouveau</button>
-      <button type="submit" class="slds-button slds-button--brand">Enregistrer</button>
+      <button *ngIf="contractId" type="button" (click)="onAddAccountAndNew()" class="slds-button slds-button--neutral">Modifier
+        et
+        Nouveau</button>
+      <button *ngIf="!contractId" type="submit" class="slds-button slds-button--brand">Enregistrer</button>
+      <button *ngIf="contractId" type="submit" class="slds-button slds-button--brand">Modifier</button>
     </ng-template>
   </ngl-modal>
 </form>

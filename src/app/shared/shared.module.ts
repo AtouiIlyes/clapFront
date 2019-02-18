@@ -1,5 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { NglModule } from 'ng-lightning/ng-lightning';
 
@@ -7,6 +8,7 @@ import { DropdownDirective } from './directives/dropdown.directive';
 import { AccessDirective } from './directives/access.directive';
 import { MessagesComponent } from './messages/messages.component';
 import { ModalComponent } from './modal/modal.component';
+import { ContractEditComponent } from '../clap/contracts/contract-edit/contract-edit.component';
 
 
 @NgModule({
@@ -14,9 +16,11 @@ import { ModalComponent } from './modal/modal.component';
     DropdownDirective,
     AccessDirective, 
     MessagesComponent,
-    ModalComponent
+    ModalComponent,
+    ContractEditComponent
   ],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     NglModule
   ],
@@ -24,7 +28,8 @@ import { ModalComponent } from './modal/modal.component';
     DropdownDirective,
     AccessDirective,
     MessagesComponent,
-    ModalComponent
+    ModalComponent,
+    ContractEditComponent
   ]
 })
 

@@ -7,7 +7,7 @@ import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { HomesModule } from './homes/homes.module';
 import { AccountsModule } from './accounts/accounts.module';
-
+import { ContractsModule } from './contracts/contracts.module';
 
 
 
@@ -20,7 +20,8 @@ import { AccountsModule } from './accounts/accounts.module';
     UsersModule,
     RolesModule,
     HomesModule,
-    AccountsModule
+    AccountsModule,
+    ContractsModule
   ],
   providers: []
 })

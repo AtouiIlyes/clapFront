@@ -5,7 +5,7 @@ import { INglDatatableSort, INglDatatableRowClick } from 'ng-lightning/ng-lightn
 import * as moment from 'moment';
 
 import { AccountService } from '../accounts.service';
-import { MessagesService } from '#shared/messages/messages.service'; ``
+import { MessagesService } from '#shared/messages/messages.service';
 
 @Component({
   selector: 'app-account-list',
@@ -15,6 +15,7 @@ import { MessagesService } from '#shared/messages/messages.service'; ``
 export class AccountListComponent implements OnInit {
   accounts = [];
   accountIdToDelete: number;
+  accountIdToEdit: number;
   loading = true;
   openDeleteAccountConfirm = false;
   openAccountEditModal = false;
@@ -48,15 +49,16 @@ export class AccountListComponent implements OnInit {
         if (this.numberOfAccounts > 0) {
           const lastUpdatedAccount = this.accounts[this.accounts.length - 1].updated_at;
           this.lastUpdatedAccountDate = moment(lastUpdatedAccount).fromNow();
+          this.loading = false;
         }
         this.loading = false;
       }
     );
   }
 
-  onEditAccount(index: number) {
+  onEditAccount(id) {
+    this.accountIdToEdit = id;
     this.openAccountEditModal = true;
-    // this.router.navigate(['/users', index, 'edit']);
   }
 
   onDeleteAccount() {
@@ -112,11 +114,18 @@ export class AccountListComponent implements OnInit {
   }
 
   lookup = (query: string, source = this.accounts): string[] => {
+    let temp = [];
     if (!query) {
-      return null;
+      for (const m of source) {
+        temp.push(m.name + ' ')
+      }
+    } else {
+      const temp2 = source.filter(account => account.name.indexOf(query.toLowerCase()) > -1);
+      for (const m of temp2) {
+        temp.push(m.name + ' ')
+      }
     }
-
-    return source.filter((d: string) => d.toLowerCase().indexOf(query.toLowerCase()) > -1);
+    return temp;
   }
 }
 

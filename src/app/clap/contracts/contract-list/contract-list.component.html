@@ -5,9 +5,9 @@
         <div class="slds-page-header__col-title">
           <div class="slds-media">
             <div class="slds-media__figure">
-              <span class="slds-icon_container slds-icon-standard-account">
+              <span class="slds-icon_container slds-icon-standard-contract">
                 <svg class="slds-icon slds-page-header__icon" aria-hidden="true">
-                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account" />
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#contract" />
                 </svg>
               </span>
             </div>
@@ -15,7 +15,7 @@
               <div class="slds-page-header__name">
                 <div class="slds-page-header__name-title">
                   <h1>
-                    <span>Comptes</span>
+                    <span>Contrats</span>
                     <span class="slds-page-header__title slds-truncate" title="Recently Viewed">Récement visualisés</span>
                   </h1>
                 </div>
@@ -34,32 +34,30 @@
           </div>
         </div>
         <div class="slds-page-header__col-actions">
-          <div class="slds-page-header__controls">
-            <ngl-lookup [(value)]="value" [lookup]="lookup" [(pick)]="name" placeholder="Recherchez dans cette liste... "
-              style="width:15rem; padding-right:1rem">
-            </ngl-lookup>
-            <button class="slds-button slds-button_neutral" (click)="onEditAccount()">Nouveau</button>
-          </div>
+          <button class="slds-button slds-button_neutral" (click)="onNewContract()">Nouveau</button>
         </div>
       </div>
       <div class="slds-page-header__row">
         <div class="slds-page-header__col-meta">
-          <p class="slds-page-header__meta-text">{{numberOfAccounts}} éléments • Mises à jour
-            {{lastUpdatedAccountDate}}</p>
+          <p class="slds-page-header__meta-text">{{numberOfContracts}} éléments • Mises à jour
+            {{lastUpdatedAContractDate}}</p>
         </div>
+        <ngl-lookup [(value)]="value" [lookup]="lookup" [(pick)]="name" placeholder="Recherchez dans cette liste... "
+          style="width:300px">
+        </ngl-lookup>
       </div>
     </div>
-    <table ngl-datatable [data]="accounts" trackByKey="id" [loading]="loading" [(sort)]="sort" (sortChange)="onSort($event)"
+    <table ngl-datatable [data]="contracts" trackByKey="id" [loading]="loading" [(sort)]="sort" (sortChange)="onSort($event)"
       class="slds-table_striped slds-m-top_large" style="margin-top:0px;">
-      <ngl-datatable-column heading="Nom du compte" key="name" cellClass="slds-truncate" sortable>
+      <ngl-datatable-column heading="Nom Contrat" key="name" cellClass="slds-truncate" sortable>
       </ngl-datatable-column>
-      <ngl-datatable-column heading="Secteur d'activité " key="activity" cellClass="slds-truncate" sortable></ngl-datatable-column>
+      <ngl-datatable-column heading="Principal" key="client_id" cellClass="slds-truncate" sortable></ngl-datatable-column>
       <ngl-datatable-column heading="Contrat" key="contracts.length" cellClass="slds-truncate" sortable>
       </ngl-datatable-column>
-      <ngl-datatable-column heading="Téléphone" key="phone" cellClass="slds-truncate" sortable></ngl-datatable-column>
+      <ngl-datatable-column heading="Société" key="phone" cellClass="slds-truncate" sortable></ngl-datatable-column>
       <ngl-datatable-column>
         <ng-template nglDatatableCell let-row="row" let-index="index">
-          <span nglDropdown [(open)]="accountActions[index]">
+          <span nglDropdown [(open)]="contractActions[index]">
             <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
               nglDropdownTrigger>
               <ngl-icon icon="down" type="default" size="x-small"></ngl-icon>
@@ -67,12 +65,12 @@
             <div class="slds-dropdown slds-dropdown--left">
               <ul class="dropdown__list" role="menu">
                 <li class="slds-dropdown__item">
-                  <a role="menuitem" nglDropdownItem (click)="onEditAccount(row.id)">
+                  <a role="menuitem" nglDropdownItem (click)="onEditContract(row.id, row.client_id)">
                     <p class="slds-truncate">Editer</p>
                   </a>
                 </li>
                 <li class="slds-dropdown__item">
-                  <a role="menuitem" nglDropdownItem (click)="onDeleteAccountAction(row.id)">
+                  <a role="menuitem" nglDropdownItem (click)="onDeleteContractAction(row.id)">
                     <p class="slds-truncate">Supprimer</p>
                   </a>
                 </li>
@@ -93,10 +91,10 @@
       </ng-template>
 
       <!-- No rows overlay -->
-      <ng-template nglNoRowsOverlay *ngIf="numberOfAccounts > 0">
+      <ng-template nglNoRowsOverlay>
         <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center">
-          <p>Vous ne pouvez pas visualiser des comptes.</p>
-          <p>Essayer d'ajouter un compte</p>
+          <p>Vous ne pouvez pas visualiser des contrats.</p>
+          <p>Essayer d'ajouter un contrat</p>
           <button class="slds-button slds-button_neutral">Nouveau</button>
         </div>
       </ng-template>
@@ -105,9 +103,13 @@
   </article>
 </div>
 
-<app-account-edit [accountsList]="accounts" [accountId]="accountIdToEdit" [open]="openAccountEditModal" (cancel)="onDeleteCancelEditModal()"
-  (saveAndNew)="onSaveAndNewAccount()"></app-account-edit>
+<app-contract-edit *ngIf="contractId" [open]="openContractEditModal" (cancel)="onCancelContractModal()" [contractId]="contractId"
+  [clientId]="clientId" (saveAndNew)="onSaveAndNewContract()"></app-contract-edit>
 
-<app-modal-window [open]="openDeleteAccountConfirm" [title]="'Suppression Compte'" [text]="'Êtes vous sur de vouloir supprimer définitivement ce compte?'"
-  [submitButtonText]="'Supprimer'" (cancel)="onDeleteCancel()" (confirm)="onDeleteAccount()">
+<app-contract-edit *ngIf="!contractId" [open]="openContractEditModal" [clientId]="clientId" (cancel)="onCancelContractModal()"
+  (saveAndNew)="onSaveAndNewAccount()"></app-contract-edit>
+
+
+<app-modal-window [open]="openDeleteContractConfirm" [title]="'Suppression Contrat'" [text]="'Êtes vous sur de vouloir supprimer définitivement ce contrat?'"
+  [submitButtonText]="'Supprimer'" (cancel)="onDeleteCancel()" (confirm)="onDeleteContract()">
 </app-modal-window>

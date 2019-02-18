@@ -1,0 +1,200 @@
+<form [formGroup]="contractForm" (ngSubmit)="onAddContract()">
+  <ngl-modal [header]="contractId ? 'Modifier: Contrat' : 'Créer: Contrat'" [(open)]="open" [size]="''" [directional]="false">
+    <div body *ngIf="loading">
+      <div *ngIf="submitted && contractFormErrors.length > 0">
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error theme_error" role="alert">
+          <h2>Examinez les erreurs dans cette page. </h2>
+        </div>
+        <p style="color:#C43631"> Les champs obligatoires suivants doivent être remplis :
+          {{contractFormErrors}}</p>
+        <br />
+      </div>
+      <!-- Info compte-->
+      <h3 class="slds-section__title slds-theme_shade">
+        <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Information sur le contrat</span>
+      </h3>
+      <br />
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_6-of-12 contract_style">
+          <div [ngClass]="contractFormValidators.name.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Nom du contrat</label>
+            <div class="slds-form-element__control">
+              <input id="contract-name" required="" class="slds-input" type="text" value="" formControlName="name" />
+            </div>
+            <div *ngIf="submitted && contractFormValidators.name.errors">
+              <div class="slds-form-element__help" *ngIf="contractFormValidators.name.errors.required">Remplissez ce
+                champ
+              </div>
+              <div class="slds-form-element__help" *ngIf="contractFormValidators.name.errors.minlength">Le nom doit
+                être
+                au minimum 3 caractères </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="clientMode" class="slds-col slds-size_6-of-12 contract_style">
+          <div [ngClass]="slds-form-element">
+            <label class="slds-form-element__label">Nom du Compte</label>
+            <div class="slds-form-element__control">
+              <ngl-pill>
+                <ngl-icon category="standard" icon="account" nglPillImage></ngl-icon>
+                <a href="javascript:void(0)">{{pickedAccount}}</a>
+              </ngl-pill>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!clientMode" class="slds-col slds-size_6-of-12 contract_style">
+          <div [ngClass]="contractFormValidators.client_id.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Nom du Compte</label>
+            <div class="slds-form-element__control">
+              <ngl-lookup [lookup]="lookupAccounts" [icon]="true" [image]="'account'" [noResultsText]="'Aucun résultat trouvé'"
+                [pick]="pickedAccount" (pickChange)="accountPicked($event)" placeholder="Recherchez des comptes..."
+                formControlName="client_id" ngDefaultControl>
+                <ng-template nglLookupItem let-item>
+                  <div class="slds-media__body">
+                    <span class="slds-media__figure slds-listbox__option-icon">
+                      <span class="slds-icon_container slds-icon-standard-account">
+                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account" />
+                        </svg>
+                      </span>
+                    </span>{{item.name}}
+                  </div>
+                </ng-template>
+              </ngl-lookup>
+            </div>
+            <div *ngIf="submitted && contractFormValidators.client_id.errors">
+              <div class="slds-form-element__help" *ngIf="contractFormValidators.client_id.errors.required">Remplissez
+                ce champ
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 contract_style">
+          <div [ngClass]="contractFormValidators.sales_person_id.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Commercial en charge</label>
+            <div class="slds-form-element__control">
+              <ngl-lookup [lookup]="lookupSalesUsers" [icon]="true" [image]="'user'" [noResultsText]="'Aucun résultat trouvé'"
+                [pick]="pickedSalesUser" (pickChange)="SalesUserPicked($event)" placeholder="Recherchez un agent..."
+                formControlName="sales_person_id" ngDefaultControl>
+                <ng-template nglLookupItem let-item>
+                  <div class="slds-media__body">
+                    <span class="slds-media__figure slds-listbox__option-icon">
+                      <span class="slds-icon_container slds-icon-standard-user">
+                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#user" />
+                        </svg>
+                      </span>
+                    </span>{{item.first_name}} {{item.last_name}}
+                  </div>
+                </ng-template>
+              </ngl-lookup>
+            </div>
+            <div *ngIf="submitted && contractFormValidators.sales_person_id.errors">
+              <div class="slds-form-element__help" *ngIf="contractFormValidators.sales_person_id.errors.required">Remplissez
+                ce champ
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 contract_style">
+          <div [ngClass]="contractFormValidators.manager_id.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Gestionnaire de dossier</label>
+            <div class="slds-form-element__control">
+              <ngl-lookup [lookup]="lookupManagerUsers" [icon]="true" [image]="'user'" [noResultsText]="'Aucun résultat trouvé'"
+                [pick]="pickedManagerUser" (pickChange)="managerUserPicked($event)" placeholder="Recherchez un agent..."
+                formControlName="manager_id" ngDefaultControl>
+                <ng-template nglLookupItem let-item>
+                  <div class="slds-media__body">
+                    <span class="slds-media__figure slds-listbox__option-icon">
+                      <span class="slds-icon_container slds-icon-standard-user">
+                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#user" />
+                        </svg>
+                      </span>
+                    </span>{{item.first_name}} {{item.last_name}}
+                  </div>
+                </ng-template>
+              </ngl-lookup>
+            </div>
+            <div *ngIf="submitted && contractFormValidators.manager_id.errors">
+              <div class="slds-form-element__help" *ngIf="contractFormValidators.manager_id.errors.required">Remplissez
+                ce champ
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 contract_style">
+          <div [ngClass]="contractFormValidators.name.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Statistiques</label>
+            <div class="slds-form-element__control">
+              <ngl-lookup [lookup]="lookup" [icon]="true" [image]="'account'" [noResultsText]="'Aucun résultat trouvé'"
+                [(pick)]="pickedStatisticUser" placeholder="Recherchez des comptes...">
+                <ng-template nglLookupItem let-item>
+                  <div class="slds-media__body">
+                    <span class="slds-media__figure slds-listbox__option-icon">
+                      <span class="slds-icon_container slds-icon-standard-account">
+                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account" />
+                        </svg>
+                      </span>
+                    </span>{{item}}
+                  </div>
+                </ng-template>
+              </ngl-lookup>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 contract_style">
+          <div class="slds-form-element">
+            <span class="slds-form-element__label" id="file-selector-primary-label">Convention</span>
+            <div class="slds-form-element__control">
+              <div class="slds-file-selector slds-file-selector_files">
+                <div class="slds-file-selector__dropzone">
+                  <input class="slds-file-selector__input slds-assistive-text" accept="image/png" type="file" id="file-upload-input-01"
+                    aria-labelledby="file-selector-primary-label file-selector-secondary-label" />
+                  <label class="slds-file-selector__body" for="file-upload-input-01" id="file-selector-secondary-label">
+                    <span class="slds-file-selector__button slds-button slds-button_neutral">
+                      <svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#upload" />
+                      </svg>Charger </span>
+                    <span class="slds-file-selector__text slds-medium-show">ou Déposer un fichier</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 contract_style">
+          <div [ngClass]="contractFormValidators.description.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">Description</label>
+            <div class="slds-form-element__control">
+              <textarea id="account-description" required="" class="slds-input" value="" formControlName="description"></textarea>
+            </div>
+            <div *ngIf="submitted && contractFormValidators.description.errors">
+              <div class="slds-form-element__help" *ngIf="contractFormValidators.description.errors.required">Remplissez
+                ce champ
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+      </div>
+    </div>
+    <ng-template ngl-modal-footer>
+      <button class="slds-button slds-button--neutral" (click)="onCancel()">Cancel</button>
+      <button *ngIf="contractId" type="button" (click)="onAddAccountAndNew()" class="slds-button slds-button--neutral">Enregistrer
+        et
+        Nouveau</button>
+      <button *ngIf="!contractId" type="button" (click)="onAddAccountAndNew()" class="slds-button slds-button--neutral">Enregistrer
+        et
+        Nouveau</button>
+      <button *ngIf="contractId" type="button" (click)="onEditContract()" class="slds-button slds-button--brand">Enregistrer</button>
+      <button *ngIf="!contractId" type="submit" class="slds-button slds-button--brand">Enregistrer</button>
+    </ng-template>
+  </ngl-modal>
+</form>
