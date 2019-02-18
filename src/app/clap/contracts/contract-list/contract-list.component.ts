@@ -106,8 +106,8 @@ export class ContractListComponent implements OnInit {
     }, 400);
   }
 
-  onShowAccountDetails(index) {
-    this.router.navigate(['/accounts', index]);
+  onShowContractDetails(index) {
+    this.router.navigate(['/contracts', index]);
   }
 
   onSort($event: INglDatatableSort) {

@@ -76,4 +76,8 @@ export class AccountService {
     return this.http.delete(API_URL + '/api/v1/clients/' + index);
   }
 
+  deleteContract(index: number) {
+    return this.http.delete(API_URL + '/api/v1/contracts/' + index);
+  }
+  
 }

@@ -119,6 +119,10 @@ export class AccountDetailComponent implements OnInit {
     this.contractIdToDelete = id;
   }
 
+  onShowContractDetails(index) {
+    this.router.navigate(['/contracts', index]);
+  }
+
   onDeleteContract() {
     this.accountService.deleteContract(this.contractIdToDelete).subscribe(
       (res) => {

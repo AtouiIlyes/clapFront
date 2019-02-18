@@ -1,0 +1,382 @@
+<div *ngIf="loading">
+  <div role="status" class="slds-spinner slds-spinner_medium">
+    <span class="slds-assistive-text">Loading</span>
+    <div class="slds-spinner__dot-a"></div>
+    <div class="slds-spinner__dot-b"></div>
+  </div>
+</div>
+<div *ngIf="!loading">
+  <!-- Account Detail Header -->
+  <div class="slds-page-header slds-page-header_record-home">
+    <div class="slds-page-header__row">
+      <div class="slds-page-header__col-title">
+        <div class="slds-media">
+          <div class="slds-media__figure">
+            <span class="slds-icon_container slds-icon-standard-contract">
+              <svg class="slds-icon slds-page-header__icon" aria-hidden="true">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#contract" />
+              </svg>
+            </span>
+          </div>
+          <div class="slds-media__body">
+            <div class="slds-page-header__name">
+              <div class="slds-page-header__name-title">
+                <h1>
+                  <span>Contrat </span>
+                  <span class="slds-page-header__title slds-truncate" title="Account name">{{contractDetail.name}}</span>
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slds-page-header__col-actions">
+        <div class="slds-page-header__controls">
+          <div class="slds-page-header__control">
+            <ul class="slds-button-group-list">
+              <li>
+                <button class="slds-button slds-button_neutral" (click)="onEditContract()">Modifier</button>
+              </li>
+              <li>
+                <button class="slds-button slds-button_neutral" (click)="onDeleteContractAction()">Supprimer</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slds-page-header__row slds-page-header__row_gutters">
+      <div class="slds-page-header__col-details">
+        <ul class="slds-page-header__detail-row">
+          <li class="slds-page-header__detail-block">
+            <div class="demo-only" style="width: 30rem;">
+              <article class="slds-tile">
+                <div class="slds-tile__detail">
+                  <dl class="slds-list_horizontal slds-wrap">
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate account-attribute-color" title="First Label">Opérationnel</dt>
+                    <dd class="slds-item_detail slds-truncate" title="Description for first label"><a href="javascript:void(0);">{{contractDetail.name}}</a></dd>
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate account-attribute-color" title="Second Label">Facturation</dt>
+                    <dd class="slds-item_detail slds-truncate" title="Description for second label"><a href="javascript:void(0);">{{contractDetail.name}}</a></dd>
+                  </dl>
+                </div>
+              </article>
+            </div>
+          </li>
+          <li class="slds-page-header__detail-block">
+            <div class="demo-only" style="width: 30rem;">
+              <article class="slds-tile">
+                <div class="slds-tile__detail">
+                  <dl class="slds-list_horizontal slds-wrap">
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate account-attribute-color" title="First Label">Commercial</dt>
+                    <dd class="slds-item_detail slds-truncate" title="Description for first label"><a href="javascript:void(0);">{{contractDetail.name}}</a></dd>
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate account-attribute-color" title="Second Label">Gestionnaire</dt>
+                    <dd class="slds-item_detail slds-truncate" title="Description for second label"><a href="javascript:void(0);">{{contractDetail.name}}</a></dd>
+                  </dl>
+                </div>
+              </article>
+            </div>
+          </li>
+          <li class="slds-page-header__detail-block">
+            <div class="demo-only" style="width: 30rem;">
+              <article class="slds-tile">
+                <div class="slds-tile__detail">
+                  <dl class="slds-list_horizontal slds-wrap">
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate account-attribute-color" title="First Label">Statistiques</dt>
+                    <dd class="slds-item_detail slds-truncate" title="Description for first label">
+                      <a href="javascript:void(0);">{{contractDetail.name}}</a>
+                    </dd>
+
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate account-attribute-color" title="Second Label">Conventions</dt>
+                    <dd class="slds-item_detail slds-truncate" title="Description for second label">{{contractDetail.name}}</dd>
+                  </dl>
+                </div>
+              </article>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+  <br />
+  <!-- Account Detail Contracts -->
+  <div class="slds-grid slds-gutters">
+
+    <div class="slds-col slds-size_8-of-12" style="margin-left:-10px">
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-1">
+
+          <article class="slds-card">
+            <div class="slds-card__header slds-grid">
+              <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                  <span class="slds-icon_container slds-icon-standard-process" title="contract">
+                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                      <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#process"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Procédures ({{numberOfProcess}})</span>
+                  </span>
+                </div>
+                <div class="slds-media__body">
+                  <h2 class="slds-card__header-title">
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+                      <span>Procédures ({{numberOfProcess}})</span>
+                    </a>
+                  </h2>
+                </div>
+                <div class="slds-no-flex">
+                  <button class="slds-button slds-button_neutral">Ajouter</button>
+                </div>
+              </header>
+            </div>
+            <div class="slds-card__body slds-card__body_inner">
+              <ul class="slds-grid slds-wrap">
+                <li class="slds-col slds-size_1-of-2" style="margin-bottom:10px">
+                  <article class="slds-card slds-card_boundary">
+                    <div class="slds-card__header slds-grid">
+                      <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                        <div class="slds-media__figure">
+                          <span class="slds-icon_container slds-icon-standard-process" title="process">
+                            <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                              <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#process"></use>
+                            </svg>
+                            <span class="slds-assistive-text">AMIAT</span>
+                          </span>
+                        </div>
+                        <div class="slds-media__body">
+                          <h2 class="slds-card__header-title">
+                            <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+                              <span>AMIAT</span>
+                            </a>
+                          </h2>
+                        </div>
+                        <div class="slds-no-flex">
+                          <span nglDropdown [(open)]="processCardActions[i]">
+                            <button class="slds-button slds-button_icon slds-button_icon-border-filled" (click)="onToggleProcessCardActions($event, i)"
+                              nglDropdownTrigger>
+                              <svg class="slds-button__icon" aria-hidden="true">
+                                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
+                              </svg>
+                            </button>
+                            <div class="slds-dropdown slds-dropdown_right">
+                              <ul class="dropdown__list" role="menu">
+                                <li class="slds-dropdown__item">
+                                  <a role="menuitem" nglDropdownItem (click)="processCardActions[i] = false">
+                                    <p class="slds-truncate">Modifier</p>
+                                  </a>
+                                </li>
+                                <li class="slds-dropdown__item">
+                                  <a role="menuitem" nglDropdownItem (click)="processCardActions[i] = false">
+                                    <p class="slds-truncate">Supprimer</p>
+                                  </a>
+                                </li>
+                                <li class="slds-dropdown__item">
+                                  <a role="menuitem" nglDropdownItem (click)="processCardActions[i] = false">
+                                    <p class="slds-truncate">Afficher détails</p>
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </span>
+                        </div>
+                      </header>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner">
+                    </div>
+                  </article>
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+        <div class="slds-col slds-size_1-of-1" style="margin-top:10px">
+          <article class="slds-card">
+            <div class="slds-card__header slds-grid">
+              <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                  <span class="slds-icon_container slds-icon-standard-insights" title="contract">
+                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                      <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#insights"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Facturation ({{numberOfBilling}})</span>
+                  </span>
+                </div>
+                <div class="slds-media__body">
+                  <h2 class="slds-card__header-title">
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+                      <span>Facturation ({{numberOfBilling}})</span>
+                    </a>
+                  </h2>
+                </div>
+                <div class="slds-no-flex">
+                  <button class="slds-button slds-button_neutral">Ajouter</button>
+                </div>
+              </header>
+            </div>
+            <div class="slds-card__body slds-card__body_inner">
+              <ul class="slds-grid slds-wrap">
+                <li class="slds-col slds-size_1-of-2" style="margin-bottom:10px">
+                  <article class="slds-card slds-card_boundary">
+                    <div class="slds-card__header slds-grid">
+                      <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                        <div class="slds-media__figure">
+                          <span class="slds-icon_container slds-icon-standard-insights" title="contract">
+                            <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                              <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#insights"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Facturation 1</span>
+                          </span>
+                        </div>
+                        <div class="slds-media__body">
+                          <h2 class="slds-card__header-title">
+                            <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+                              <span>Facturation 1</span>
+                            </a>
+                          </h2>
+                        </div>
+                        <div class="slds-no-flex">
+                          <span nglDropdown [(open)]="billingCardActions[i]">
+                            <button class="slds-button slds-button_icon slds-button_icon-border-filled" (click)="onToggleBillingCardActions($event, i)"
+                              nglDropdownTrigger>
+                              <svg class="slds-button__icon" aria-hidden="true">
+                                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
+                              </svg>
+                            </button>
+                            <div class="slds-dropdown slds-dropdown_right">
+                              <ul class="dropdown__list" role="menu">
+                                <li class="slds-dropdown__item">
+                                  <a role="menuitem" nglDropdownItem (click)="billingCardActions[i] = false">
+                                    <p class="slds-truncate">Modifier</p>
+                                  </a>
+                                </li>
+                                <li class="slds-dropdown__item">
+                                  <a role="menuitem" nglDropdownItem (click)="billingCardActions[i] = false">
+                                    <p class="slds-truncate">Supprimer</p>
+                                  </a>
+                                </li>
+                                <li class="slds-dropdown__item">
+                                  <a role="menuitem" nglDropdownItem (click)="billingCardActions[i] = false">
+                                    <p class="slds-truncate">Afficher détails</p>
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </span>
+                        </div>
+                      </header>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner">
+                      <div class="demo-only" style="width: 10rem;">
+                        <article class="slds-tile">
+                          <div class="slds-tile__detail">
+                            <dl class="slds-list_horizontal slds-wrap">
+                              <dt class="slds-item_label slds-text-color_weak slds-truncate account-attribute-color"
+                                title="First Label">Type:</dt>
+                              <dd class="slds-item_detail slds-truncate" title="Description for first label">au forfait</dd>
+                            </dl>
+                          </div>
+                        </article>
+                      </div>
+                      <br />
+                    </div>
+                  </article>
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="slds-col slds-size_4-of-12" style="margin-left:20px;">
+      <div class="slds-grid slds-wrap">
+
+        <div class="slds-col slds-size_2-of-2 " style="margin-bottom: 10px;">
+          <article class="slds-card">
+            <div class="slds-card__header slds-grid">
+              <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                  <span class="slds-icon_container slds-icon-standard-document" title="account">
+                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                      <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#document"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Documents</span>
+                  </span>
+                </div>
+                <div class="slds-media__body">
+                  <h2 class="slds-card__header-title">
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+                      <span>Documents (1)</span>
+                    </a>
+                  </h2>
+                </div>
+
+              </header>
+            </div>
+            <div class="slds-card__body slds-card__body_inner">
+              <div class="demo-only" style="max-width: 320px;">
+                <div class="slds-form-element">
+                  <div class="slds-form-element__control">
+                    <div class="slds-file-selector slds-file-selector_images">
+                      <div class="slds-file-selector__dropzone">
+                        <input class="slds-file-selector__input slds-assistive-text" accept="image/png" type="file" id="file-upload-input-01"
+                          aria-labelledby="file-selector-primary-label file-selector-secondary-label" />
+                        <label class="slds-file-selector__body" for="file-upload-input-01" id="file-selector-secondary-label">
+                          <span class="slds-file-selector__button slds-button slds-button_neutral">
+                            <svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#upload" />
+                            </svg>Charger des fichiers</span>
+                          <span class="slds-file-selector__text slds-medium-show">ou déposer un fichier</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="slds-col slds-size_2-of-2">
+          <article class="slds-card">
+            <div class="slds-card__header slds-grid">
+              <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                  <span class="slds-icon_container slds-icon-standard-note" title="account">
+                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                      <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#document"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Notes</span>
+                  </span>
+                </div>
+                <div class="slds-media__body">
+                  <h2 class="slds-card__header-title">
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Comptes">
+                      <span>Notes (1)</span>
+                    </a>
+                  </h2>
+                </div>
+              </header>
+            </div>
+            <div class="slds-card__body slds-card__body_inner">
+              Test
+            </div>
+            <footer class="slds-card__footer">
+              <a class="slds-card__footer-action" href="javascript:void(0);">Afficher Tout
+                <span class="slds-assistive-text">Notes</span>
+              </a>
+            </footer>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-contract-edit [open]="openContractEditModal" (cancel)="onCancelContractModal()" [contractId]="id" [clientId]="clientId"
+  (saveAndNew)="onSaveAndNewContract()"></app-contract-edit>
+
+<app-modal-window [open]="openDeleteContractConfirm" [title]="'Suppression Contrat'" [text]="'Êtes vous sur de vouloir supprimer définitivement ce contrat?'"
+  [submitButtonText]="'Supprimer'" (cancel)="onDeleteCancel()" (confirm)="onDeleteContract()">
+</app-modal-window>
