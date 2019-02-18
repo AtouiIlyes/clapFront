@@ -105,7 +105,7 @@
   </article>
 </div>
 
-<app-account-edit [accountsList]="accounts" [accountId]="accountIdToEdit" [open]="openAccountEditModal" (cancel)="onDeleteCancelEditModal()"
+<app-account-edit  [accountId]="accountIdToEdit" [open]="openAccountEditModal" (cancel)="onDeleteCancelEditModal()"
   (saveAndNew)="onSaveAndNewAccount()"></app-account-edit>
 
 <app-modal-window [open]="openDeleteAccountConfirm" [title]="'Suppression Compte'" [text]="'Êtes vous sur de vouloir supprimer définitivement ce compte?'"

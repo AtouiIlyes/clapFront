@@ -21,6 +21,7 @@ export class AccountEditComponent implements OnChanges {
   submitted = false;
   accountForm: FormGroup;
   accountFormErrors = [];
+  accountsList = [];
   user = [];
   pickedAccount: string = '';
   activities = [
@@ -32,7 +33,6 @@ export class AccountEditComponent implements OnChanges {
 
   @Input() open: boolean;
   @Input() accountId: number;
-  @Input() accountsList: any = [];
   @Output() cancel = new EventEmitter<Boolean>();
   @Output() saveAndNew = new EventEmitter<Boolean>();
 
@@ -46,6 +46,9 @@ export class AccountEditComponent implements OnChanges {
     private fb: FormBuilder) { }
 
   ngOnChanges() {
+    this.accountService.getAccounts().subscribe(accounts => {
+        this.accountsList = accounts;
+    })
     this.initForm();
   }
 

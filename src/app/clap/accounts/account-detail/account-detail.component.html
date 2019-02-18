@@ -42,7 +42,7 @@
                 </button>
               </li>
               <li>
-                <button class="slds-button slds-button_neutral">Modifier</button>
+                <button class="slds-button slds-button_neutral" (click)="onEditAccount()">Modifier</button>
               </li>
               <li>
                 <button class="slds-button slds-button_neutral" (click)="onDeleteAccountAction()">Supprimer</button>
@@ -190,7 +190,7 @@
                               </a>
                             </li>
                             <li class="slds-dropdown__item">
-                              <a role="menuitem" nglDropdownItem (click)="contractCardActions[i] = false">
+                              <a role="menuitem" nglDropdownItem (click)="onDeleteContractAction(contract.id)">
                                 <p class="slds-truncate">Supprimer</p>
                               </a>
                             </li>
@@ -575,8 +575,17 @@
 </div>
 <app-contract-edit *ngIf="contractId" [open]="openContractEditModal" [contractId]="contractId" [clientId]="id" (cancel)="onCancelEditModal()"
   (saveAndNew)="onSaveAndNewAccount()"></app-contract-edit>
+
 <app-contract-edit *ngIf="!contractId" [open]="openContractEditModal" [clientId]="id" (cancel)="onCancelEditModal()"
   (saveAndNew)="onSaveAndNewAccount()"></app-contract-edit>
+
+<app-account-edit  [accountId]="id" [open]="openAccountEditModal" (cancel)="onDeleteCancelEditModal()"
+  (saveAndNew)="onSaveAndNewAccount()"></app-account-edit>
+
 <app-modal-window [open]="openDeleteAccountConfirm" [title]="'Suppression Compte'" [text]="'Êtes vous sur de vouloir supprimer définitivement ce compte?'"
-  [submitButtonText]="'Supprimer'" (cancel)="onDeleteCancel()" (confirm)="onDeleteAccount()">
+  [submitButtonText]="'Supprimer'" (cancel)="onDeleteAccountCancel()" (confirm)="onDeleteAccount()">
+</app-modal-window>
+
+<app-modal-window [open]="openDeleteContractConfirm" [title]="'Suppression Contrat'" [text]="'Êtes vous sur de vouloir supprimer définitivement ce contrat?'"
+  [submitButtonText]="'Supprimer'" (cancel)="onDeleteContractCancel()" (confirm)="onDeleteContract()">
 </app-modal-window>

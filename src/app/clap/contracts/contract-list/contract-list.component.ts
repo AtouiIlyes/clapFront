@@ -71,7 +71,7 @@ export class ContractListComponent implements OnInit {
   onDeleteContract() {
     this.contractService.deleteContract(this.contractIdToDelete).subscribe(
       (res) => {
-        this.messages.success('CLIENT SUPPRIMÉ', 'le client a bien été supprimé');
+        this.messages.success('CONTRAT SUPPRIMÉ', 'le contrat a bien été supprimé');
         const index = this.contracts.findIndex(user => user.id === this.contractIdToDelete);
         if (index > -1) {
           this.contracts.splice(index, 1);
@@ -79,10 +79,11 @@ export class ContractListComponent implements OnInit {
         this.openDeleteContractConfirm = false;
       },
       err => {
-        this.messages.error('CLIENT NON SUPPRIMÉ', 'le client n\'a pas été supprimé : ' + err);
+        this.messages.error('CONTRAT NON SUPPRIMÉ', 'le contrat n\'a pas été supprimé : ' + err);
       }
     );
   }
+
 
   onDeleteCancel() {
     this.openDeleteContractConfirm = false;

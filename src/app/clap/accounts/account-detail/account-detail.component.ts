@@ -17,9 +17,12 @@ export class AccountDetailComponent implements OnInit {
   billingContacts = [];
   operationalContacts = [];
   numberOfContacts = 0;
+  contractIdToDelete: number;
   loading = true;
   openDeleteAccountConfirm = false;
   openContractEditModal = false;
+  openDeleteContractConfirm = false;
+  openAccountEditModal = false;
   contractId: number;
   commercialActions = [];
   contractCardActions = [];
@@ -69,10 +72,14 @@ export class AccountDetailComponent implements OnInit {
     this.openDeleteAccountConfirm = true;
   }
 
-  onDeleteCancel() {
-    this.openDeleteAccountConfirm = false;
+  onDeleteContractCancel() {
+    this.openDeleteContractConfirm = false;
+    this.contractIdToDelete = 0;
   }
 
+  onDeleteAccountCancel() {
+    this.openDeleteAccountConfirm = false;
+  }
   onDeleteAccount() {
     this.accountService.deleteAccount(this.id).subscribe(
       (res) => {
@@ -82,6 +89,10 @@ export class AccountDetailComponent implements OnInit {
         this.messages.error('CLIENT NON SUPPRIMÉ', 'le client n\'a pas été supprimé : ' + err);
       }
     );
+  }
+
+  onEditAccount() {
+    this.openAccountEditModal = true;
   }
 
   onNewContract() {
@@ -97,5 +108,30 @@ export class AccountDetailComponent implements OnInit {
 
   onCancelEditModal() {
     this.openContractEditModal = false;
+  }
+
+  onDeleteCancelEditModal() {
+    this.openAccountEditModal = false;
+  }
+
+  onDeleteContractAction(id) {
+    this.openDeleteContractConfirm = true;
+    this.contractIdToDelete = id;
+  }
+
+  onDeleteContract() {
+    this.accountService.deleteContract(this.contractIdToDelete).subscribe(
+      (res) => {
+        this.messages.success('CONTRAT SUPPRIMÉ', 'le contrat a bien été supprimé');
+        const index = this.accountContracts.findIndex(user => user.id === this.contractIdToDelete);
+        if (index > -1) {
+          this.accountContracts.splice(index, 1);
+        }
+        this.openDeleteContractConfirm = false;
+      },
+      err => {
+        this.messages.error('CONTRAT NON SUPPRIMÉ', 'le contrat n\'a pas été supprimé : ' + err);
+      }
+    );
   }
 }
