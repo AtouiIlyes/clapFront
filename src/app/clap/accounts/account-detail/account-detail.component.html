@@ -35,7 +35,7 @@
           <div class="slds-page-header__control">
             <ul class="slds-button-group-list">
               <li>
-                <button class="slds-button slds-button_neutral">
+                <button class="slds-button slds-button_neutral" (click)="onShowHierarchy()">
                   <svg class="slds-button__icon slds-button__icon_small slds-button__icon_left" aria-hidden="true">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#hierarchy" />
                   </svg>
@@ -579,8 +579,7 @@
 <app-contract-edit *ngIf="!contractId" [open]="openContractEditModal" [clientId]="id" (cancel)="onCancelEditModal()"
   (saveAndNew)="onSaveAndNewAccount()"></app-contract-edit>
 
-<app-account-edit  [accountId]="id" [open]="openAccountEditModal" (cancel)="onDeleteCancelEditModal()"
-  (saveAndNew)="onSaveAndNewAccount()"></app-account-edit>
+<app-account-edit [accountId]="id" [open]="openAccountEditModal" (cancel)="onDeleteCancelEditModal()" (saveAndNew)="onSaveAndNewAccount()"></app-account-edit>
 
 <app-modal-window [open]="openDeleteAccountConfirm" [title]="'Suppression Compte'" [text]="'Êtes vous sur de vouloir supprimer définitivement ce compte?'"
   [submitButtonText]="'Supprimer'" (cancel)="onDeleteAccountCancel()" (confirm)="onDeleteAccount()">

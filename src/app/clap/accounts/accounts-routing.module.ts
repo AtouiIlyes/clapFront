@@ -6,6 +6,7 @@ import { AccountListComponent } from './account-list/account-list.component';
 import { AccountEditComponent } from './account-edit/account-edit.component';
 import { AccountDetailComponent } from './account-detail/account-detail.component';
 import { AccountsComponent } from './accounts.component';
+import { AccountHierarchyComponent } from './account-hierarchy/account-hierarchy.component';
 
 
 const accountsRoutes: Routes = [
@@ -28,6 +29,12 @@ const accountsRoutes: Routes = [
       {
         path: ':id/edit',
         component: AccountEditComponent,
+        canActivate: [AuthGuard],
+        data: { function: 'rights.edit' }
+      },
+      {
+        path: ':id/hierarchy',
+        component: AccountHierarchyComponent,
         canActivate: [AuthGuard],
         data: { function: 'rights.edit' }
       },

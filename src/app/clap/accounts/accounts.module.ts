@@ -12,13 +12,15 @@ import { AccountDetailComponent } from './account-detail/account-detail.componen
 import { AccountEditComponent } from './account-edit/account-edit.component';
 import { AccountService } from './accounts.service';
 import { AccountsRoutingModule } from './accounts-routing.module';
+import { AccountHierarchyComponent } from './account-hierarchy/account-hierarchy.component';
 
 @NgModule({
   declarations: [
     AccountsComponent,
     AccountListComponent,
     AccountDetailComponent,
-    AccountEditComponent
+    AccountEditComponent,
+    AccountHierarchyComponent
   ],
   imports: [
     CommonModule,

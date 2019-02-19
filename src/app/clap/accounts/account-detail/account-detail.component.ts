@@ -123,6 +123,10 @@ export class AccountDetailComponent implements OnInit {
     this.router.navigate(['/contracts', index]);
   }
 
+  onShowHierarchy() {
+    this.router.navigate(['/accounts', this.id , 'hierarchy']);
+  }
+
   onDeleteContract() {
     this.accountService.deleteContract(this.contractIdToDelete).subscribe(
       (res) => {

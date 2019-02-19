@@ -1,0 +1,291 @@
+<div class="slds-col slds-size_12-of-12">
+  <div class="slds-page-header slds-page-header_related-list">
+    <div class="slds-page-header__row">
+      <div class="slds-page-header__col-title">
+        <nav role="navigation" aria-label="Breadcrumbs">
+          <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+            <li class="slds-breadcrumb__item"><a href="javascript:void(0);">Compte</a></li>
+            <li class="slds-breadcrumb__item"><a href="javascript:void(0);">Fedex</a></li>
+          </ol>
+        </nav>
+        <div class="slds-media">
+          <div class="slds-media__body">
+            <div class="slds-page-header__name">
+              <div class="slds-page-header__name-title">
+                <h1>
+                  <span class="slds-page-header__title slds-truncate" title="Contacts (will truncate)">Hiérarchie des
+                    comptes</span>
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <article class="slds-card" style="margin-top:10px">
+    <table aria-multiselectable="true" class="slds-table slds-table_bordered slds-table_edit slds-table_fixed-layout slds-table_resizable-cols slds-tree slds-table_tree"
+      role="treegrid">
+      <thead>
+        <tr class="slds-line-height_reset">
+          <th class="slds-text-align_right" scope="col" style="width: 3.25rem;"></th>
+          <th aria-label="Account Name" aria-sort="none" class="slds-has-button-menu slds-is-resizable slds-is-sortable"
+            scope="col">
+            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">
+              <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                <span class="slds-truncate" title="Account Name">RAISON SOCIALE/NOM DU COMPTE</span>
+                <span class="slds-icon_container slds-icon-utility-arrowdown">
+                  <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon " aria-hidden="true">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+          </th>
+          <th aria-label="Title" aria-sort="none" class="slds-has-button-menu slds-is-resizable slds-is-sortable" scope="col">
+            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">
+              <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                <span class="slds-truncate" title="Activity">SECTEUR D'ACTIVITE</span>
+              </div>
+            </a>
+          </th>
+          <th aria-label="Phone Number" aria-sort="none" class="slds-has-button-menu slds-is-resizable slds-is-sortable"
+            scope="col">
+            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">
+              <span class="slds-assistive-text">Sort by: </span>
+              <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                <span class="slds-truncate" title="Phone Number">Téléphone</span>
+              </div>
+            </a>
+          </th>
+          <th aria-label="Account Owner" aria-sort="none" class="slds-has-button-menu slds-is-resizable slds-is-sortable"
+            scope="col">
+            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">
+              <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                <span class="slds-truncate" title="Account Owner">ALIAS DU PROPRIETAIRE DU COMPTE</span>
+
+              </div>
+            </a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr aria-expanded="expanded" aria-level="1" aria-posinset="2" aria-selected="false" aria-setsize="4" class="slds-hint-parent">
+          <td class="slds-text-align_right" role="gridcell" style="width: 3.25rem;"></td>
+          <th class="slds-tree__item" data-label="Account Name" scope="row">
+            <button class="slds-button slds-button_icon slds-button_icon slds-button_icon-x-small slds-m-right_x-small"
+              aria-hidden="true" tabindex="-1" title="Collapse Acme Corporation" (click)="expandHierarchy()">
+              <svg class="slds-button__icon slds-button__icon_small" aria-hidden="true">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevronright" />
+              </svg>
+              <span class="slds-assistive-text">Expand Acme Corporation</span>
+            </button>
+            <div class="slds-truncate" title="Acme Corporation" (mouseenter)="accountHover($event, 'enter')"
+              (mouseleave)="accountHover($event, 'leave')"><a href="javascript:void(0);" tabindex="-1">Fedex
+              </a></div>
+          </th>
+          <td data-label="Employees" role="gridcell">
+            <div class="slds-truncate" title="transport">TRANSPORT</div>
+          </td>
+          <td data-label="Phone Number" role="gridcell">
+            <div class="slds-truncate" title="837-555-1212">837-555-1212</div>
+          </td>
+          <td data-label="Account Owner" role="gridcell">
+            <div class="slds-truncate" title="John Doe"><a href="javascript:void(0);" tabindex="-1">John Doe</a></div>
+          </td>
+
+        </tr>
+        <tr *ngIf="expanded" aria-expanded="false" aria-level="2" aria-posinset="1" aria-selected="false" aria-setsize="1"
+          class="slds-hint-parent">
+          <td class="slds-text-align_right" role="gridcell" style="width: 3.25rem;"></td>
+          <th class="slds-tree__item" data-label="Account Name" scope="row">
+            <button class="slds-button slds-button_icon slds-button_icon slds-button_icon-x-small slds-m-right_x-small slds-is-disabled"
+              aria-hidden="true" tabindex="-1" title="Expand Acme Corporation (Oakland)">
+              <svg class="slds-button__icon slds-button__icon_small" aria-hidden="true">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevronright" />
+              </svg>
+              <span class="slds-assistive-text">Collapse Acme Corporation (Oakland)</span>
+            </button>
+            <div class="slds-truncate" title="Acme Corporation (Oakland)"><a href="javascript:void(0);" tabindex="-1">Fedex
+                (Tunise)</a></div>
+          </th>
+          <td data-label="Employees" role="gridcell">
+            <div class="slds-truncate" title="transport">TRANSPORT</div>
+          </td>
+          <td data-label="Phone Number" role="gridcell">
+            <div class="slds-truncate" title="837-555-1212">837-555-1212</div>
+          </td>
+          <td data-label="Account Owner" role="gridcell">
+            <div class="slds-truncate" title="John Doe"><a href="javascript:void(0);" tabindex="-1">John Doe</a></div>
+          </td>
+
+        </tr>
+        <tr *ngIf="expanded" aria-level="2" aria-posinset="1" aria-selected="false" aria-setsize="1" class="slds-hint-parent">
+          <td class="slds-text-align_right" role="gridcell" style="width: 3.25rem;"></td>
+          <th class="slds-tree__item" data-label="Account Name" scope="row">
+            <button class="slds-button slds-button_icon slds-button_icon slds-button_icon-x-small slds-m-right_x-small slds-is-disabled"
+              aria-hidden="true" tabindex="-1" title="Expand Acme Corporation (Oakland)">
+              <svg class="slds-button__icon slds-button__icon_small" aria-hidden="true">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevronright" />
+              </svg>
+              <span class="slds-assistive-text">Collapse Acme Corporation (Oakland)</span>
+            </button>
+            <div class="slds-truncate" title="Acme Corporation (Oakland)"><a href="javascript:void(0);" tabindex="-1">Fedex
+                (Tunise)</a></div>
+          </th>
+          <td data-label="Employees" role="gridcell">
+            <div class="slds-truncate" title="transport">TRANSPORT</div>
+          </td>
+          <td data-label="Phone Number" role="gridcell">
+            <div class="slds-truncate" title="837-555-1212">837-555-1212</div>
+          </td>
+          <td data-label="Account Owner" role="gridcell">
+            <div class="slds-truncate" title="John Doe"><a href="javascript:void(0);" tabindex="-1">John Doe</a></div>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+    <footer class="slds-card__footer"></footer>
+
+  </article>
+
+</div>
+<div id="myId" #myId>
+  <section *ngIf="hovered" aria-labelledby="panel-heading-id" class="slds-popover slds-popover_panel slds-nubbin_left-top"
+    role="dialog">
+    <button class="slds-button slds-button_icon slds-button_icon slds-button_icon-small slds-float_right slds-popover__close"
+      title="Close dialog">
+      <svg class="slds-button__icon" aria-hidden="true">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close" />
+      </svg>
+      <span class="slds-assistive-text">Close dialog</span>
+    </button>
+    <div class="slds-popover__header">
+      <header class="slds-media slds-media_center slds-m-bottom_small">
+        <span class="slds-icon_container slds-icon-standard-account slds-media__figure">
+          <svg class="slds-icon slds-icon_small" aria-hidden="true">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account" />
+          </svg>
+        </span>
+        <div class="slds-media__body">
+          <h2 class="slds-text-heading_medium slds-hyphenate" id="panel-heading-id"><a href="javascript:void(0);">Fedex</a></h2>
+        </div>
+      </header>
+      <footer class="slds-grid slds-wrap slds-grid_pull-padded">
+        <div class="slds-p-horizontal_small slds-size_1-of-2 slds-p-bottom_x-small">
+          <dl>
+            <dd>
+              <p class="slds-truncate" title="3500 Deer Creek Rd.">Nom du compte</p>
+            </dd>
+            <dt>
+              <p class="slds-popover_panel__label slds-truncate" title="account name">FEDEX</p>
+            </dt>
+          </dl>
+        </div>
+        <div class="slds-p-horizontal_small slds-size_1-of-2 slds-p-bottom_x-small">
+          <dl>
+            <dd>propriétaire du compte</dd>
+            <dt>
+              <p class="slds-popover_panel__label slds-truncate" title="Account Owner">Fawzy Othman</p>
+            </dt>
+          </dl>
+        </div>
+        <div class="slds-p-horizontal_small slds-size_1-of-2 slds-p-bottom_x-small">
+          <dl>
+            <dd>Secteur d'activité</dd>
+            <dt>
+              <p class="slds-popover_panel__label slds-truncate" title="Website">Tranport</p>
+            </dt>
+          </dl>
+        </div>
+        <div class="slds-p-horizontal_small slds-size_1-of-2 slds-p-bottom_x-small">
+          <dl>
+            <dd>Téléphone</dd>
+            <dt>
+              <p class="slds-popover_panel__label slds-truncate" title="Phone">212-345-3485</p>
+            </dt>
+          </dl>
+        </div>
+      </footer>
+    </div>
+    <div class="slds-popover__body">
+      <dl class="slds-popover__body-list">
+
+        <article class="slds-card">
+          <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+              <div class="slds-media__figure">
+                <span class="slds-icon_container slds-icon-standard-contract" title="account">
+                  <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#contract"></use>
+                  </svg>
+                  <span class="slds-assistive-text">account</span>
+                </span>
+              </div>
+              <div class="slds-media__body">
+                <h2 class="slds-card__header-title">
+                  <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+                    <span>Contracts (0)</span>
+                  </a>
+                </h2>
+              </div>
+
+            </header>
+          </div>
+
+          <div class="slds-card__body slds-card__body_inner">
+          </div>
+        </article>
+        <article class="slds-card">
+          <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+              <div class="slds-media__figure">
+                <span class="slds-icon_container slds-icon-custom-custom101" title="account">
+                  <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#contact"></use>
+                  </svg>
+                  <span class="slds-assistive-text">account</span>
+                </span>
+              </div>
+              <div class="slds-media__body">
+                <h2 class="slds-card__header-title">
+                  <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+                    <span>Contacts (2)</span>
+                  </a>
+                </h2>
+              </div>
+            </header>
+          </div>
+          <div class="slds-card__body slds-card__body_inner">
+          </div>
+        </article>
+        <article class="slds-card">
+          <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+              <div class="slds-media__figure">
+                <span class="slds-icon_container slds-icon-custom-custom5" title="account">
+                  <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                    <use xlink:href="/assets/icons/custom-sprite/svg/symbols.svg#custom16"></use>
+                  </svg>
+                  <span class="slds-assistive-text">account</span>
+                </span>
+              </div>
+              <div class="slds-media__body">
+                <h2 class="slds-card__header-title">
+                  <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+                    <span>Comptes bancaires (1)</span>
+                  </a>
+                </h2>
+              </div>
+            </header>
+          </div>
+          <div class="slds-card__body slds-card__body_inner">
+          </div>
+        </article>
+      </dl>
+    </div>
+  </section>
+</div>
