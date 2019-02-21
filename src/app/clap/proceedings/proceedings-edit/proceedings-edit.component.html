@@ -1,0 +1,53 @@
+<form [formGroup]="processForm" (ngSubmit)="onAddProcess()">
+  <ngl-modal [header]="'Créer: Procédure'" [(open)]="open" [size]="''" [directional]="false">
+    <div body>
+      <div *ngIf="submitted && processFormErrors.length > 0">
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error theme_error" role="alert">
+          <h2>Examinez les erreurs dans cette page. </h2>
+        </div>
+        <p style="color:#C43631"> Les champs obligatoires suivants doivent être remplis :
+          {{processFormErrors}}</p>
+        <br />
+      </div>
+      <div class="slds-grid slds-wrap" style="margin-left:3rem;margin-right:3rem">
+        <div class="slds-col slds-size_2-of-2 account_style">
+          <div [ngClass]="processFormValidators.code.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Code Procédure</label>
+            <div class="slds-form-element__control">
+              <input id="account-name" required="" class="slds-input" type="text" value="" formControlName="code" />
+            </div>
+            <div *ngIf="submitted && processFormValidators.code.errors">
+              <div class="slds-form-element__help" *ngIf="processFormValidators.code.errors.required">Remplissez ce
+                champ
+              </div>
+              <div class="slds-form-element__help" *ngIf="processFormValidators.code.errors.minlength">Le nom doit être
+                au minimum 3 caractères </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_2-of-2 account_style">
+          <div [ngClass]="processFormValidators.libelle.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Libelle Procédure</label>
+            <div class="slds-form-element__control">
+              <input id="account-naf" required="" class="slds-input" type="text" value="" formControlName="libelle" />
+            </div>
+            <div *ngIf="submitted && processFormValidators.libelle.errors">
+              <div class="slds-form-element__help" *ngIf="processFormValidators.libelle.errors.required">Remplissez
+                ce champ
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+
+    </div>
+    <ng-template ngl-modal-footer>
+      <button class="slds-button slds-button--neutral" (click)="onCancel()">Cancel</button>
+      <button *ngIf="!contractId" type="submit" class="slds-button slds-button--brand">Enregistrer</button>
+      <button *ngIf="contractId" type="submit" class="slds-button slds-button--brand">Modifier</button>
+    </ng-template>
+  </ngl-modal>
+</form>

@@ -1,0 +1,93 @@
+<article class="slds-card" style="background-color: #F3F2F2;">
+  <div class="slds-grid slds-wrap">
+
+    <div class="slds-col slds-size_3-of-12">
+      <article class="slds-card" style="background-color:#FFFFFF">
+        <div class="demo-only">
+          <div class="slds-split-view_container">
+            <article aria-hidden="false" id="split-view-id" class="slds-split-view slds-grid slds-grid_vertical slds-grow">
+              <header class="slds-split-view__header">
+                <div class="slds-grid slds-grid_vertical-align-center slds-m-bottom_xx-small">
+                  <div class="slds-has-flexi-truncate">
+                    <div class="slds-media slds-media_center">
+                      <div class="slds-media__figure">
+                        <div class="slds-icon_container slds-icon-standard-process">
+                          <svg class="slds-icon" aria-hidden="true">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#process" />
+                          </svg>
+                          <span class="slds-assistive-text">Procédures</span>
+                        </div>
+                      </div>
+                      <div class="slds-media__body">
+                        <h1 class="slds-text-heading_small slds-text-color_default slds-p-right_x-small">
+                          <button class="slds-button slds-button_reset slds-type-focus slds-truncate" aria-haspopup="true"
+                            title="">
+                            <span class="slds-grid slds-has-flexi-truncate slds-grid_vertical-align-center">
+                              <span class="slds-truncate" title="Procédures">Procédures</span>
+                            </span>
+                          </button>
+                        </h1>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-no-flex">
+                    <button class="slds-button slds-button_neutral" (click)="onEditProcess()">Ajouter</button>
+                  </div>
+                </div>
+                <div class="slds-grid slds-grid_vertical-align-center">
+                  <p class="slds-text-body_small slds-text-color_weak">6 éléments • Mise a jour il y a une heure</p>
+                </div>
+                <ngl-lookup [(value)]="value" [lookup]="lookup" [(pick)]="name" placeholder="Recherchez des procédures... "
+                  style="width:10rem; padding-right:1rem">
+                </ngl-lookup>
+              </header>
+              <div class="slds-grid slds-grid_vertical">
+                <div class="slds-split-view__list-header slds-grid">
+                  <span>CODE PROCEDURE </span>
+                </div>
+                <ul aria-multiselectable="true" class="slds-scrollable_y" role="listbox" aria-label="Select an item to open it in a new workspace tab.">
+                  <li class="slds-split-view__list-item" role="presentation">
+                    <a href="javascript:void(0);" aria-selected="false" role="option" class="slds-split-view__list-item-action slds-grow slds-has-flexi-truncate"
+                      tabindex="0">
+                      <div class="slds-grid slds-wrap">
+                        <span class="slds-truncate slds-text-body_regular slds-text-color_default" title="AMIAT">AMIAT</span>
+                        <span class="slds-truncate slds-col_bump-left" title="99">4 étapes</span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="slds-split-view__list-item" role="presentation">
+                    <a href="javascript:void(0);" aria-selected="false" role="option" class="slds-split-view__list-item-action slds-grow slds-has-flexi-truncate"
+                      tabindex="-1">
+                      <div class="slds-grid slds-wrap">
+                        <span class="slds-truncate slds-text-body_regular slds-text-color_default" title="AMIAF">AMIAF</span>
+                        <span class="slds-truncate slds-col_bump-left" title="92">0 étapes</span>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="slds-col slds-size_6-of-12">
+      <app-proceedings-detail></app-proceedings-detail>
+
+    </div>
+
+
+
+    <div class="slds-col slds-size_3-of-12">
+
+      <app-proceedings-step></app-proceedings-step>
+    </div>
+  </div>
+  <p>
+
+  </p>
+</article>
+
+<app-proceedings-edit *ngIf="!editMode" [open]="openProcessEditModal" (cancel)="onDeleteCancelEditModal()"></app-proceedings-edit>
+<app-proceedings-edit *ngIf="editMode" [accountId]="processIdToEdit" [open]="openStepEditModal" (cancel)="onDeleteCancelEditModal()"></app-proceedings-edit>

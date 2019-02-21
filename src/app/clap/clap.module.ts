@@ -8,6 +8,7 @@ import { RolesModule } from './roles/roles.module';
 import { HomesModule } from './homes/homes.module';
 import { AccountsModule } from './accounts/accounts.module';
 import { ContractsModule } from './contracts/contracts.module';
+import { ProceedingsModule } from './proceedings/proceedings.module';
 
 
 
@@ -21,7 +22,8 @@ import { ContractsModule } from './contracts/contracts.module';
     RolesModule,
     HomesModule,
     AccountsModule,
-    ContractsModule
+    ContractsModule,
+    ProceedingsModule
   ],
   providers: []
 })

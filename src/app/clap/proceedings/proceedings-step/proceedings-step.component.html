@@ -1,0 +1,75 @@
+<article class="slds-card slds-card_boundary" style="margin-top:1rem; margin-right:1rem">
+  <div class="slds-card__header slds-grid">
+    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+
+      <div class="slds-media__body">
+        <h2 class="slds-card__header-title">
+          <span>Ajouter une étape</span>
+        </h2>
+      </div>
+    </header>
+  </div>
+  <hr>
+  <div class="slds-card__body slds-card__body_inner">
+    <form [formGroup]="stepForm" (ngSubmit)="onAddStep()">
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Type d'action</label>
+        <div class="slds-form-element__control">
+          <ngl-picklist [data]="steps" [(nglPick)]="pickSteps" [(open)]="openStepPickList" [nglPickMultiple]="flase"
+            (nglPickChange)="stepPicked($event)" formControlName="type" ngDefaultControl>
+            <span class="slds-truncate">{{ pickStepsLabel }}</span>
+            <ng-template nglPicklistItem let-item>{{item.value}}</ng-template>
+          </ngl-picklist>
+        </div>
+      </div>
+
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Nom d'action</label>
+        <div class="slds-form-element__control">
+          <input id="name" placeholder="Entrez le nom de type ici" class="slds-input" formControlName="name" name="name"
+            type="text" />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Description d'action</label>
+        <div class="slds-form-element__control">
+          <input id="description" placeholder="Entrez la description de type ici" class="slds-input" formControlName="description"
+            name="description" type="text" />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <div class="slds-form-element__control">
+          <fieldset ngl-form-group label="Envoyé" [required]="false" [error]="hasError ? error : null" class="slds-m-top--small"
+            ngDefaultControl formControlName="send">
+            <ngl-form-group-element label="Avant"><input nglFormControl type="radio" value="avant" /></ngl-form-group-element>
+            <ngl-form-group-element label="Aprés"><input nglFormControl type="radio" value="aprés" /></ngl-form-group-element>
+          </fieldset>
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Nombre de jour</label>
+        <div class="slds-form-element__control">
+          <input id="description" placeholder="Entrez la description de type ici" class="slds-input" formControlName="numberOfDays"
+            name="description" type="text" />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-top_small">
+        <label class="slds-form-element__label" for="text-input-id-1">Rang</label>
+        <div class="slds-form-element__control">
+          <ngl-picklist [data]="ranks" [(nglPick)]="pickRanks" [(open)]="openRankPickList" [nglPickMultiple]="flase"
+            (nglPickChange)="rankPicked($event)" formControlName="rank" ngDefaultControl>
+            <span class="slds-truncate">{{ pickRanksLabel }}</span>
+            <ng-template nglPicklistItem let-item>{{item.value}}</ng-template>
+          </ngl-picklist>
+        </div>
+      </div>
+
+      <div style="margin-top:1rem;">
+        <button type="submit" class="slds-button slds-button_brand" [disabled]="!stepForm.valid">Sauvegarder</button>
+        <button type="button" *ngIf="editMode" class="slds-button slds-button_brand" (click)="onUpdateUserType()"
+          [disabled]="!stepForm.valid">Modifier</button>
+      </div>
+
+    </form>
+  </div>
+</article>

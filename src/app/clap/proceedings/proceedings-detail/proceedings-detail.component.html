@@ -1,0 +1,353 @@
+<article class="slds-card slds-card_boundary" style="margin: 1rem;">
+  <div class="slds-card__header slds-grid">
+    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+      <div class="slds-media__figure">
+        <span class="slds-icon_container slds-icon-standard-account" title="account">
+          <svg class="slds-icon slds-icon_small" aria-hidden="true">
+            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+          </svg>
+          <span class="slds-assistive-text">AMIAT</span>
+        </span>
+      </div>
+      <div class="slds-media__body">
+        <h2 class="slds-card__header-title">
+          <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+            <span>AMIAT</span>
+          </a>
+        </h2>
+        Recouvrement amiable 750€
+      </div>
+      <div class="slds-no-flex">
+        <div class="slds-no-flex">
+          <span nglDropdown [(open)]="stepActions">
+            <button class="slds-button slds-button_icon slds-button_icon-border-filled" (click)="onToggleStepActions($event)"
+              nglDropdownTrigger>
+              <svg class="slds-button__icon" aria-hidden="true">
+                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
+              </svg>
+            </button>
+            <div class="slds-dropdown slds-dropdown_right">
+              <ul class="dropdown__list" role="menu">
+                <li class="slds-dropdown__item">
+                  <a role="menuitem" nglDropdownItem>
+                    <p class="slds-truncate">Modifier</p>
+                  </a>
+                </li>
+                <li class="slds-dropdown__item">
+                  <a role="menuitem" nglDropdownItem>
+                    <p class="slds-truncate">Supprimer</p>
+                  </a>
+                </li>
+                <li class="slds-dropdown__item">
+                  <a role="menuitem" nglDropdownItem>
+                    <p class="slds-truncate">Afficher détails</p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </span>
+        </div>
+      </div>
+    </header>
+  </div>
+  <hr style="margin-top:1rem">
+  <div class="slds-card__body slds-card__body_inner">
+    <ul class="slds-timeline">
+      <li>
+        <div class="{{expandedStep ? 'slds-timeline__item_expandable slds-timeline__item_case slds-is-open' : 'slds-timeline__item_expandable slds-timeline__item_case'}}">
+          <span class="slds-assistive-text">task</span>
+          <div class="slds-media">
+            <div class="slds-media__figure">
+              <button class="slds-button slds-button_icon" title="Toggle" aria-controls="task-item-base" aria-expanded="false"
+                (click)="onExpandStep()">
+                <svg class="slds-button__icon slds-timeline__details-action-icon" aria-hidden="true">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#switch" />
+                </svg>
+              </button>
+              <div class="slds-icon_container slds-icon-standard-case slds-timeline__icon" title="case">
+                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#case" />
+                </svg>
+              </div>
+            </div>
+            <div class="slds-media__body">
+              <div class="slds-grid slds-grid_align-spread slds-timeline__trigger">
+                <div class="slds-grid slds-grid_vertical-align-center slds-truncate_container_75 slds-no-space">
+                  <h3 class="slds-truncate" title="MED1">
+                    <a href="javascript:void(0);">
+                      <strong>MED1</strong>
+                    </a>
+                  </h3>
+                </div>
+                <div class="slds-timeline__actions slds-timeline__actions_inline">
+                  <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
+                    aria-haspopup="true" title="More Options for this item">
+                    <svg class="slds-button__icon" aria-hidden="true">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down" />
+                    </svg>
+                    <span class="slds-assistive-text">More Options for this item</span>
+                  </button>
+                </div>
+              </div>
+              <ul class="slds-wrap">
+                <li class="slds-grid  slds-size_2-of-2">
+                  <b>1 ére Mise en demeure</b>
+                </li>
+                <li class="slds-grid slds-size_2-of-2" style="margin-top:1rem">
+                  <p class="slds-grid slds-size_3-of-12 slds-text-color_weak">Envoyé après</p>
+                  <p class="slds-grid slds-size_1-of-12" title="First Label">8</p>
+                  <dt class="slds-grid slds-size_2-of-12 slds-text-color_weak">Actions:</dt>
+                  <p class="slds-grid slds-size_3-of-12" title="First Label">Courrier postal</p>
+                </li>
+              </ul>
+              <article class="slds-box slds-timeline__item_details slds-theme_shade slds-m-top_x-small slds-m-horizontal_xx-small"
+                id="task-item-base" aria-hidden="true">
+                <ul class="slds-list_horizontal slds-wrap">
+                  <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                    <span class="slds-text-title slds-p-bottom_x-small">Name</span>
+                    <span class="slds-text-body_medium slds-truncate" title="Charlie Gomez"><a href="javascript:void(0);">Charlie
+                        Gomez</a></span>
+                  </li>
+                  <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                    <span class="slds-text-title slds-p-bottom_x-small">Related To</span>
+                    <span class="slds-text-body_medium slds-truncate" title="Tesla Cloudhub + Anypoint Connectors"><a
+                        href="javascript:void(0);">Tesla Cloudhub + Anypoint Connectors</a></span>
+                  </li>
+                </ul>
+                <div>
+                  <span class="slds-text-title">Description</span>
+                  <p class="slds-p-top_x-small">Need to finalize proposals and brand details before the meeting</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="slds-timeline__item_expandable slds-timeline__item_call_2 ">
+          <span class="slds-assistive-text">call</span>
+          <div class="slds-media">
+            <div class="slds-media__figure">
+              <button class="slds-button slds-button_icon" title="Toggle " aria-controls="call-item-base" aria-expanded="false">
+                <svg class="slds-button__icon slds-timeline__details-action-icon" aria-hidden="true">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#switch" />
+                </svg>
+                <span class="slds-assistive-text">Toggle</span>
+              </button>
+              <div class="slds-icon_container slds-icon-standard-address slds-timeline__icon" title="call">
+                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#call" />
+                </svg>
+              </div>
+            </div>
+            <div class="slds-media__body">
+              <div class="slds-grid slds-grid_align-spread slds-timeline__trigger">
+                <div class="slds-grid slds-grid_vertical-align-center slds-truncate_container_75 slds-no-space">
+                  <h3 class="slds-truncate" title="APS">
+                    <a href="javascript:void(0);">
+                      <strong>APS</strong>
+                    </a>
+                  </h3>
+                </div>
+                <div class="slds-timeline__actions slds-timeline__actions_inline">
+                  <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
+                    aria-haspopup="true" title="More Options for this item">
+                    <svg class="slds-button__icon" aria-hidden="true">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down" />
+                    </svg>
+                    <span class="slds-assistive-text">More Options for this item</span>
+                  </button>
+                </div>
+              </div>
+              <ul class="slds-wrap">
+                <li class="slds-grid  slds-size_2-of-2">
+                  <b>1 ére Mise en demeure</b>
+                </li>
+                <li class="slds-grid slds-size_2-of-2" style="margin-top:1rem">
+                  <p class="slds-grid slds-size_3-of-12 slds-text-color_weak">Envoyé après</p>
+                  <p class="slds-grid slds-size_1-of-12" title="First Label">8</p>
+                  <dt class="slds-grid slds-size_2-of-12 slds-text-color_weak">Actions:</dt>
+                  <p class="slds-grid slds-size_3-of-12" title="First Label">Appel Téléphonique</p>
+                </li>
+              </ul>
+              <article class="slds-box slds-timeline__item_details slds-theme_shade slds-m-top_x-small slds-m-horizontal_xx-small"
+                id="call-item-base" aria-hidden="true">
+                <ul class="slds-list_horizontal slds-wrap">
+                  <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                    <span class="slds-text-title slds-p-bottom_x-small">Name</span>
+                    <span class="slds-text-body_medium slds-truncate" title="Adam Chan"><a href="javascript:void(0);">Adam
+                        Chan</a></span>
+                  </li>
+                  <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                    <span class="slds-text-title slds-p-bottom_x-small">Related To</span>
+                    <span class="slds-text-body_medium slds-truncate" title="Tesla Cloudhub + Anypoint Connectors"><a
+                        href="javascript:void(0);">Tesla
+                        Cloudhub + Anypoint Connectors</a></span>
+                  </li>
+                </ul>
+                <div>
+                  <span class="slds-text-title">Description</span>
+                  <p class="slds-p-top_x-small">Adam seemed interested in closing this deal quickly! Let’s move.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="slds-timeline__item_expandable slds-timeline__item_call">
+          <span class="slds-assistive-text">sms</span>
+          <div class="slds-media">
+            <div class="slds-media__figure">
+              <button class="slds-button slds-button_icon" title="Toggle" aria-controls="email-item-base" aria-expanded="false">
+                <svg class="slds-button__icon slds-timeline__details-action-icon" aria-hidden="true">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#switch" />
+                </svg>
+                <span class="slds-assistive-text">Toggle</span>
+              </button>
+              <div class="slds-icon_container slds-icon-standard-log-a-call slds-timeline__icon" title="email">
+                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#log_a_call" />
+                </svg>
+              </div>
+            </div>
+            <div class="slds-media__body">
+              <div class="slds-grid slds-grid_align-spread slds-timeline__trigger">
+                <div class="slds-grid slds-grid_vertical-align-center slds-truncate_container_75 slds-no-space">
+                  <h3 class="slds-truncate" title="SMS">
+                    <a href="javascript:void(0);">
+                      <strong>SMS</strong>
+                    </a>
+                  </h3>
+                  <div class="slds-no-flex">
+
+
+                  </div>
+                </div>
+                <div class="slds-timeline__actions slds-timeline__actions_inline">
+                  <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
+                    aria-haspopup="true" title="More Options for this item">
+                    <svg class="slds-button__icon" aria-hidden="true">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down" />
+                    </svg>
+                    <span class="slds-assistive-text">More Options for this item</span>
+                  </button>
+                </div>
+              </div>
+              <ul class="slds-wrap">
+                <li class="slds-grid  slds-size_2-of-2">
+                  <b>1 ére Mise en demeure</b>
+                </li>
+                <li class="slds-grid slds-size_2-of-2" style="margin-top:1rem">
+                  <p class="slds-grid slds-size_3-of-12 slds-text-color_weak">Envoyé après</p>
+                  <p class="slds-grid slds-size_1-of-12" title="First Label">8</p>
+                  <dt class="slds-grid slds-size_2-of-12 slds-text-color_weak">Actions:</dt>
+                  <p class="slds-grid slds-size_3-of-12" title="First Label">SMS</p>
+                </li>
+              </ul>
+              <article class="slds-box slds-timeline__item_details slds-theme_shade slds-m-top_x-small slds-m-horizontal_xx-small"
+                id="email-item-base" aria-hidden="true">
+                <ul class="slds-list_horizontal slds-wrap">
+                  <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                    <span class="slds-text-title slds-p-bottom_x-small">From Address</span>
+                    <span class="slds-text-body_medium slds-truncate" title="Jackie Dewar"><a href="javascript:void(0);">Jackie
+                        Dewar</a></span>
+                  </li>
+                  <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                    <span class="slds-text-title slds-p-bottom_x-small">To Address</span>
+                    <span class="slds-text-body_medium slds-truncate" title="Lea Chan"><a href="javascript:void(0);">Lea
+                        Chan</a></span>
+                  </li>
+                </ul>
+                <div>
+                  <span class="slds-text-title">Text Body</span>
+                  <p class="slds-p-top_x-small">Hi everyone, Thanks for meeting with the team today and going through
+                    the proposals we saw. This goes on and wraps if needed.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="slds-timeline__item_expandable slds-timeline__item_email">
+          <span class="slds-assistive-text">Email</span>
+          <div class="slds-media">
+            <div class="slds-media__figure">
+              <button class="slds-button slds-button_icon" title="Toggle" aria-controls="event-item-base" aria-expanded="false">
+                <svg class="slds-button__icon slds-timeline__details-action-icon" aria-hidden="true">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#switch" />
+                </svg>
+                <span class="slds-assistive-text">Toggle</span>
+              </button>
+              <div class="slds-icon_container slds-icon-standard-email slds-timeline__icon" title="event">
+                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#email" />
+                </svg>
+              </div>
+            </div>
+            <div class="slds-media__body">
+              <div class="slds-grid slds-grid_align-spread slds-timeline__trigger">
+                <div class="slds-grid slds-grid_vertical-align-center slds-truncate_container_75 slds-no-space">
+                  <h3 class="slds-truncate" title="EBC Follow up call">
+                    <a href="javascript:void(0);">
+                      <strong>EMAIL</strong>
+                    </a>
+                  </h3>
+                  <div class="slds-no-flex">
+
+                  </div>
+                </div>
+                <div class="slds-timeline__actions slds-timeline__actions_inline">
+                  <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
+                    aria-haspopup="true" title="More Options for this item">
+                    <svg class="slds-button__icon" aria-hidden="true">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down" />
+                    </svg>
+                    <span class="slds-assistive-text">More Options for this item</span>
+                  </button>
+                </div>
+              </div>
+              <ul class="slds-wrap">
+                  <li class="slds-grid  slds-size_2-of-2">
+                    <b>1 ére Mise en demeure</b>
+                  </li>
+                  <li class="slds-grid slds-size_2-of-2" style="margin-top:1rem">
+                    <p class="slds-grid slds-size_3-of-12 slds-text-color_weak">Envoyé après</p>
+                    <p class="slds-grid slds-size_1-of-12" title="First Label">8</p>
+                    <dt class="slds-grid slds-size_2-of-12 slds-text-color_weak">Actions:</dt>
+                    <p class="slds-grid slds-size_3-of-12" title="First Label">Email</p>
+                  </li>
+                </ul>
+              <article class="slds-box slds-timeline__item_details slds-theme_shade slds-m-top_x-small slds-m-horizontal_xx-small"
+                id="event-item-base" aria-hidden="true">
+                <ul class="slds-list_horizontal slds-wrap">
+                  <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                    <span class="slds-text-title slds-p-bottom_x-small">Location</span>
+                    <span class="slds-text-body_medium slds-truncate" title="Westen St. Francis, San Francisco, CA, 94622"><a
+                        href="javascript:void(0);">Westen St. Francis, San Francisco, CA, 94622</a></span>
+                  </li>
+                  <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                    <span class="slds-text-title slds-p-bottom_x-small">Attendees</span>
+                    <span class="slds-text-body_medium slds-truncate" title="Jason Dewar (Organizer) + 5 others"><a
+                        href="javascript:void(0);">Jason
+                        Dewar (Organizer) + 5 others</a></span>
+                  </li>
+                  <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                    <span class="slds-text-title slds-p-bottom_x-small">When</span>
+                    <span class="slds-text-body_medium slds-truncate" title="March 26, 10:00 AM - 11:00 AM"><a href="javascript:void(0);">March
+                        26, 10:00 AM - 11:00 AM</a></span>
+                  </li>
+                </ul>
+                <div>
+                  <span class="slds-text-title">Description</span>
+                  <p class="slds-p-top_x-small">Let's discuss the 2017 product roadmap and address any questions</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</article>
