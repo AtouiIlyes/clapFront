@@ -8,7 +8,7 @@ import { ProceedingsEditComponent } from './proceedings-edit/proceedings-edit.co
 
 const proceedingsRoutes: Routes = [
   {
-    path: 'proceedings',
+    path: 'procédures',
     component: ProceedingsComponent,
     children: [
       {

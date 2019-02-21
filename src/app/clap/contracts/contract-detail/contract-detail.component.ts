@@ -16,8 +16,11 @@ export class ContractDetailComponent implements OnInit {
   loading = true;
   openDeleteContractConfirm = false;
   openContractEditModal = false;
+  editMode = false;
+  openProcessEditModal = false;
   processCardActions = [];
   billingCardActions = [];
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -61,6 +64,14 @@ export class ContractDetailComponent implements OnInit {
 
   onCancelContractModal() {
     this.openContractEditModal = false;
+  }
+
+  onEditProcess() {
+    this.openProcessEditModal = true;
+  }
+
+  onDeleteCancelEditModal() {
+    this.openProcessEditModal = false;
   }
 
   onDeleteContract() {
