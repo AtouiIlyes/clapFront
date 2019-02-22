@@ -13,6 +13,7 @@ import { AccountEditComponent } from './account-edit/account-edit.component';
 import { AccountService } from './accounts.service';
 import { AccountsRoutingModule } from './accounts-routing.module';
 import { AccountHierarchyComponent } from './account-hierarchy/account-hierarchy.component';
+import { AccountBankComponent } from './account-bank/account-bank.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AccountHierarchyComponent } from './account-hierarchy/account-hierarchy
     AccountListComponent,
     AccountDetailComponent,
     AccountEditComponent,
-    AccountHierarchyComponent
+    AccountHierarchyComponent,
+    AccountBankComponent
   ],
   imports: [
     CommonModule,

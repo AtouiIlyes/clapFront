@@ -1,0 +1,201 @@
+<form [formGroup]="bankAccountForm" (ngSubmit)="onAddBankAccount()">
+  <ngl-modal [header]="'Créer: Compte bancaire'" [(open)]="open" [size]="''" [directional]="false">
+    <div body>
+      <div *ngIf="submitted && bankAccountFormErrors.length > 0">
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error theme_error" role="alert">
+          <h2>Examinez les erreurs dans cette page. </h2>
+        </div>
+        <p style="color:#C43631"> Les champs obligatoires suivants doivent être remplis :
+          {{bankAccountFormErrors}}</p>
+        <br />
+      </div>
+      <!-- Info compte-->
+      <h3 class="slds-section__title slds-theme_shade">
+        <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Information sur le compte</span>
+      </h3>
+      <br />
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="bankAccountFormValidators.bankName.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Nom du Banque</label>
+            <div class="slds-form-element__control">
+              <input id="bank-name" required="" class="slds-input" type="text" value="" formControlName="bankName" />
+            </div>
+            <div *ngIf="submitted && bankAccountFormValidators.bankName.errors">
+              <div class="slds-form-element__help" *ngIf="bankAccountFormValidators.bankName.errors.required">Remplissez
+                ce
+                champ
+              </div>
+              <div class="slds-form-element__help" *ngIf="bankAccountFormValidators.bankName.errors.minlength">Le nom
+                doit
+                être
+                au minimum 3 caractères </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="bankAccountFormValidators.client_id.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label" for="text-input-id-1">Nom du compte</label>
+            <div class="slds-form-element__control">
+              <ngl-lookup [lookup]="lookupAccounts" [icon]="true" [image]="'account'" [noResultsText]="'Aucun résultat trouvé'"
+                [pick]="pickedAccount" (pickChange)="accountPicked($event)" ngDefaultControl formControlName="client_id"
+                placeholder="Recherchez des comptes...">
+                <ng-template nglLookupItem let-item>
+                  <div class="slds-media__body">
+                    <span class="slds-media__figure slds-listbox__option-icon">
+                      <span class="slds-icon_container slds-icon-standard-account">
+                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account" />
+                        </svg>
+                      </span>
+                    </span>{{item.name}}
+                  </div>
+                </ng-template>
+              </ngl-lookup>
+            </div>
+            <div *ngIf="submitted && bankAccountFormValidators.client_id.errors">
+              <div class="slds-form-element__help" *ngIf="bankAccountFormValidators.client_id.errors.required">Remplissez
+                ce champ
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="bankAccountFormValidators.iban.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">IBAN</label>
+            <input id="iban" required="" class="slds-input" type="text" value="" formControlName="iban" />
+          </div>
+          <div *ngIf="submitted && bankAccountFormValidators.iban.errors">
+            <div class="slds-form-element__help" *ngIf="bankAccountFormValidators.iban.errors.required">Remplissez
+              ce champ
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="bankAccountFormValidators.bic.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">BIC</label>
+            <input id="bic" required="" class="slds-input" type="text" value="" formControlName="bic" />
+            <div *ngIf="submitted && bankAccountFormValidators.bic.errors">
+              <div class="slds-form-element__help" *ngIf="bankAccountFormValidators.bic.errors.required">Remplissez
+                ce champ
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="bankAccountFormValidators.swift.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">SWIFT</label>
+            <input id="swift" required="" class="slds-input" type="text" value="" formControlName="swift" />
+          </div>
+          <div *ngIf="submitted && bankAccountFormValidators.swift.errors">
+            <div class="slds-form-element__help" *ngIf="bankAccountFormValidators.swift.errors.required">Remplissez
+              ce champ
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <!-- Coordonnées-->
+
+      <h3 class="slds-section__title slds-theme_shade">
+        <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Coordonnées</span>
+      </h3>
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="bankAccountFormValidators.address.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">Adresse siége social</label>
+            <div class="slds-form-element__control">
+              <input id="account-address-1" required="" class="slds-input" type="text" value="" formControlName="address" />
+            </div>
+            <div *ngIf="submitted && bankAccountFormValidators.address.errors">
+              <div class="slds-form-element__help" *ngIf="bankAccountFormValidators.address.errors.required">Remplissez
+                ce
+                champ
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="bankAccountFormValidators.address2.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">Adresse 2</label>
+            <div class="slds-form-element__control">
+              <input id="account-address-2" required="" formControlName="address2" class="slds-input" type="text" value="" />
+            </div>
+            <div *ngIf="submitted && bankAccountFormValidators.address2.errors">
+              <div class="slds-form-element__help" *ngIf="bankAccountFormValidators.address2.errors.required">Remplissez
+                ce
+                champ
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_8-of-12">
+              <div [ngClass]="bankAccountFormValidators.city.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+                <label class="slds-form-element__label">Ville</label>
+                <div class="slds-form-element__control">
+                  <input id="account-city" required="" class="slds-input" type="text" value="" formControlName="city" />
+                </div>
+                <div *ngIf="submitted && bankAccountFormValidators.city.errors">
+                  <div class="slds-form-element__help" *ngIf="bankAccountFormValidators.city.errors.required">Remplissez
+                    ce
+                    champ
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-col slds-size_4-of-12">
+              <div [ngClass]="bankAccountFormValidators.zip_code.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+                <label class="slds-form-element__label">Code postal</label>
+                <div class="slds-form-element__control">
+                  <input id="account-code" required="" class="slds-input" type="number" value="" formControlName="zip_code" />
+                </div>
+                <div *ngIf="submitted && bankAccountFormValidators.zip_code.errors">
+                  <div class="slds-form-element__help" *ngIf="bankAccountFormValidators.zip_code.errors.required">Remplissez
+                    ce champ</div>
+                  <div class="slds-form-element__help" *ngIf="bankAccountFormValidators.zip_code.errors.minlength">Le
+                    zip code doit être de 5 caractères</div>
+                  <div class="slds-form-element__help" *ngIf="bankAccountFormValidators.zip_code.errors.maxlength">Le
+                    zip code doit être de 5 caractères</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="bankAccountFormValidators.city.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">Pays</label>
+            <div class="slds-form-element__control">
+              <input id="account-country" required="" class="slds-input" type="text" value="" formControlName="country" />
+            </div>
+            <div *ngIf="submitted && bankAccountFormValidators.country.errors">
+              <div class="slds-form-element__help" *ngIf="bankAccountFormValidators.country.errors.required">Remplissez
+                ce
+                champ
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <br />
+    </div>
+    <ng-template ngl-modal-footer>
+      <button class="slds-button slds-button--neutral" (click)="onCancel()">Cancel</button>
+      <button *ngIf="!contractId" type="button" (click)="onAddAccountAndNew()" class="slds-button slds-button--neutral">Enregistrer
+        et
+        Nouveau</button>
+      <button *ngIf="contractId" type="button" (click)="onAddAccountAndNew()" class="slds-button slds-button--neutral">Modifier
+        et
+        Nouveau</button>
+      <button *ngIf="!contractId" type="submit" class="slds-button slds-button--brand">Enregistrer</button>
+      <button *ngIf="contractId" type="submit" class="slds-button slds-button--brand">Modifier</button>
+    </ng-template>
+  </ngl-modal>
+</form>

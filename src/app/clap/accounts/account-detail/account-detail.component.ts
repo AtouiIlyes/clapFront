@@ -23,6 +23,7 @@ export class AccountDetailComponent implements OnInit {
   openContractEditModal = false;
   openDeleteContractConfirm = false;
   openAccountEditModal = false;
+  openBankAccountEditModal = false;
   contractId: number;
   commercialActions = [];
   contractCardActions = [];
@@ -95,6 +96,10 @@ export class AccountDetailComponent implements OnInit {
     this.openAccountEditModal = true;
   }
 
+  onEditBankAccount() {
+    this.openBankAccountEditModal = true;
+  }
+
   onNewContract() {
     this.openContractEditModal = true;
     this.contractId = null;
@@ -114,6 +119,10 @@ export class AccountDetailComponent implements OnInit {
     this.openAccountEditModal = false;
   }
 
+  onDeleteCancelBankAccountEditModal() {
+    this.openBankAccountEditModal = false;
+  }
+
   onDeleteContractAction(id) {
     this.openDeleteContractConfirm = true;
     this.contractIdToDelete = id;
@@ -124,7 +133,7 @@ export class AccountDetailComponent implements OnInit {
   }
 
   onShowHierarchy() {
-    this.router.navigate(['/accounts', this.id , 'hierarchy']);
+    this.router.navigate(['/accounts', this.id, 'hierarchy']);
   }
 
   onDeleteContract() {

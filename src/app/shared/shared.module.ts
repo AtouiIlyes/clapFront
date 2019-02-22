@@ -9,6 +9,7 @@ import { AccessDirective } from './directives/access.directive';
 import { MessagesComponent } from './messages/messages.component';
 import { ModalComponent } from './modal/modal.component';
 import { ContractEditComponent } from '../clap/contracts/contract-edit/contract-edit.component';
+import { ProceedingsEditComponent } from '#app/clap/proceedings/proceedings-edit/proceedings-edit.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ContractEditComponent } from '../clap/contracts/contract-edit/contract-
     AccessDirective, 
     MessagesComponent,
     ModalComponent,
-    ContractEditComponent
+    ContractEditComponent,
+    ProceedingsEditComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -29,7 +31,9 @@ import { ContractEditComponent } from '../clap/contracts/contract-edit/contract-
     AccessDirective,
     MessagesComponent,
     ModalComponent,
-    ContractEditComponent
+    ContractEditComponent,
+    ProceedingsEditComponent
+    
   ]
 })
 
