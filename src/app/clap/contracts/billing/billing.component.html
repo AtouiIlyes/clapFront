@@ -1,0 +1,247 @@
+<form [formGroup]="billingForm" (ngSubmit)="onAddBillingAccount()">
+  <ngl-modal [header]="'Créer: Facturation'" [(open)]="open" [size]="''" [directional]="false">
+    <div body>
+      <div *ngIf="submitted && billingFormErrors.length > 0">
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error theme_error" role="alert">
+          <h2>Examinez les erreurs dans cette page. </h2>
+        </div>
+        <p style="color:#C43631"> Les champs obligatoires suivants doivent être remplis :
+          {{billingFormErrors}}</p>
+        <br />
+      </div>
+      <!-- Info compte-->
+      <h3 class="slds-section__title slds-theme_shade">
+        <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Information sur la facturation</span>
+      </h3>
+      <br />
+      <div class="slds-grid slds-wrap">
+
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="billingFormValidators.contract_id.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label" for="text-input-id-1">Nom du contrat</label>
+            <div class="slds-form-element__control">
+              <ngl-lookup [lookup]="lookupContracts" [icon]="true" [image]="'contract'" [noResultsText]="'Aucun résultat trouvé'"
+                [pick]="pickedContract" (pickChange)="contractPicked($event)" ngDefaultControl formControlName="contract_id"
+                placeholder="Recherchez des contrats...">
+                <ng-template nglLookupItem let-item>
+                  <div class="slds-media__body">
+                    <span class="slds-media__figure slds-listbox__option-icon">
+                      <span class="slds-icon_container slds-icon-standard-contract">
+                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#contract" />
+                        </svg>
+                      </span>
+                    </span>{{item.name}}
+                  </div>
+                </ng-template>
+              </ngl-lookup>
+            </div>
+            <div *ngIf="submitted && billingFormValidators.contract_id.errors">
+              <div class="slds-form-element__help" *ngIf="billingFormValidators.contract_id.errors.required">Remplissez
+                ce champ
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div class="slds-form-element">
+            <label class="slds-form-element__label" for="text-input-id-1">Propriétaire du compte</label>
+            <div class="slds-form-element__control">
+              <label class="slds-form-element__label" for="text-input-id-1">{{user.first_name}} {{user.last_name}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div class="slds-form-element">
+            <label class="slds-form-element__label">Type de facturation</label>
+            <ngl-picklist [data]="billingTypes" [(nglPick)]="pickBillingTypes" [(open)]="openBillingTypesPickList"
+              [nglPickMultiple]="flase" (nglPickChange)="billingPicked($event)" formControlName="billing_type"
+              ngDefaultControl>
+              <span class="slds-truncate">{{ pickBillingTypesLabel }}</span>
+              <ng-template nglPicklistItem let-item>{{item.value}}</ng-template>
+            </ngl-picklist>
+          </div>
+        </div>
+      </div>
+      <br />
+      <!-- Détails-->
+
+      <h3 *ngIf="billingType" class="slds-section__title slds-theme_shade">
+        <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Détails</span>
+      </h3>
+      <div *ngIf="billingType == '1'" class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="billingFormValidators.folder_volume.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Volulme du dossiers</label>
+            <div class="slds-form-element__control">
+              <input id="account-name" required="" class="slds-input" type="text" value="" formControlName="folder_volume" />
+            </div>
+            <div *ngIf="submitted && billingFormValidators.folder_volume.errors">
+              <div class="slds-form-element__help" *ngIf="billingFormValidators.folder_volume.errors.required">Remplissez
+                ce
+                champ
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="billingFormValidators.fixed_rate.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>tarif fixe</label>
+            <div class="slds-form-element__control">
+              <input id="account-name" required="" class="slds-input" type="text" value="" formControlName="fixed_rate" />
+            </div>
+            <div *ngIf="submitted && billingFormValidators.fixed_rate.errors">
+              <div class="slds-form-element__help" *ngIf="billingFormValidators.fixed_rate.errors.required">Remplissez
+                ce
+                champ
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div *ngIf="billingType == '2'" class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="billingFormValidators.rate_per_folder.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Tarif par dossier</label>
+            <div class="slds-form-element__control">
+              <input id="account-name" required="" class="slds-input" type="text" value="" formControlName="rate_per_folder" />
+            </div>
+            <div *ngIf="submitted && billingFormValidators.rate_per_folder.errors">
+              <div class="slds-form-element__help" *ngIf="billingFormValidators.rate_per_folder.errors.required">Remplissez
+                ce
+                champ
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="billingFormValidators.share_on_cashing.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Parts sur l'encaissement fixe</label>
+            <div class="slds-form-element__control">
+              <input id="account-name" required="" class="slds-input" type="text" value="" formControlName="share_on_cashing" />
+            </div>
+            <div *ngIf="submitted && billingFormValidators.share_on_cashing.errors">
+              <div class="slds-form-element__help" *ngIf="billingFormValidators.share_on_cashing.errors.required">Remplissez
+                ce
+                champ
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div *ngIf="billingType == '3'" class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="billingFormValidators.outgoing_call.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Appels sortants</label>
+            <div class="slds-form-element__control">
+              <input id="account-name" required="" class="slds-input" type="text" value="" formControlName="outgoing_call" />
+            </div>
+            <div *ngIf="submitted && billingFormValidators.outgoing_call.errors">
+              <div class="slds-form-element__help" *ngIf="billingFormValidators.outgoing_call.errors.required">Remplissez
+                ce
+                champ
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="billingFormValidators.sms.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>SMS</label>
+            <div class="slds-form-element__control">
+              <input id="account-name" required="" class="slds-input" type="text" value="" formControlName="sms" />
+            </div>
+            <div *ngIf="submitted && billingFormValidators.sms.errors">
+              <div class="slds-form-element__help" *ngIf="billingFormValidators.sms.errors.required">Remplissez
+                ce
+                champ
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div *ngIf="billingType == '4'" class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="billingFormValidators.cashing.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Encaissement de x%</label>
+            <div class="slds-form-element__control">
+              <input id="account-name" required="" class="slds-input" type="text" value="" formControlName="cashing" />
+            </div>
+            <div *ngIf="submitted && billingFormValidators.cashing.errors">
+              <div class="slds-form-element__help" *ngIf="billingFormValidators.cashing.errors.required">Remplissez
+                ce
+                champ
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="billingFormValidators.legal_fees.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Frais légaux</label>
+            <div class="slds-form-element__control">
+              <input id="account-name" required="" class="slds-input" type="text" value="" formControlName="legal_fees" />
+            </div>
+            <div *ngIf="submitted && billingFormValidators.legal_fees.errors">
+              <div class="slds-form-element__help" *ngIf="billingFormValidators.legal_fees.errors.required">Remplissez
+                ce
+                champ
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="billingFormValidators.court_fees.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Frais judiciaires</label>
+            <div class="slds-form-element__control">
+              <input id="account-name" required="" class="slds-input" type="text" value="" formControlName="court_fees" />
+            </div>
+            <div *ngIf="submitted && billingFormValidators.court_fees.errors">
+              <div class="slds-form-element__help" *ngIf="billingFormValidators.court_fees.errors.required">Remplissez
+                ce
+                champ
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="billingFormValidators.added_fees.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Frais ajoutés</label>
+            <div class="slds-form-element__control">
+              <input id="account-name" required="" class="slds-input" type="text" value="" formControlName="added_fees" />
+            </div>
+            <div *ngIf="submitted && billingFormValidators.added_fees.errors">
+              <div class="slds-form-element__help" *ngIf="billingFormValidators.added_fees.errors.required">Remplissez
+                ce
+                champ
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+    </div>
+    <ng-template ngl-modal-footer>
+      <button class="slds-button slds-button--neutral" (click)="onCancel()">Cancel</button>
+      <button *ngIf="!contractId" type="button" (click)="onAddAccountAndNew()" class="slds-button slds-button--neutral">Enregistrer
+        et
+        Nouveau</button>
+      <button *ngIf="contractId" type="button" (click)="onAddAccountAndNew()" class="slds-button slds-button--neutral">Modifier
+        et
+        Nouveau</button>
+      <button *ngIf="!contractId" type="submit" class="slds-button slds-button--brand">Enregistrer</button>
+      <button *ngIf="contractId" type="submit" class="slds-button slds-button--brand">Modifier</button>
+    </ng-template>
+  </ngl-modal>
+</form>

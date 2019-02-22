@@ -16,6 +16,7 @@ export class ContractDetailComponent implements OnInit {
   loading = true;
   openDeleteContractConfirm = false;
   openContractEditModal = false;
+  openBillingEditModal = false;
   editMode = false;
   openProcessEditModal = false;
   processCardActions = [];
@@ -49,7 +50,7 @@ export class ContractDetailComponent implements OnInit {
     $event.stopPropagation();
     this.processCardActions[index] = true;
   }
-  
+
   onDeleteContractAction(id) {
     this.openDeleteContractConfirm = true;
   }
@@ -62,12 +63,20 @@ export class ContractDetailComponent implements OnInit {
     this.openContractEditModal = true;
   }
 
+  onEditBilling() {
+    this.openBillingEditModal = true;
+  }
+
   onCancelContractModal() {
     this.openContractEditModal = false;
   }
 
   onEditProcess() {
     this.openProcessEditModal = true;
+  }
+
+  onBillingCancelEditModal() {
+    this.openBillingEditModal = false;
   }
 
   onDeleteCancelEditModal() {

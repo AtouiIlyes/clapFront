@@ -209,7 +209,7 @@
                   </h2>
                 </div>
                 <div class="slds-no-flex">
-                  <button class="slds-button slds-button_neutral">Ajouter</button>
+                  <button class="slds-button slds-button_neutral" (click)="onEditBilling()">Ajouter</button>
                 </div>
               </header>
             </div>
@@ -379,6 +379,8 @@
 
 <app-proceedings-edit *ngIf="!editMode" [open]="openProcessEditModal" (cancel)="onDeleteCancelEditModal()"></app-proceedings-edit>
 <app-proceedings-edit *ngIf="editMode" [accountId]="processIdToEdit" [open]="openStepEditModal" (cancel)="onDeleteCancelEditModal()"></app-proceedings-edit>
+
+<app-billing [open]="openBillingEditModal" (cancel)="onBillingCancelEditModal()"></app-billing>
 
 <app-modal-window [open]="openDeleteContractConfirm" [title]="'Suppression Contrat'" [text]="'Êtes vous sur de vouloir supprimer définitivement ce contrat?'"
   [submitButtonText]="'Supprimer'" (cancel)="onDeleteCancel()" (confirm)="onDeleteContract()">

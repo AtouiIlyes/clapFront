@@ -10,13 +10,15 @@ import { ContractListComponent } from './contract-list/contract-list.component';
 import { ContractDetailComponent } from './contract-detail/contract-detail.component';
 import { ContractService } from './contracts.service';
 import { ContractsRoutingModule } from './contracts-routing.module';
+import { BillingComponent } from './billing/billing.component';
 
 
 @NgModule({
   declarations: [
     ContractsComponent,
     ContractListComponent,
-    ContractDetailComponent
+    ContractDetailComponent,
+    BillingComponent
   ],
   imports: [
     CommonModule,
