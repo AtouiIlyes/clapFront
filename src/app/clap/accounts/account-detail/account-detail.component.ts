@@ -19,6 +19,13 @@ export class AccountDetailComponent implements OnInit {
   numberOfContacts = 0;
   contractIdToDelete: number;
   loading = true;
+
+  //Contact Modal 
+  contactIdToDelete: number;
+  contactIdToEdit: number;
+  openDeleteContactConfirm = false;
+  openContactEditModal = false;
+
   openDeleteAccountConfirm = false;
   openContractEditModal = false;
   openDeleteContractConfirm = false;
@@ -100,6 +107,10 @@ export class AccountDetailComponent implements OnInit {
     this.openBankAccountEditModal = true;
   }
 
+  onEditContact() {
+    this.openContactEditModal = true;
+  }
+
   onNewContract() {
     this.openContractEditModal = true;
     this.contractId = null;
@@ -150,5 +161,17 @@ export class AccountDetailComponent implements OnInit {
         this.messages.error('CONTRAT NON SUPPRIMÉ', 'le contrat n\'a pas été supprimé : ' + err);
       }
     );
+  }
+
+  onCancelContactEditModal() {
+    this.openContactEditModal = false;
+  }
+
+
+  onSaveAndNewAccount() {
+    this.openContactEditModal = false;
+    setTimeout(() => {
+      this.openContactEditModal = true;
+    }, 400);
   }
 }

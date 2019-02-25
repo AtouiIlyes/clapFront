@@ -304,11 +304,13 @@
                   </h2>
                 </div>
                 <div class="slds-no-flex">
-                  <span class="slds-icon_container slds-icon-action-new-child-case" title="Contacts">
-                    <svg class="slds-button__icon" aria-hidden="true">
-                      <use xlink:href="/assets/icons/action-sprite/svg/symbols.svg#add_contact"></use>
-                    </svg>
-                  </span>
+                  <a (click)="onEditContact()">
+                    <span class="slds-icon_container slds-icon-action-new-child-case" title="Contacts">
+                      <svg class="slds-button__icon" aria-hidden="true">
+                        <use xlink:href="/assets/icons/action-sprite/svg/symbols.svg#add_contact"></use>
+                      </svg>
+                    </span>
+                  </a>
                 </div>
               </header>
             </div>
@@ -487,7 +489,7 @@
                   </h2>
                 </div>
                 <div class="slds-no-flex">
-                  <a  (click)="onEditBankAccount()">
+                  <a (click)="onEditBankAccount()">
                     <span class="slds-icon_container slds-icon-action-quote" title="bank">
                       <svg class="slds-icon slds-icon_small" aria-hidden="true">
                         <use xlink:href="/assets/icons/custom-sprite/svg/symbols.svg#custom16"></use>
@@ -588,6 +590,8 @@
 
 <app-account-bank [bankAccountId]="bankAccountId" [open]="openBankAccountEditModal" (cancel)="onDeleteCancelBankAccountEditModal()"></app-account-bank>
 
+<app-contact-edit [contactId]="contactIdToEdit" [open]="openContactEditModal" (cancel)="onCancelContactEditModal()"
+  (saveAndNew)="onSaveAndNewAccount()"></app-contact-edit>
 
 <app-modal-window [open]="openDeleteContractConfirm" [title]="'Suppression Contrat'" [text]="'Êtes vous sur de vouloir supprimer définitivement ce contrat?'"
   [submitButtonText]="'Supprimer'" (cancel)="onDeleteContractCancel()" (confirm)="onDeleteContract()">

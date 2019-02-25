@@ -1,0 +1,228 @@
+<form [formGroup]="contactForm" (ngSubmit)="onAddContact()">
+  <ngl-modal [header]="contactId ? 'Modifier: Contact' : 'Créer: Contact'" [(open)]="open" [size]="''" [directional]="false">
+    <div body>
+      <div *ngIf="submitted && contactFormErrors.length > 0">
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error theme_error" role="alert">
+          <h2>Examinez les erreurs dans cette page. </h2>
+        </div>
+        <p style="color:#C43631"> Les champs obligatoires suivants doivent être remplis :
+          {{contactFormErrors}}</p>
+        <br />
+      </div>
+      <!-- Info compte-->
+      <h3 class="slds-section__title slds-theme_shade">
+        <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Détails contact</span>
+      </h3>
+      <br />
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="contactFormValidators.first_name.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Nom</label>
+            <div class="slds-form-element__control">
+              <input id="account-name" required="" class="slds-input" type="text" value="" formControlName="first_name" />
+            </div>
+            <div *ngIf="submitted && contactFormValidators.first_name.errors">
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.first_name.errors.required">Remplissez
+                ce
+                champ
+              </div>
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.first_name.errors.minlength">Le nom
+                doit être
+                au minimum 3 caractères </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div class="slds-form-element">
+            <label class="slds-form-element__label" for="text-input-id-1">Propriétaire du compte</label>
+            <div class="slds-form-element__control">
+              <label class="slds-form-element__label" for="text-input-id-1"><b>{{user.first_name}} {{user.last_name}}</b></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="contactFormValidators.last_name.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Prénom</label>
+            <div class="slds-form-element__control">
+              <input id="account-naf" required="" class="slds-input" type="text" value="" formControlName="last_name" />
+            </div>
+            <div *ngIf="submitted && contactFormValidators.last_name.errors">
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.last_name.errors.required">Remplissez
+                ce champ
+              </div>
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.last_name.hasError('pattern')">Le code
+                doit etre : 4 chiffres puis 1 lettre </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="contactFormValidators.type_id.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Type</label>
+            <div class="slds-form-element__control">
+              <ngl-picklist [data]="types" [(nglPick)]="pickTypes" [(open)]="openTypePickList" [nglPickMultiple]="flase"
+                (nglPickChange)="typePicked($event)" formControlName="type_id" ngDefaultControl>
+                <span class="slds-truncate">{{ pickTypesLabel }}</span>
+                <ng-template nglPicklistItem let-item>{{item.value}}</ng-template>
+              </ngl-picklist>
+            </div>
+            <div *ngIf="submitted && contactFormValidators.type_id.errors">
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.type_id.errors.required">Remplissez
+                ce champ
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="contactFormValidators.function.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Fonction</label>
+            <div class="slds-form-element__control">
+              <input id="account-naf" required="" class="slds-input" type="text" value="" formControlName="function" />
+            </div>
+            <div *ngIf="submitted && contactFormValidators.function.errors">
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.function.errors.required">Remplissez
+                ce champ
+              </div>
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.function.hasError('pattern')">Le code
+                doit etre : 4 chiffres puis 1 lettre </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="contactFormValidators.email.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Email</label>
+            <div class="slds-form-element__control">
+              <input id="account-email" required="" class="slds-input" type="email" value="" formControlName="email" />
+            </div>
+            <div *ngIf="submitted && contactFormValidators.email.errors">
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.email.errors.required">Remplissez
+                ce champ
+              </div>
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.email.hasError('pattern')">Entrer un
+                email valide</div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="contactFormValidators.address_one.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Adresse siége social</label>
+            <div class="slds-form-element__control">
+              <input id="account-address-1" required="" class="slds-input" type="text" value="" formControlName="address_one" />
+            </div>
+            <div *ngIf="submitted && contactFormValidators.address_one.errors">
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.address_one.errors.required">Remplissez
+                ce
+                champ
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="contactFormValidators.phone.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label" for="text-input-id-1">
+              <abbr class="slds-required" title="required">* </abbr>Téléphone</label>
+            <div class="slds-form-element__control">
+              <input id="account-phone" required="" class="slds-input" type="tel" value="" formControlName="phone" />
+            </div>
+            <div *ngIf="submitted && contactFormValidators.phone.errors">
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.phone.errors.required">Remplissez
+                ce champ</div>
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.phone.hasError('pattern')">Le
+                Numéro de Téléphone doit être valide</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="contactFormValidators.address_two.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Adresse 2</label>
+            <div class="slds-form-element__control">
+              <input id="account-address-2" required="" class="slds-input" type="text" value="" formControlName="address_two" />
+            </div>
+            <div *ngIf="submitted && contactFormValidators.address_two.errors">
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.address_two.errors.required">Remplissez
+                ce champ</div>
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.address_two.hasError('pattern')">Le
+                Numéro de Fax doit être valide</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div [ngClass]="contactFormValidators.fax.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+            <label class="slds-form-element__label">
+              <abbr class="slds-required" title="required">* </abbr>Fax</label>
+            <div class="slds-form-element__control">
+              <input id="account-fax" required="" class="slds-input" type="tel" value="" formControlName="fax" />
+            </div>
+            <div *ngIf="submitted && contactFormValidators.fax.errors">
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.fax.errors.required">Remplissez
+                ce champ</div>
+              <div class="slds-form-element__help" *ngIf="contactFormValidators.fax.hasError('pattern')">Le
+                Numéro de Fax doit être valide</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slds-col slds-size_6-of-12 account_style">
+          <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_7-of-12">
+              <div [ngClass]="contactFormValidators.city.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+                <label class="slds-form-element__label">
+                  <abbr class="slds-required" title="required">* </abbr>Ville</label>
+                <div class="slds-form-element__control">
+                  <input id="account-city" required="" class="slds-input" type="text" value="" formControlName="city" />
+                </div>
+                <div *ngIf="submitted && contactFormValidators.city.errors">
+                  <div class="slds-form-element__help" *ngIf="contactFormValidators.city.errors.required">Remplissez ce
+                    champ
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-col slds-size_5-of-12">
+              <div [ngClass]="contactFormValidators.zip_code.errors && submitted ? 'slds-form-element slds-has-error' : 'slds-form-element'">
+                <label class="slds-form-element__label">
+                  <abbr class="slds-required" title="required">* </abbr>Code postal</label>
+                <div class="slds-form-element__control">
+                  <input id="account-code" required="" class="slds-input" type="number" value="" formControlName="zip_code" />
+                </div>
+                <div *ngIf="submitted && contactFormValidators.zip_code.errors">
+                  <div class="slds-form-element__help" *ngIf="contactFormValidators.zip_code.errors.required">Remplissez
+                    ce champ</div>
+                  <div class="slds-form-element__help" *ngIf="contactFormValidators.zip_code.errors.minlength">Le
+                    zip code doit être de 5 caractères</div>
+                  <div class="slds-form-element__help" *ngIf="contactFormValidators.zip_code.errors.maxlength">Le
+                    zip code doit être de 5 caractères</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+
+      <br />
+    </div>
+    <ng-template ngl-modal-footer>
+      <button class="slds-button slds-button--neutral" (click)="onCancel()">Cancel</button>
+      <button *ngIf="!contactId" type="button" (click)="onAddContractAndNew()" class="slds-button slds-button--neutral">Enregistrer
+        et
+        Nouveau</button>
+      <button *ngIf="contactId" type="button" (click)="onAddContractAndNew()" class="slds-button slds-button--neutral">Modifier
+        et
+        Nouveau</button>
+      <button *ngIf="!contactId" type="submit" class="slds-button slds-button--brand">Enregistrer</button>
+      <button *ngIf="contactId" type="submit" class="slds-button slds-button--brand">Modifier</button>
+    </ng-template>
+  </ngl-modal>
+</form>

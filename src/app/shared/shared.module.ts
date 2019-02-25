@@ -10,6 +10,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { ModalComponent } from './modal/modal.component';
 import { ContractEditComponent } from '../clap/contracts/contract-edit/contract-edit.component';
 import { ProceedingsEditComponent } from '#app/clap/proceedings/proceedings-edit/proceedings-edit.component';
+import { ContactEditComponent } from '#app/clap/contacts/contact-edit/contact-edit.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ProceedingsEditComponent } from '#app/clap/proceedings/proceedings-edit
     MessagesComponent,
     ModalComponent,
     ContractEditComponent,
-    ProceedingsEditComponent
+    ProceedingsEditComponent,
+    ContactEditComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -32,7 +34,8 @@ import { ProceedingsEditComponent } from '#app/clap/proceedings/proceedings-edit
     MessagesComponent,
     ModalComponent,
     ContractEditComponent,
-    ProceedingsEditComponent
+    ProceedingsEditComponent,
+    ContactEditComponent
     
   ]
 })
